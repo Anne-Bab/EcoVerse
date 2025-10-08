@@ -541,6 +541,7 @@ body {
     background: var(--gradient-primary);
     border-radius: var(--border-radius);
     color: var(--text-light);
+    margin-bottom: 30px;
 }
 
 .slogan-display h3 {
@@ -607,6 +608,12 @@ body {
     display: flex;
     align-items: flex-start;
     gap: 20px;
+    transition: var(--transition);
+}
+
+.policy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
 }
 
 .policy-card i {
@@ -984,6 +991,20 @@ body {
         gap: 15px;                         /* Smaller gap sa controls */
         padding: 6px 12px;                 /* Smaller padding */
     }
+
+    .slogan-display h3 {
+        font-size: 2.2rem;
+    }
+
+    .policy-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .policy-card i {
+        margin-top: 0;
+    }
 }
 
 /* Mobile styles - small screens */
@@ -1084,6 +1105,24 @@ body {
 
     .concepts-grid {
         grid-template-columns: 1fr;
+    }
+
+    .slogan-section {
+        padding: 20px;
+    }
+
+    .slogan-display h3 {
+        font-size: 1.8rem;
+    }
+
+    .policy-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .policy-card i {
+        margin-top: 0;
     }
 
     .cycle-visualization {

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVerse: Designing a Sustainable Digital World</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo-container">
+                <div class="nav-logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>EcoVerse</span>
+                </div>
+            </div>
+            <div class="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#profile" class="nav-link">Profile</a></li>
+                    <li><a href="#education" class="nav-link">Education</a></li>
+                    <li><a href="#ecosystem" class="nav-link">Ecosystem</a></li>
+                    <li><a href="#cycles" class="nav-link">Cycles</a></li>
+                    <li><a href="#quiz" class="nav-link">Quiz</a></li>
+                    <li><a href="#team" class="nav-link">Team</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pangunahing Seksyon -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">EcoVerse</h1>
+            <p class="hero-subtitle">Designing a Sustainable Digital World</p>
+            <p class="hero-description">A futuristic digital ecosystem that simulates environmental processes, challenges, and solutions through innovative technology and sustainable practices.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('profile')">Explore EcoVerse</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('education')">Learn More</button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-elements">
+                <div class="floating-icon"><i class="fas fa-sun"></i></div>
+                <div class="floating-icon"><i class="fas fa-tree"></i></div>
+                <div class="floating-icon"><i class="fas fa-recycle"></i></div>
+                <div class="floating-icon"><i class="fas fa-wind"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seksyon sa EcoVerse Profile -->
+    <section id="profile" class="section">
+        <div class="container">
+            <h2 class="section-title">EcoVerse Profile</h2>
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <i class="fas fa-globe-americas"></i>
+                        <h3>Solaria Prime</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>A solar-powered floating archipelago in the sky, sustained by advanced technology and ecological harmony. This innovative ecosystem exists in the upper atmosphere, where solar radiation is abundant and environmental conditions are carefully controlled through AI-managed systems.</p>
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <strong>Climate:</strong> Tropical with high solar radiation
+                            </div>
+                            <div class="detail-item">
+                                <strong>Location:</strong> Upper atmosphere (15-20 km altitude)
+                            </div>
+                            <div class="detail-item">
+                                <strong>Dominant Species:</strong> Sky corals, solar gliders, AI-managed flora
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="goals-card">
+                    <h3>Environmental Goals</h3>
+                    <div class="goals-list">
+                        <div class="goal-item">
+                            <i class="fas fa-bullseye"></i>
+                            <span>Achieve zero waste through closed-loop systems</span>
+                        </div>
+                        <div class="goal-item">
+                            <i class="fas fa-seedling"></i>
+                            <span>Maintain biodiversity in aerial biomes</span>
+                        </div>
+                        <div class="goal-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Educate citizens on sustainable tech practices</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="issues-card">
+                    <h3>Environmental Issues & Solutions</h3>
+                    <div class="issue-solution">
+                        <div class="issue">
+                            <h4>Issue: Energy Storage & Distribution</h4>
+                            <p>Managing solar energy efficiently across floating platforms during varying weather conditions.</p>
+                        </div>
+                        <div class="solution">
+                            <h4>Tech Solution: Quantum Bio-Batteries</h4>
+                            <p>Advanced bio-engineered energy storage systems that use living organisms to store and distribute solar energy with 95% efficiency, adapting to weather patterns through AI optimization.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seksyon sa Eco-Education Blueprint -->
+    <section id="education" class="section bg-alt">
+        <div class="container">
+            <h2 class="section-title">Eco-Education Blueprint</h2>
+            <div class="education-content">
+                <div class="slogan-section">
+                    <div class="slogan-display">
+                        <h3>"Shine Smart, Live Light"</h3>
+                        <div class="logo-visual">
+                            <div class="logo-icon">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-leaf"></i>
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="messages-section">
+                    <h3>Key Messages for Citizens</h3>
+                    <div class="messages-grid">
+                        <div class="message-card">
+                            <i class="fas fa-bolt"></i>
+                            <p>"Energy is precious—use it wisely."</p>
+                        </div>
+                        <div class="message-card">
+                            <i class="fas fa-database"></i>
+                            <p>"Every byte has a footprint."</p>
+                        </div>
+                        <div class="message-card">
+                            <i class="fas fa-balance-scale"></i>
+                            <p>"Balance tech with nature."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="policy-section">
+                    <h3>Policy Inspired by NEEAP</h3>
+                    <div class="policy-card">
+                        <i class="fas fa-users-cog"></i>
+                        <h4>Mandatory Weekly Eco-Hackathons</h4>
+                        <p>Citizens participate in weekly collaborative sessions where they co-design tech-based sustainability solutions. These hackathons foster innovation while ensuring continuous environmental education and community engagement.</p>
+                    </div>
+                </div>
+
+                <div class="mdgs-section">
+                    <h3>Relevant Millennium Development Goals</h3>
+                    <div class="mdgs-grid">
+                        <div class="mdg-card">
+                            <div class="mdg-number">7</div>
+                            <h4>Ensure Environmental Sustainability</h4>
+                            <p>Integrate principles of sustainable development into country policies and reverse loss of environmental resources.</p>
+                        </div>
+                        <div class="mdg-card">
+                            <div class="mdg-number">8</div>
+                            <h4>Develop Global Partnerships</h4>
+                            <p>Develop further an open, rule-based, predictable, non-discriminatory trading and financial system through tech exchange programs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seksyon sa Ecosystem Simulation -->
+    <section id="ecosystem" class="section">
+        <div class="container">
+            <h2 class="section-title">Ecosystem Simulation</h2>
+            <div class="ecosystem-content">
+                <div class="food-chain-section">
+                    <h3>Food Chain & Food Web</h3>
+                    <div class="visualization-container">
+                        <div class="food-chain">
+                            <div class="trophic-level primary">
+                                <i class="fas fa-sun"></i>
+                                <span>Solar Energy</span>
+                            </div>
+                            <div class="arrow">↓</div>
+                            <div class="trophic-level producer">
+                                <i class="fas fa-seedling"></i>
+                                <span>Sky Corals (Producers)</span>
+                            </div>
+                            <div class="arrow">↓</div>
+                            <div class="trophic-level consumer">
+                                <i class="fas fa-dove"></i>
+                                <span>Solar Gliders (Primary Consumers)</span>
+                            </div>
+                            <div class="arrow">↓</div>
+                            <div class="trophic-level decomposer">
+                                <i class="fas fa-robot"></i>
+                                <span>AI Decomposers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="energy-concepts">
+                    <h3>Energy Concepts Explained</h3>
+                    <div class="concepts-grid">
+                        <div class="concept-card">
+                            <h4>Matter & Energy Changes</h4>
+                            <p>Solar energy is converted to chemical energy via bio-solar panels integrated into sky corals, creating a sustainable energy conversion system.</p>
+                        </div>
+                        <div class="concept-card">
+                            <h4>1st Law of Thermodynamics</h4>
+                            <p>Energy input from the sun is conserved in biomass and technological systems - energy cannot be created or destroyed, only transformed.</p>
+                        </div>
+                        <div class="concept-card">
+                            <h4>2nd Law of Thermodynamics</h4>
+                            <p>Energy dissipates as heat during technological operations, but our systems capture and recycle this thermal energy for additional uses.</p>
+                        </div>
+                        <div class="concept-card">
+                            <h4>Homeostasis</h4>
+                            <p>AI sensors continuously monitor and regulate temperature, humidity, and nutrient flow to maintain ecological balance across all floating platforms.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seksyon sa Biogeochemical Cycles -->
+    <section id="cycles" class="section bg-alt">
+        <div class="container">
+            <h2 class="section-title">Biogeochemical Cycle Mapping</h2>
+            <div class="cycles-content">
+                <div class="cycle-tabs">
+                    <button class="tab-btn active" onclick="showCycle('carbon')">Carbon Cycle</button>
+                    <button class="tab-btn" onclick="showCycle('nitrogen')">Nitrogen Cycle</button>
+                    <button class="tab-btn" onclick="showCycle('water')">Water Cycle</button>
+                </div>
+
+                <div class="cycle-content">
+                    <div id="carbon-cycle" class="cycle-panel active">
+                        <h3>Carbon Cycle in Solaria Prime</h3>
+                        <div class="cycle-visualization">
+                            <div class="cycle-step">
+                                <i class="fas fa-sun"></i>
+                                <span>Solar Energy</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-seedling"></i>
+                                <span>Carbon Capture via Solar Algae</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-battery-full"></i>
+                                <span>Storage in Bio-Batteries</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-microchip"></i>
+                                <span>Release during Tech Use</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-recycle"></i>
+                                <span>Recycling via AI Systems</span>
+                            </div>
+                        </div>
+                        <p>Carbon flows through our ecosystem via solar-powered algae that capture atmospheric CO₂, storing it in bio-engineered batteries for technological use, then recycling it back through AI-managed decomposition systems.</p>
+                    </div>
+
+                    <div id="nitrogen-cycle" class="cycle-panel">
+                        <h3>Nitrogen Cycle in Solaria Prime</h3>
+                        <div class="cycle-visualization">
+                            <div class="cycle-step">
+                                <i class="fas fa-cloud"></i>
+                                <span>Atmospheric Nitrogen</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-bug"></i>
+                                <span>Nitrogen Fixation by Aerial Microbes</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-tint"></i>
+                                <span>Nutrient Fog Systems</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-seedling"></i>
+                                <span>Plant Uptake</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-robot"></i>
+                                <span>Recycling via Decomposer Drones</span>
+                            </div>
+                        </div>
+                        <p>Nitrogen is fixed by specialized aerial microbes, distributed through nutrient fog systems, absorbed by plants, and recycled back into the system through AI-controlled decomposer drones.</p>
+                    </div>
+
+                    <div id="water-cycle" class="cycle-panel">
+                        <h3>Water Cycle in Solaria Prime</h3>
+                        <div class="cycle-visualization">
+                            <div class="cycle-step">
+                                <i class="fas fa-cloud"></i>
+                                <span>Cloud Water Vapor Collection</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-filter"></i>
+                                <span>Advanced Filtration Systems</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-tint"></i>
+                                <span>Mist Irrigation Distribution</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-thermometer-half"></i>
+                                <span>Evaporation & Transpiration</span>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <i class="fas fa-cloud"></i>
+                                <span>Return to Atmosphere</span>
+                            </div>
+                        </div>
+                        <p>Water vapor is collected from clouds, filtered through advanced purification systems, distributed via mist irrigation, and naturally evaporates back to the atmosphere, creating a sustainable water cycle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard sa Sustainability Metrics -->
+    <section id="metrics" class="section">
+        <div class="container">
+            <h2 class="section-title">Sustainability Metrics Dashboard</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>Carbon Footprint</h3>
+                        <div class="metric-value" data-target="95">0</div>
+                        <div class="metric-unit">% Reduction</div>
+                        <div class="metric-description">Compared to traditional cities</div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>Waste Management</h3>
+                        <div class="metric-value" data-target="100">0</div>
+                        <div class="metric-unit">% Recycled</div>
+                        <div class="metric-description">Zero waste to landfill</div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>Renewable Energy</h3>
+                        <div class="metric-value" data-target="100">0</div>
+                        <div class="metric-unit">% Solar</div>
+                        <div class="metric-description">Clean energy usage</div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>Water Efficiency</h3>
+                        <div class="metric-value" data-target="85">0</div>
+                        <div class="metric-unit">% Saved</div>
+                        <div class="metric-description">Water conservation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seksyon sa Interactive Quiz -->
+    <section id="quiz" class="section bg-alt">
+        <div class="container">
+            <h2 class="section-title">EcoVerse Knowledge Challenge</h2>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h3>Test Your Environmental Science Knowledge</h3>
+                    <p>Answer questions about Solaria Prime and environmental concepts</p>
+                </div>
+                <div class="quiz-content">
+                    <div class="question-container">
+                        <div class="question-number">Question <span id="current-q">1</span> of <span id="total-q">5</span></div>
+                        <div class="question-text" id="question-text">What is the primary energy source in Solaria Prime?</div>
+                        <div class="options" id="options">
+                            <button class="option-btn" data-answer="0">Wind Energy</button>
+                            <button class="option-btn" data-answer="1">Solar Energy</button>
+                            <button class="option-btn" data-answer="2">Nuclear Energy</button>
+                            <button class="option-btn" data-answer="3">Geothermal Energy</button>
+                        </div>
+                    </div>
+                    <div class="quiz-controls">
+                        <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Next Question</button>
+                        <div class="score-display">Score: <span id="score">0</span>/5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pagpakita sa Technology -->
+    <section id="technology" class="section">
+        <div class="container">
+            <h2 class="section-title">Innovative Technologies</h2>
+            <div class="tech-showcase">
+                <div class="tech-item">
+                    <div class="tech-visual">
+                        <div class="tech-animation">
+                            <i class="fas fa-solar-panel"></i>
+                            <div class="energy-flow"></div>
+                        </div>
+                    </div>
+                    <div class="tech-content">
+                        <h3>Bio-Solar Panels</h3>
+                        <p>Living solar panels that grow and adapt to maximize energy capture. These panels use genetically modified algae that photosynthesize more efficiently than traditional solar cells.</p>
+                        <div class="tech-stats">
+                            <div class="stat">
+                                <span class="stat-value">300%</span>
+                                <span class="stat-label">More Efficient</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">Self-Repairing</span>
+                                <span class="stat-label">Technology</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-visual">
+                        <div class="tech-animation">
+                            <i class="fas fa-robot"></i>
+                            <div class="ai-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="tech-content">
+                        <h3>AI Ecosystem Manager</h3>
+                        <p>Advanced artificial intelligence that monitors and optimizes all environmental systems in real-time, ensuring perfect balance and maximum efficiency.</p>
+                        <div class="tech-stats">
+                            <div class="stat">
+                                <span class="stat-value">24/7</span>
+                                <span class="stat-label">Monitoring</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">99.9%</span>
+                                <span class="stat-label">Accuracy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-visual">
+                        <div class="tech-animation">
+                            <i class="fas fa-wind"></i>
+                            <div class="wind-flow"></div>
+                        </div>
+                    </div>
+                    <div class="tech-content">
+                        <h3>Atmospheric Water Harvesters</h3>
+                        <p>Revolutionary systems that extract water directly from the atmosphere using advanced condensation technology, providing unlimited clean water.</p>
+                        <div class="tech-stats">
+                            <div class="stat">
+                                <span class="stat-value">1000L</span>
+                                <span class="stat-label">Per Day</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">Zero Waste</span>
+                                <span class="stat-label">Process</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Calculator sa Environmental Impact -->
+    <section id="calculator" class="section">
+        <div class="container">
+            <h2 class="section-title">Environmental Impact Calculator</h2>
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <h3>Calculate Your Eco-Footprint</h3>
+                    <div class="form-group">
+                        <label for="energy-usage">Daily Energy Usage (kWh)</label>
+                        <input type="number" id="energy-usage" placeholder="Enter your daily energy consumption">
+                    </div>
+                    <div class="form-group">
+                        <label for="water-usage">Daily Water Usage (Liters)</label>
+                        <input type="number" id="water-usage" placeholder="Enter your daily water consumption">
+                    </div>
+                    <div class="form-group">
+                        <label for="waste-production">Weekly Waste Production (kg)</label>
+                        <input type="number" id="waste-production" placeholder="Enter your weekly waste">
+                    </div>
+                    <button class="btn btn-primary" onclick="calculateImpact()">Calculate Impact</button>
+                </div>
+                <div class="calculator-results">
+                    <h3>Your Impact Results</h3>
+                    <div class="result-item">
+                        <span class="result-label">Carbon Footprint:</span>
+                        <span class="result-value" id="carbon-result">--</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Water Efficiency:</span>
+                        <span class="result-value" id="water-result">--</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Waste Score:</span>
+                        <span class="result-value" id="waste-result">--</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Overall Rating:</span>
+                        <span class="result-value" id="overall-result">--</span>
+                    </div>
+                    <div class="recommendations" id="recommendations">
+                        <h4>Recommendations:</h4>
+                        <ul id="recommendations-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline sa Development -->
+    <section id="timeline" class="section bg-alt">
+        <div class="container">
+            <h2 class="section-title">EcoVerse Development Timeline</h2>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-date">2020</div>
+                    <div class="timeline-content">
+                        <h3>Concept Development</h3>
+                        <p>Initial research and conceptualization of floating ecosystem technology</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2021</div>
+                    <div class="timeline-content">
+                        <h3>Bio-Solar Panel Innovation</h3>
+                        <p>Breakthrough in living solar panel technology with 300% efficiency improvement</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022</div>
+                    <div class="timeline-content">
+                        <h3>AI System Integration</h3>
+                        <p>Development of advanced AI ecosystem management systems</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023</div>
+                    <div class="timeline-content">
+                        <h3>First Prototype Launch</h3>
+                        <p>Successful deployment of the first floating platform with 100 citizens</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024</div>
+                    <div class="timeline-content">
+                        <h3>Full Ecosystem Deployment</h3>
+                        <p>Complete Solaria Prime ecosystem with 10,000 citizens and zero waste achievement</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025</div>
+                    <div class="timeline-content">
+                        <h3>Global Expansion Initiative</h3>
+                        <p>Launch of multiple Solaria Prime colonies worldwide, establishing sustainable floating cities across different climate zones</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seksyon sa Team -->
+    <section id="team" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Team</h2>
+            <div class="team-info">
+                <div class="team-header">
+                    <h3>Group 4</h3>
+                    <p>Environmental Science - EnviSci | Midterm Performance Task</p>
+                </div>
+                <div class="team-members">
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>KIT LOOC</h4>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>LORRAINE HINAUT</h4>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>ADRIAN PITOY</h4>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>ANNE CLAIRE BABOR</h4>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>KIMBERLY TAYTAYAN</h4>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>WELMER PARAGAMAC</h4>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="member-info">
+                            <h4>AIRA MONIQUE PRECILLAS</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EcoVerse</h3>
+                    <p>Designing a Sustainable Digital World</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#profile">EcoVerse Profile</a></li>
+                        <li><a href="#education">Education Blueprint</a></li>
+                        <li><a href="#ecosystem">Ecosystem Simulation</a></li>
+                        <li><a href="#cycles">Biogeochemical Cycles</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Course Information</h4>
+                    <p><strong>Course:</strong> Environmental Science - EnviSci</p>
+                    <p><strong>Term:</strong> Midterm</p>
+                    <p><strong>Type:</strong> Group Work</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EcoVerse Project. All rights reserved. | Environmental Science Performance Task</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

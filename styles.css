@@ -533,6 +533,8 @@ body {
 .education-content {
     display: grid;
     gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .slogan-section {
@@ -542,6 +544,9 @@ body {
     border-radius: var(--border-radius);
     color: var(--text-light);
     margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .slogan-display h3 {
@@ -571,6 +576,11 @@ body {
 
 .logo-icon i:nth-child(3) {
     animation-delay: 1s;
+}
+
+.messages-section {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .messages-grid {
@@ -620,6 +630,16 @@ body {
     font-size: 2rem;
     color: var(--secondary-color);
     margin-top: 5px;
+}
+
+.policy-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.mdgs-section {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .mdgs-grid {
@@ -996,6 +1016,12 @@ body {
         font-size: 2.2rem;
     }
 
+    .messages-section,
+    .policy-section,
+    .mdgs-section {
+        max-width: 90%;
+    }
+
     .policy-card {
         flex-direction: column;
         text-align: center;
@@ -1109,10 +1135,19 @@ body {
 
     .slogan-section {
         padding: 20px;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .slogan-display h3 {
         font-size: 1.8rem;
+    }
+
+    .messages-section,
+    .policy-section,
+    .mdgs-section {
+        max-width: 100%;
     }
 
     .policy-card {

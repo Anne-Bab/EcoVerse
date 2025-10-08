@@ -2075,12 +2075,15 @@ html {
     position: relative;
     margin-top: 40px;
     padding-left: 30px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .timeline-container::before {
     content: '';
     position: absolute;
-    left: 0;
+    left: 2px;
     top: 0;
     bottom: 0;
     width: 4px;
@@ -2097,7 +2100,7 @@ html {
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: -8px;
+    left: -6px;
     top: 10px;
     width: 16px;
     height: 16px;
@@ -2109,7 +2112,7 @@ html {
 
 .timeline-date {
     position: absolute;
-    left: -80px;
+    left: -60px;
     top: 5px;
     background: var(--primary-color);
     color: var(--text-light);
@@ -2117,6 +2120,7 @@ html {
     border-radius: 20px;
     font-weight: 600;
     font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .timeline-content {
@@ -2285,18 +2289,41 @@ html {
     }
 
     .timeline-container {
-        padding-left: 20px;
+        padding-left: 40px;
+        max-width: 100%;
     }
 
     .timeline-date {
-        position: static;
-        display: inline-block;
-        margin-bottom: 10px;
+        left: -50px;
+        font-size: 0.8rem;
+        padding: 4px 12px;
     }
 
-    .timeline-item {
-        padding-left: 20px;
+    .timeline-item::before {
+        left: -4px;
+        width: 14px;
+        height: 14px;
     }
+
+    /* For very small screens, stack the dates */
+    @media (max-width: 480px) {
+        .timeline-container {
+            padding-left: 20px;
+        }
+
+        .timeline-date {
+            position: static;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item::before {
+            left: -6px;
+            width: 12px;
+            height: 12px;
+        }
+    }
+
 
     .timeline-item::before {
         left: -6px;

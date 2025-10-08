@@ -711,6 +711,32 @@ function showQuizResults() {
 }
 
 function restartQuiz() {
+    // Restore the original quiz structure
+    document.querySelector('.quiz-content').innerHTML = `
+        <div class="question-container">
+            <div class="question-number">Question <span id="current-q">1</span> of <span id="total-q">5</span></div>
+            <div class="question-text" id="question-text">What is the primary energy source in Solaria Prime?</div>
+            <div class="options" id="options">
+                <button class="option-btn" data-answer="0">Wind Energy</button>
+                <button class="option-btn" data-answer="1">Solar Energy</button>
+                <button class="option-btn" data-answer="2">Nuclear Energy</button>
+                <button class="option-btn" data-answer="3">Geothermal Energy</button>
+            </div>
+        </div>
+        <div class="quiz-controls">
+            <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Next Question</button>
+            <div class="score-display">Score: <span id="score">0</span>/5</div>
+        </div>
+    `;
+    
+    // Re-attach event listeners to the new buttons
+    const optionButtons = document.querySelectorAll('.option-btn');
+    optionButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            selectAnswer(this);
+        });
+    });
+    
     // Start a new quiz with different randomized questions
     startNewQuiz();
 }

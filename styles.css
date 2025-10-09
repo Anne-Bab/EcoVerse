@@ -1551,6 +1551,22 @@ body::before {
         margin-bottom: 15px;
     }
     
+    /* Game Boy screen and battle scene tablet styles */
+    .gameboy-screen {
+        padding: 25px;
+        margin: 0 auto;
+    }
+    
+    .pokemon-stats-panel {
+        padding: 25px;
+        margin: 0 auto;
+    }
+    
+    .pokemon-battle-scene {
+        padding: 25px;
+        margin: 0 auto;
+    }
+    
     .pokedex-header {
         flex-direction: column;
         gap: 20px;
@@ -1615,7 +1631,9 @@ body::before {
     .effectiveness-card,
     .energy-step,
     .care-step,
-    .pokemon-evolution-stage {
+    .pokemon-evolution-stage,
+    .pokemon-stats-panel,
+    .pokemon-battle-scene {
         width: 100%;
         max-width: 320px;
         margin: 0 auto 15px auto;
@@ -1624,6 +1642,34 @@ body::before {
     
     .pokemon-card {
         padding: 20px;
+    }
+    
+    /* Game Boy screen and battle scene specific mobile styles */
+    .gameboy-screen {
+        padding: 20px;
+        margin: 0 auto;
+    }
+    
+    .pokemon-stats-panel {
+        padding: 20px;
+        margin: 0 auto;
+    }
+    
+    .pokemon-battle-scene {
+        padding: 20px;
+        margin: 0 auto;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .battle-pokemon {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .battle-center {
+        order: -1;
+        margin-bottom: 20px;
     }
     
     /* Ensure all grid layouts are single column on small mobile */

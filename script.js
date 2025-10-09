@@ -10,43 +10,57 @@ document.addEventListener('DOMContentLoaded', function() {
     initMetrics();
     initCalculator();
     initThemeToggle();
+    initEvolutionCards();
 });
 
 // Navigation functionality - Navigation nga functionality
 function initNavigation() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const hamburger = document.querySelector('.hamburger-menu');
+    const navMenu = document.querySelector('.pokemon-menu');
+    const navItems = document.querySelectorAll('.pokemon-nav-item');
 
     // I-toggle ang mobile menu
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
+    if (hamburger) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
 
     // I-close ang mobile menu kung mag-click sa link
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
-
-    // Smooth scrolling para sa navigation links
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            if (hamburger && navMenu) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
             
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 70; // I-account para sa fixed navbar
+            // Update active state
+            navItems.forEach(navItem => navItem.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Smooth scrolling
+            const targetSection = this.getAttribute('data-section');
+            const targetElement = document.getElementById(targetSection);
+            
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 70; // I-account para sa fixed navbar
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
                 });
             }
         });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (hamburger && navMenu && 
+            !hamburger.contains(e.target) && 
+            !navMenu.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
     });
 
     // I-change ang navbar background kung mag-scroll
@@ -514,7 +528,7 @@ let questionsPerRound = 5; // Number of questions per quiz round
 
 const quizData = [
     {
-        question: "What is the primary energy source in Solaria Prime?",
+        question: "What is the primary energy source in PokéVerse?",
         options: ["Wind Energy", "Solar Energy", "Nuclear Energy", "Geothermal Energy"],
         correct: 1
     },
@@ -604,9 +618,20 @@ function initQuiz() {
     // Initialize with shuffled questions
     startNewQuiz();
     
-    const optionButtons = document.querySelectorAll('.option-btn');
-    optionButtons.forEach(button => {
+    // Attach event listeners to quiz buttons
+    attachQuizEventListeners();
+}
+
+function attachQuizEventListeners() {
+    const optionButtons = document.querySelectorAll('.option-btn-quiz');
+    console.log('Found quiz buttons:', optionButtons.length);
+    
+    optionButtons.forEach((button, index) => {
+        // Remove any existing event listeners
+        button.removeEventListener('click', selectAnswer);
+        // Add new event listener
         button.addEventListener('click', function() {
+            console.log('Button clicked:', index);
             selectAnswer(this);
         });
     });
@@ -621,17 +646,24 @@ function startNewQuiz() {
     document.getElementById('score').textContent = '0';
     document.getElementById('next-btn').textContent = 'Next Question';
     updateQuestion();
+    
+    // Ensure event listeners are attached
+    attachQuizEventListeners();
 }
 
 function selectAnswer(button) {
+    console.log('Answer selected:', button.dataset.answer);
+    
     // Remove selected class from all buttons
-    document.querySelectorAll('.option-btn').forEach(btn => {
+    document.querySelectorAll('.option-btn-quiz').forEach(btn => {
         btn.classList.remove('selected');
     });
     
     // Add selected class to clicked button
     button.classList.add('selected');
     selectedAnswer = parseInt(button.dataset.answer);
+    
+    console.log('Selected answer:', selectedAnswer);
 }
 
 function nextQuestion() {
@@ -643,10 +675,10 @@ function nextQuestion() {
     // Check if answer is correct
     if (selectedAnswer === shuffledQuestions[currentQuestion].correct) {
         score++;
-        document.querySelectorAll('.option-btn')[selectedAnswer].classList.add('correct');
+        document.querySelectorAll('.option-btn-quiz')[selectedAnswer].classList.add('correct');
     } else {
-        document.querySelectorAll('.option-btn')[selectedAnswer].classList.add('incorrect');
-        document.querySelectorAll('.option-btn')[shuffledQuestions[currentQuestion].correct].classList.add('correct');
+        document.querySelectorAll('.option-btn-quiz')[selectedAnswer].classList.add('incorrect');
+        document.querySelectorAll('.option-btn-quiz')[shuffledQuestions[currentQuestion].correct].classList.add('correct');
     }
     
     // Update score
@@ -668,12 +700,20 @@ function nextQuestion() {
 
 function updateQuestion() {
     const question = shuffledQuestions[currentQuestion];
-    document.getElementById('question-text').textContent = question.question;
+    const questionElement = document.getElementById('question-text-quiz') || document.getElementById('question-text');
+    if (questionElement) {
+        questionElement.textContent = question.question;
+    }
     document.getElementById('current-q').textContent = currentQuestion + 1;
     
-    const options = document.querySelectorAll('.option-btn');
+    const options = document.querySelectorAll('.option-btn-quiz');
     options.forEach((option, index) => {
-        option.textContent = question.options[index];
+        const optionText = option.querySelector('.option-text');
+        if (optionText) {
+            optionText.textContent = question.options[index];
+        } else {
+            option.textContent = question.options[index];
+        }
         option.classList.remove('selected', 'correct', 'incorrect');
         option.dataset.answer = index;
     });
@@ -698,44 +738,132 @@ function showQuizResults() {
     }
     
     document.querySelector('.quiz-content').innerHTML = `
-        <div class="quiz-results">
-            <h3>Quiz Complete!</h3>
-            <div class="final-score">
-                <h2>${score}/${shuffledQuestions.length}</h2>
-                <p>${percentage}%</p>
+        <div class="quiz-results-pokemon">
+            <div class="quiz-results-header">
+                <div class="pokemon-celebration">
+                    <div class="pokemon-sprite-results">${score >= 4 ? '🏆' : score >= 2 ? '⭐' : '💪'}</div>
+                    <div class="celebration-effects">
+                        <div class="celebration-star">✨</div>
+                        <div class="celebration-star">✨</div>
+                        <div class="celebration-star">✨</div>
+                        <div class="celebration-star">✨</div>
+                        <div class="celebration-star">✨</div>
+                    </div>
+                </div>
+                <h3 class="quiz-complete-title">Quiz Complete!</h3>
+                <p class="quiz-subtitle">Pokémon Battle Quiz Results</p>
             </div>
-            <p class="result-message">${message}</p>
-            <button class="btn btn-primary" onclick="restartQuiz()">Take Quiz Again</button>
+            
+            <div class="quiz-score-display">
+                <div class="score-circle">
+                    <div class="score-number">${score}</div>
+                    <div class="score-total">/${shuffledQuestions.length}</div>
+                </div>
+                <div class="score-percentage">${percentage}%</div>
+                <div class="score-bar-container">
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: ${percentage}%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-result-message">
+                <div class="result-icon">${score >= 4 ? '🎉' : score >= 2 ? '👍' : '💪'}</div>
+                <p class="result-text">${message}</p>
+            </div>
+            
+            <div class="quiz-achievements">
+                <h4>🏆 Achievements Unlocked:</h4>
+                <div class="achievement-list">
+                    <div class="achievement-item ${score >= 1 ? 'unlocked' : 'locked'}">
+                        <span class="achievement-icon">🥉</span>
+                        <span class="achievement-text">First Answer</span>
+                    </div>
+                    <div class="achievement-item ${score >= 2 ? 'unlocked' : 'locked'}">
+                        <span class="achievement-icon">🥈</span>
+                        <span class="achievement-text">Getting Started</span>
+                    </div>
+                    <div class="achievement-item ${score >= 3 ? 'unlocked' : 'locked'}">
+                        <span class="achievement-icon">🥇</span>
+                        <span class="achievement-text">Pokémon Scholar</span>
+                    </div>
+                    <div class="achievement-item ${score >= 4 ? 'unlocked' : 'locked'}">
+                        <span class="achievement-icon">💎</span>
+                        <span class="achievement-text">Master Trainer</span>
+                    </div>
+                    <div class="achievement-item ${score >= 5 ? 'unlocked' : 'locked'}">
+                        <span class="achievement-icon">👑</span>
+                        <span class="achievement-text">Pokémon Professor</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-actions">
+                <button class="btn-quiz-restart" onclick="restartQuiz()">
+                    <span class="btn-icon">🔄</span>
+                    <span class="btn-text">Take Quiz Again</span>
+                </button>
+                <button class="btn-quiz-home" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <span class="btn-icon">🏠</span>
+                    <span class="btn-text">Back to Home</span>
+                </button>
+            </div>
         </div>
     `;
 }
 
 function restartQuiz() {
-    // Restore the original quiz structure
+    // Restore the original quiz structure with correct class names
     document.querySelector('.quiz-content').innerHTML = `
-        <div class="question-container">
-            <div class="question-number">Question <span id="current-q">1</span> of <span id="total-q">5</span></div>
-            <div class="question-text" id="question-text">What is the primary energy source in Solaria Prime?</div>
-            <div class="options" id="options">
-                <button class="option-btn" data-answer="0">Wind Energy</button>
-                <button class="option-btn" data-answer="1">Solar Energy</button>
-                <button class="option-btn" data-answer="2">Nuclear Energy</button>
-                <button class="option-btn" data-answer="3">Geothermal Energy</button>
+        <div class="quiz-battle-arena">
+            <div class="battle-pokemon-left">
+                <div class="pokemon-sprite-quiz">⚡</div>
+                <div class="pokemon-name-quiz">Pikachu</div>
+            </div>
+            <div class="quiz-center">
+                <div class="vs-text-quiz">VS</div>
+                <div class="question-number-quiz">Question <span id="current-q">1</span> of <span id="total-q">5</span></div>
+            </div>
+            <div class="battle-pokemon-right">
+                <div class="pokemon-sprite-quiz">🔥</div>
+                <div class="pokemon-name-quiz">Charmander</div>
             </div>
         </div>
-        <div class="quiz-controls">
-            <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Next Question</button>
-            <div class="score-display">Score: <span id="score">0</span>/5</div>
+        <div class="question-container-quiz">
+            <div class="question-text-quiz" id="question-text-quiz">What is the primary energy source in PokéVerse?</div>
+            <div class="options-quiz" id="options">
+                <button class="option-btn-quiz" data-answer="0">
+                    <span class="option-icon">💨</span>
+                    <span class="option-text">Wind Energy</span>
+                </button>
+                <button class="option-btn-quiz" data-answer="1">
+                    <span class="option-icon">☀️</span>
+                    <span class="option-text">Solar Energy</span>
+                </button>
+                <button class="option-btn-quiz" data-answer="2">
+                    <span class="option-icon">⚛️</span>
+                    <span class="option-text">Nuclear Energy</span>
+                </button>
+                <button class="option-btn-quiz" data-answer="3">
+                    <span class="option-icon">🌋</span>
+                    <span class="option-text">Geothermal Energy</span>
+                </button>
+            </div>
+        </div>
+        <div class="quiz-controls-quiz">
+            <button class="btn-quiz-primary" id="next-btn" onclick="nextQuestion()">
+                <span class="btn-icon">➡️</span>
+                <span class="btn-text">Next Question</span>
+            </button>
+            <div class="score-display-quiz">
+                <div class="score-icon">🏆</div>
+                <div class="score-text">Score: <span id="score">0</span>/5</div>
+            </div>
         </div>
     `;
     
     // Re-attach event listeners to the new buttons
-    const optionButtons = document.querySelectorAll('.option-btn');
-    optionButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            selectAnswer(this);
-        });
-    });
+    attachQuizEventListeners();
     
     // Start a new quiz with different randomized questions
     startNewQuiz();
@@ -878,4 +1006,633 @@ function toggleTheme() {
 function updateThemeIcon(theme) {
     const icon = document.querySelector('.theme-toggle i');
     icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+}
+
+// Pokémon Game Interactions
+document.addEventListener('DOMContentLoaded', function() {
+    // Pokémon Navigation
+    const navItems = document.querySelectorAll('.pokemon-nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Remove active class from all items
+            navItems.forEach(nav => nav.classList.remove('active'));
+            // Add active class to clicked item
+            this.classList.add('active');
+            
+            // Get section to scroll to
+            const section = this.getAttribute('data-section');
+            if (section) {
+                scrollToSection(section);
+            }
+        });
+    });
+
+    // Pokémon Card Interactions
+    const pokemonCards = document.querySelectorAll('.pokemon-card');
+    pokemonCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Add battle animation
+            this.style.transform = 'translateY(-15px) rotate(5deg) scale(1.05)';
+            this.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.4), 0 0 0 6px #FFD700';
+            
+            // Reset after animation
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            }, 300);
+        });
+    });
+
+    // Pokémon Search Functionality
+    const searchInput = document.querySelector('.pokemon-search');
+    const searchBtn = document.querySelector('.search-btn');
+    
+    if (searchInput && searchBtn) {
+        searchBtn.addEventListener('click', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+            filterPokemonCards(searchTerm);
+        });
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            filterPokemonCards(searchTerm);
+        });
+    }
+
+    // Pokémon Battle Animations
+    const battlePokemon = document.querySelectorAll('.pokemon-sprite-large');
+    battlePokemon.forEach(pokemon => {
+        pokemon.addEventListener('click', function() {
+            // Trigger battle animation
+            this.style.animation = 'pokemonBattle 0.5s ease-in-out';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 500);
+        });
+    });
+
+    // Pokémon Menu Options
+    const menuOptions = document.querySelectorAll('.pokemon-option');
+    menuOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            // Remove active class from all options
+            menuOptions.forEach(opt => opt.classList.remove('active'));
+            // Add active class to clicked option
+            this.classList.add('active');
+            
+            // Add click effect
+            this.style.transform = 'scale(0.95)';
+            this.style.background = 'rgba(255, 255, 255, 0.4)';
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.background = '';
+            }, 150);
+            
+            // Navigate to appropriate section based on option
+            const optionText = this.textContent.trim();
+            let targetSection = '';
+            
+            switch(optionText) {
+                case 'START JOURNEY':
+                    targetSection = 'home';
+                    break;
+                case 'POKÉDEX':
+                    targetSection = 'profile';
+                    break;
+                case 'TRAINER CARD':
+                    targetSection = 'education';
+                    break;
+                case 'BATTLE':
+                    targetSection = 'ecosystem';
+                    break;
+            }
+            
+            if (targetSection) {
+                const targetElement = document.getElementById(targetSection);
+                if (targetElement) {
+                    const offsetTop = targetElement.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+});
+
+// Filter Pokémon cards based on search term
+function filterPokemonCards(searchTerm) {
+    const cards = document.querySelectorAll('.pokemon-card');
+    cards.forEach(card => {
+        const pokemonName = card.querySelector('.pokemon-name').textContent.toLowerCase();
+        const pokemonType = card.querySelector('.pokemon-type').textContent.toLowerCase();
+        const pokemonDescription = card.querySelector('.pokemon-description p').textContent.toLowerCase();
+        
+        if (pokemonName.includes(searchTerm) || 
+            pokemonType.includes(searchTerm) || 
+            pokemonDescription.includes(searchTerm)) {
+            card.style.display = 'block';
+            card.style.animation = 'pokemonCardFloat 0.5s ease-in-out';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// Evolution tab switching functionality
+function showEvolution(tabName) {
+    // Remove active class from all tabs
+    const tabs = document.querySelectorAll('.evolution-tab');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    // Hide all panels
+    const panels = document.querySelectorAll('.evolution-panel');
+    panels.forEach(panel => panel.classList.remove('active'));
+    
+    // Show selected panel based on tab name
+    let selectedPanel;
+    if (tabName === 'energy') {
+        selectedPanel = document.getElementById('energy-flow');
+    } else if (tabName === 'evolution') {
+        selectedPanel = document.getElementById('evolution-chain');
+    } else if (tabName === 'care') {
+        selectedPanel = document.getElementById('pokemon-care');
+    }
+    
+    if (selectedPanel) {
+        selectedPanel.classList.add('active');
+    }
+    
+    // Add active class to clicked tab
+    const clickedTab = event.target;
+    clickedTab.classList.add('active');
+    
+    // Add click effect
+    clickedTab.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        clickedTab.style.transform = '';
+    }, 150);
+    
+    // Re-attach event listeners for the newly shown panel
+    setTimeout(() => {
+        attachEvolutionEventListeners();
+    }, 50);
+}
+
+// Add scroll listener to re-attach event listeners when cycles section is visible
+window.addEventListener('scroll', function() {
+    const cyclesSection = document.getElementById('cycles');
+    if (cyclesSection) {
+        const rect = cyclesSection.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (isVisible) {
+            // Re-attach event listeners when section becomes visible
+            attachEvolutionEventListeners();
+        }
+    }
+});
+
+// Add global click handler for dynamic content
+document.addEventListener('click', function(e) {
+    // Check if clicked element is an energy step
+    if (e.target.closest('.energy-step')) {
+        const energyStep = e.target.closest('.energy-step');
+        console.log('Energy step clicked via global handler');
+        showEnergyDialog(energyStep);
+    }
+    
+    // Check if clicked element is a care step
+    if (e.target.closest('.care-step')) {
+        const careStep = e.target.closest('.care-step');
+        console.log('Care step clicked via global handler');
+        showCareDialog(careStep);
+    }
+    
+    // Check if clicked element is an evolution stage
+    if (e.target.closest('.pokemon-evolution-stage')) {
+        const evolutionStage = e.target.closest('.pokemon-evolution-stage');
+        console.log('Evolution stage clicked via global handler');
+        showPokemonDialog(evolutionStage);
+    }
+});
+
+// Evolution card click functionality
+function initEvolutionCards() {
+    // Add a small delay to ensure elements are loaded
+    setTimeout(() => {
+        attachEvolutionEventListeners();
+    }, 100);
+}
+
+function attachEvolutionEventListeners() {
+    // Evolution stages click functionality
+    const evolutionStages = document.querySelectorAll('.pokemon-evolution-stage');
+    console.log('Found evolution stages:', evolutionStages.length);
+    evolutionStages.forEach(stage => {
+        stage.addEventListener('click', function() {
+            console.log('Evolution stage clicked');
+            showPokemonDialog(this);
+        });
+    });
+    
+    // Energy flow step click functionality
+    const energySteps = document.querySelectorAll('.energy-step');
+    console.log('Found energy steps:', energySteps.length);
+    energySteps.forEach(step => {
+        step.addEventListener('click', function() {
+            console.log('Energy step clicked');
+            showEnergyDialog(this);
+        });
+    });
+    
+    // Care step click functionality
+    const careSteps = document.querySelectorAll('.care-step');
+    console.log('Found care steps:', careSteps.length);
+    careSteps.forEach(step => {
+        step.addEventListener('click', function() {
+            console.log('Care step clicked');
+            showCareDialog(this);
+        });
+    });
+}
+
+// Show Pokémon dialog when evolution card is clicked
+function showPokemonDialog(evolutionStage) {
+    const pokemonName = evolutionStage.querySelector('.pokemon-name-evolution').textContent;
+    const pokemonSprite = evolutionStage.querySelector('.pokemon-sprite-evolution').textContent;
+    const pokemonLevel = evolutionStage.querySelector('.evolution-level').textContent;
+    
+    // Create dialog content based on Pokémon
+    let dialogContent = getPokemonDialogContent(pokemonName, pokemonSprite, pokemonLevel);
+    
+    // Create and show modal dialog
+    showModalDialog(pokemonName, dialogContent);
+}
+
+// Get dialog content for specific Pokémon
+function getPokemonDialogContent(name, sprite, level) {
+    const pokemonData = {
+        'Bulbasaur': {
+            type: 'Grass/Poison',
+            description: 'A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon.',
+            abilities: ['Overgrow', 'Chlorophyll'],
+            stats: { hp: 45, attack: 49, defense: 49, speed: 45 },
+            evolution: 'Evolves into Ivysaur at Level 16'
+        },
+        'Ivysaur': {
+            type: 'Grass/Poison',
+            description: 'When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.',
+            abilities: ['Overgrow', 'Chlorophyll'],
+            stats: { hp: 60, attack: 62, defense: 63, speed: 60 },
+            evolution: 'Evolves into Venusaur at Level 32'
+        },
+        'Venusaur': {
+            type: 'Grass/Poison',
+            description: 'The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight.',
+            abilities: ['Overgrow', 'Chlorophyll'],
+            stats: { hp: 80, attack: 82, defense: 83, speed: 80 },
+            evolution: 'Final evolution stage'
+        },
+        'Charmander': {
+            type: 'Fire',
+            description: 'It has a preference for hot things. When it rains, steam is said to spout from the tip of its tail.',
+            abilities: ['Blaze', 'Solar Power'],
+            stats: { hp: 39, attack: 52, defense: 43, speed: 65 },
+            evolution: 'Evolves into Charmeleon at Level 16'
+        },
+        'Charmeleon': {
+            type: 'Fire',
+            description: 'It is very hotheaded by nature, so it constantly seeks opponents. It calms down only when it wins.',
+            abilities: ['Blaze', 'Solar Power'],
+            stats: { hp: 58, attack: 64, defense: 58, speed: 80 },
+            evolution: 'Evolves into Charizard at Level 36'
+        },
+        'Charizard': {
+            type: 'Fire/Flying',
+            description: 'It spits fire that is hot enough to melt boulders. It is said to cause wildfires by accident.',
+            abilities: ['Blaze', 'Solar Power'],
+            stats: { hp: 78, attack: 84, defense: 78, speed: 100 },
+            evolution: 'Final evolution stage'
+        }
+    };
+    
+    const data = pokemonData[name] || {
+        type: 'Unknown',
+        description: 'A mysterious Pokémon with unknown abilities.',
+        abilities: ['Unknown'],
+        stats: { hp: 50, attack: 50, defense: 50, speed: 50 },
+        evolution: 'Evolution information unknown'
+    };
+    
+    return `
+        <div class="pokemon-dialog-content">
+            <div class="pokemon-dialog-header">
+                <div class="pokemon-dialog-sprite">${sprite}</div>
+                <div class="pokemon-dialog-info">
+                    <h3>${name}</h3>
+                    <p class="pokemon-type">${data.type}</p>
+                    <p class="pokemon-level">Level: ${level}</p>
+                </div>
+            </div>
+            <div class="pokemon-dialog-body">
+                <p class="pokemon-description">${data.description}</p>
+                <div class="pokemon-abilities">
+                    <h4>Abilities:</h4>
+                    <div class="ability-list">
+                        ${data.abilities.map(ability => `<span class="ability-badge">${ability}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="pokemon-stats-compact">
+                    <div class="stats-row">
+                        <div class="stat-compact">
+                            <span class="stat-label">HP</span>
+                            <span class="stat-value">${data.stats.hp}</span>
+                        </div>
+                        <div class="stat-compact">
+                            <span class="stat-label">ATK</span>
+                            <span class="stat-value">${data.stats.attack}</span>
+                        </div>
+                        <div class="stat-compact">
+                            <span class="stat-label">DEF</span>
+                            <span class="stat-value">${data.stats.defense}</span>
+                        </div>
+                        <div class="stat-compact">
+                            <span class="stat-label">SPD</span>
+                            <span class="stat-value">${data.stats.speed}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pokemon-evolution-info">
+                    <h4>Evolution:</h4>
+                    <p>${data.evolution}</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Show energy flow dialog
+function showEnergyDialog(energyStep) {
+    const energyIcon = energyStep.querySelector('.energy-icon').textContent;
+    const energyText = energyStep.querySelector('span').textContent.replace(/\n/g, ' ');
+    
+    const energyData = {
+        '☀️': {
+            title: 'Sun Energy',
+            description: 'The primary energy source in the PokéVerse ecosystem. Solar energy provides the foundation for all life processes and powers the entire energy flow system.',
+            details: [
+                'Provides 100% of the ecosystem\'s energy needs',
+                'Captured by Grass-type Pokémon through photosynthesis',
+                'Converts light energy into chemical energy',
+                'Sustains the entire food web and energy cycle'
+            ],
+            type: 'Primary Energy Source',
+            efficiency: '100%'
+        },
+        '🌱': {
+            title: 'Grass Pokémon Photosynthesis',
+            description: 'Grass-type Pokémon like Bulbasaur, Oddish, and Bellsprout use photosynthesis to convert solar energy into chemical energy stored in their bodies.',
+            details: [
+                'Converts solar energy to glucose and oxygen',
+                'Stores energy in leaves and body tissues',
+                'Provides food for other Pokémon types',
+                'Maintains atmospheric oxygen levels'
+            ],
+            type: 'Energy Conversion',
+            efficiency: '85%'
+        },
+        '⚡': {
+            title: 'Electric Pokémon Energy Storage',
+            description: 'Electric-type Pokémon like Pikachu and Magnemite store and convert electrical energy, acting as living batteries in the ecosystem.',
+            details: [
+                'Stores electrical energy in specialized organs',
+                'Converts chemical energy to electrical energy',
+                'Provides power for technological systems',
+                'Maintains electrical balance in the ecosystem'
+            ],
+            type: 'Energy Storage',
+            efficiency: '90%'
+        },
+        '🔥': {
+            title: 'Fire Pokémon Energy Release',
+            description: 'Fire-type Pokémon like Charmander and Vulpix release thermal energy through controlled combustion, providing heat and power.',
+            details: [
+                'Releases stored energy as heat and light',
+                'Provides warmth for cold environments',
+                'Enables cooking and industrial processes',
+                'Maintains temperature balance'
+            ],
+            type: 'Energy Release',
+            efficiency: '75%'
+        },
+        '🔄': {
+            title: 'Energy Recycling at Pokémon Centers',
+            description: 'Pokémon Centers use advanced technology to recycle and redistribute energy throughout the ecosystem, ensuring no energy is wasted.',
+            details: [
+                'Recycles waste energy back into the system',
+                'Distributes energy to areas in need',
+                'Maintains energy balance across regions',
+                'Prevents energy loss and waste'
+            ],
+            type: 'Energy Recycling',
+            efficiency: '95%'
+        }
+    };
+    
+    const data = energyData[energyIcon] || {
+        title: energyText,
+        description: 'An important part of the Pokémon energy flow system.',
+        details: ['Essential for ecosystem balance', 'Contributes to energy flow'],
+        type: 'Energy Process',
+        efficiency: '80%'
+    };
+    
+    const dialogContent = `
+        <div class="energy-dialog-content">
+            <div class="energy-dialog-header">
+                <div class="energy-dialog-icon">${energyIcon}</div>
+                <div class="energy-dialog-info">
+                    <h3>${data.title}</h3>
+                    <p class="energy-type">${data.type}</p>
+                    <p class="energy-efficiency">Efficiency: ${data.efficiency}</p>
+                </div>
+            </div>
+            <div class="energy-dialog-body">
+                <p class="energy-description">${data.description}</p>
+                <div class="energy-details-compact">
+                    <h4>Key Functions:</h4>
+                    <div class="details-grid">
+                        ${data.details.map(detail => `<div class="detail-item">• ${detail}</div>`).join('')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    showModalDialog(data.title, dialogContent);
+}
+
+// Show care dialog
+function showCareDialog(careStep) {
+    const careIcon = careStep.querySelector('.care-icon').textContent;
+    const careText = careStep.querySelector('span').textContent.replace(/\n/g, ' ');
+    
+    const careData = {
+        '🍎': {
+            title: 'Feeding & Nutrition',
+            description: 'Proper nutrition is essential for Pokémon health and growth. Different Pokémon types require specific diets to maintain their energy levels and abilities.',
+            details: [
+                'Grass-types need sunlight and water',
+                'Fire-types require high-energy foods',
+                'Water-types need aquatic nutrition',
+                'Electric-types need electrical supplements'
+            ],
+            importance: 'Critical for Health'
+        },
+        '💤': {
+            title: 'Rest & Sleep',
+            description: 'Pokémon need adequate rest to recover energy, heal from battles, and maintain their mental health. Sleep is crucial for their overall well-being.',
+            details: [
+                '8-10 hours of sleep per night',
+                'Quiet, comfortable sleeping areas',
+                'Regular sleep schedules',
+                'Peaceful environment for rest'
+            ],
+            importance: 'Essential for Recovery'
+        },
+        '🏥': {
+            title: 'Health Monitoring',
+            description: 'Regular health checkups at Pokémon Centers ensure early detection of health issues and maintain optimal Pokémon condition.',
+            details: [
+                'Weekly health assessments',
+                'Vaccination schedules',
+                'Injury treatment and prevention',
+                'Mental health evaluations'
+            ],
+            importance: 'Preventive Care'
+        },
+        '❤️': {
+            title: 'Happiness & Bonding',
+            description: 'Building strong emotional bonds with Pokémon through interaction, play, and affection is crucial for their happiness and performance.',
+            details: [
+                'Daily interaction and playtime',
+                'Positive reinforcement training',
+                'Emotional support and comfort',
+                'Building trust and friendship'
+            ],
+            importance: 'Emotional Well-being'
+        },
+        '⚡': {
+            title: 'Training & Growth',
+            description: 'Regular training helps Pokémon develop their abilities, increase their stats, and reach their full potential in battles and competitions.',
+            details: [
+                'Daily exercise and training',
+                'Skill development programs',
+                'Battle practice sessions',
+                'Physical and mental challenges'
+            ],
+            importance: 'Skill Development'
+        }
+    };
+    
+    const data = careData[careIcon] || {
+        title: careText,
+        description: 'An important aspect of Pokémon care and wellness.',
+        details: ['Essential for Pokémon health', 'Contributes to overall well-being'],
+        importance: 'Important'
+    };
+    
+    const dialogContent = `
+        <div class="care-dialog-content">
+            <div class="care-dialog-header">
+                <div class="care-dialog-icon">${careIcon}</div>
+                <div class="care-dialog-info">
+                    <h3>${data.title}</h3>
+                    <p class="care-importance">${data.importance}</p>
+                </div>
+            </div>
+            <div class="care-dialog-body">
+                <p class="care-description">${data.description}</p>
+                <div class="care-details-compact">
+                    <h4>Care Guidelines:</h4>
+                    <div class="details-grid">
+                        ${data.details.map(detail => `<div class="detail-item">• ${detail}</div>`).join('')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    showModalDialog(data.title, dialogContent);
+}
+
+// Show modal dialog
+function showModalDialog(title, content) {
+    // Remove any existing modals first
+    const existingModals = document.querySelectorAll('.modal-overlay');
+    existingModals.forEach(modal => modal.remove());
+    
+    // Create modal overlay
+    const modalOverlay = document.createElement('div');
+    modalOverlay.className = 'modal-overlay';
+    
+    // Create modal dialog
+    const modalDialog = document.createElement('div');
+    modalDialog.className = 'modal-dialog pokemon-modal';
+    
+    modalDialog.innerHTML = `
+        <div class="modal-header">
+            <h2>${title}</h2>
+            <button class="modal-close" type="button">&times;</button>
+        </div>
+        <div class="modal-body">
+            ${content}
+        </div>
+    `;
+    
+    modalOverlay.appendChild(modalDialog);
+    document.body.appendChild(modalOverlay);
+    
+    // Close function
+    const closeModal = () => {
+        console.log('Closing modal');
+        if (modalOverlay && modalOverlay.parentNode) {
+            modalOverlay.classList.remove('show');
+            setTimeout(() => {
+                if (modalOverlay.parentNode) {
+                    document.body.removeChild(modalOverlay);
+                }
+            }, 300);
+        }
+    };
+    
+    // Add event listeners
+    const closeBtn = modalDialog.querySelector('.modal-close');
+    closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeModal();
+    });
+    
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            closeModal();
+        }
+    });
+    
+    // Add keyboard support (ESC key)
+    const handleKeyPress = (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+            document.removeEventListener('keydown', handleKeyPress);
+        }
+    };
+    document.addEventListener('keydown', handleKeyPress);
+    
+    // Add animation
+    setTimeout(() => {
+        modalOverlay.classList.add('show');
+    }, 10);
 }

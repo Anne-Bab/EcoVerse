@@ -1428,6 +1428,9 @@ body::before {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        width: 100%;
+        max-width: 100%;
+        padding: 0 15px;
     }
     
     /* Mobile Navigation */
@@ -1464,6 +1467,8 @@ body::before {
         backdrop-filter: blur(10px);
         border: 2px solid rgba(255, 255, 255, 0.2);
         min-width: auto;
+        white-space: nowrap;
+        text-align: center;
     }
     
     .pokemon-nav-item:hover {
@@ -1484,7 +1489,7 @@ body::before {
         font-size: 0.8rem;
     }
     
-    /* Make all cards responsive with better mobile width */
+    /* Make all cards match Pokédex entry width */
     .pokemon-card,
     .concept-card-pokemon,
     .stat-card-pokemon,
@@ -1503,9 +1508,8 @@ body::before {
     .result-card-pokemon,
     .timeline-item-pokemon {
         width: 100%;
-        max-width: 90vw;
+        max-width: 350px;
         margin: 0 auto 20px auto;
-        min-width: 280px;
     }
     
     .pokemon-cards-grid,
@@ -1604,10 +1608,9 @@ body::before {
     
     /* Game Boy screen and battle scene tablet styles */
     .pokemon-game-screen {
-        max-width: 90vw !important;
+        max-width: 350px !important;
         margin: 0 auto;
         width: 100%;
-        min-width: 280px;
     }
     
     .gameboy-screen {
@@ -1681,9 +1684,40 @@ body::before {
         width: 50px;
         height: 50px;
         font-size: 1.5rem;
+        aspect-ratio: 1;
+        object-fit: contain;
     }
     
-    /* Ensure all cards have better mobile width */
+    /* Fix all circular icons to maintain aspect ratio */
+    .pokeball-icon,
+    .pokeball-icon-large,
+    .pokeball-academy,
+    .pokeball-arena,
+    .pokeball-biology,
+    .pokeball-evolution,
+    .pokeball-stats,
+    .pokeball-quiz,
+    .pokeball-tech,
+    .pokeball-tools,
+    .pokeball-journey,
+    .pokeball-team,
+    .pokeball-footer,
+    .pokemon-sprite-large,
+    .pokemon-sprite-small,
+    .pokemon-sprite-trainer,
+    .pokemon-sprite-footer,
+    .pokemon-sprite-quiz,
+    .pokemon-sprite-evolution,
+    .pokemon-battle-sprite,
+    .pokemon-sprite-results {
+        aspect-ratio: 1;
+        object-fit: contain;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Ensure all cards match Pokédex entry width on mobile */
     .pokemon-card,
     .concept-card-pokemon,
     .stat-card-pokemon,
@@ -1702,10 +1736,9 @@ body::before {
     .result-card-pokemon,
     .timeline-item-pokemon {
         width: 100%;
-        max-width: 95vw;
+        max-width: 320px;
         margin: 0 auto 15px auto;
-        padding: 20px;
-        min-width: 260px;
+        padding: 15px;
     }
     
     .pokemon-card {
@@ -1714,10 +1747,9 @@ body::before {
     
     /* Game Boy screen and battle scene specific mobile styles */
     .pokemon-game-screen {
-        max-width: 95vw !important;
+        max-width: 320px !important;
         margin: 0 auto;
         width: 100%;
-        min-width: 260px;
     }
     
     .gameboy-screen {
@@ -3616,15 +3648,13 @@ body::before {
     .result-card-pokemon,
     .timeline-item-pokemon {
         width: 100%;
-        max-width: 98vw;
+        max-width: 300px;
         margin: 0 auto 10px auto;
         padding: 15px;
-        min-width: 240px;
     }
     
     .pokemon-game-screen {
-        max-width: 98vw !important;
-        min-width: 240px;
+        max-width: 300px !important;
     }
     
     .pokemon-title h1 {
@@ -3636,7 +3666,7 @@ body::before {
     }
 }
 
-/* Large mobile devices (480px to 768px) */
+/* Large mobile devices (481px to 768px) */
 @media (min-width: 481px) and (max-width: 768px) {
     .pokemon-card,
     .concept-card-pokemon,
@@ -3656,15 +3686,13 @@ body::before {
     .result-card-pokemon,
     .timeline-item-pokemon {
         width: 100%;
-        max-width: 85vw;
+        max-width: 350px;
         margin: 0 auto 20px auto;
         padding: 25px;
-        min-width: 300px;
     }
     
     .pokemon-game-screen {
-        max-width: 85vw !important;
-        min-width: 300px;
+        max-width: 350px !important;
     }
 }
 

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initMetrics();
     initCalculator();
     initThemeToggle();
+    initStatsAnimation();
     initEvolutionCards();
 });
 
@@ -21,18 +22,18 @@ function initNavigation() {
 
     // I-toggle ang mobile menu
     if (hamburger) {
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
     }
 
     // I-close ang mobile menu kung mag-click sa link
     navItems.forEach(item => {
         item.addEventListener('click', function() {
             if (hamburger && navMenu) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
             }
             
             // Update active state
@@ -712,7 +713,7 @@ function updateQuestion() {
         if (optionText) {
             optionText.textContent = question.options[index];
         } else {
-            option.textContent = question.options[index];
+        option.textContent = question.options[index];
         }
         option.classList.remove('selected', 'correct', 'incorrect');
         option.dataset.answer = index;
@@ -748,7 +749,7 @@ function showQuizResults() {
                         <div class="celebration-star">✨</div>
                         <div class="celebration-star">✨</div>
                         <div class="celebration-star">✨</div>
-                    </div>
+            </div>
                 </div>
                 <h3 class="quiz-complete-title">Quiz Complete!</h3>
                 <p class="quiz-subtitle">Pokémon Battle Quiz Results</p>
@@ -1635,4 +1636,49 @@ function showModalDialog(title, content) {
     setTimeout(() => {
         modalOverlay.classList.add('show');
     }, 10);
+}
+
+// Initialize stats animation
+function initStatsAnimation() {
+    // Function to animate stats when they come into view
+    function animateStats() {
+        const statValues = document.querySelectorAll('.stat-value[data-target]');
+        const statFills = document.querySelectorAll('.stat-fill[data-width]');
+        
+        statValues.forEach((element, index) => {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 16);
+        });
+        
+        statFills.forEach((element, index) => {
+            const width = element.getAttribute('data-width');
+            element.style.width = width + '%';
+        });
+    }
+    
+    // Use Intersection Observer to trigger animation when stats section is visible
+    const statsSection = document.querySelector('.pokemon-stats-section');
+    if (statsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(statsSection);
+    }
 }

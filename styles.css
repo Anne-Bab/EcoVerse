@@ -1495,7 +1495,13 @@ body::before {
     .care-step,
     .pokemon-evolution-stage,
     .pokemon-stats-panel,
-    .pokemon-battle-scene {
+    .pokemon-battle-scene,
+    .lesson-card,
+    .program-card,
+    .goal-card,
+    .pokemon-stats-card,
+    .result-card-pokemon,
+    .timeline-item-pokemon {
         width: 100%;
         max-width: 350px;
         margin: 0 auto 20px auto;
@@ -1509,7 +1515,12 @@ body::before {
     .effectiveness-grid,
     .energy-flow-visualization,
     .care-visualization,
-    .evolution-chains {
+    .evolution-chains,
+    .lessons-grid,
+    .goals-grid,
+    .stats-comparison,
+    .results-grid-pokemon,
+    .pokemon-timeline {
         grid-template-columns: 1fr;
         gap: 20px;
         justify-items: center;
@@ -1550,6 +1561,31 @@ body::before {
     
     .pokemon-evolution-stage {
         margin-bottom: 15px;
+    }
+    
+    /* Additional card types responsive styles */
+    .lesson-card {
+        margin-bottom: 20px;
+    }
+    
+    .program-card {
+        margin-bottom: 20px;
+    }
+    
+    .goal-card {
+        margin-bottom: 20px;
+    }
+    
+    .pokemon-stats-card {
+        margin-bottom: 20px;
+    }
+    
+    .result-card-pokemon {
+        margin-bottom: 20px;
+    }
+    
+    .timeline-item-pokemon {
+        margin-bottom: 20px;
     }
     
     /* Game Boy screen and battle scene tablet styles */
@@ -1643,7 +1679,13 @@ body::before {
     .care-step,
     .pokemon-evolution-stage,
     .pokemon-stats-panel,
-    .pokemon-battle-scene {
+    .pokemon-battle-scene,
+    .lesson-card,
+    .program-card,
+    .goal-card,
+    .pokemon-stats-card,
+    .result-card-pokemon,
+    .timeline-item-pokemon {
         width: 100%;
         max-width: 320px;
         margin: 0 auto 15px auto;
@@ -1708,7 +1750,12 @@ body::before {
     .effectiveness-grid,
     .energy-flow-visualization,
     .care-visualization,
-    .evolution-chains {
+    .evolution-chains,
+    .lessons-grid,
+    .goals-grid,
+    .stats-comparison,
+    .results-grid-pokemon,
+    .pokemon-timeline {
         grid-template-columns: 1fr;
         gap: 15px;
         justify-items: center;

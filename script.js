@@ -1,1684 +1,1079 @@
-// DOM Content Loaded - DOM na-load na
+// WALL-E Terra Nova Interactive Features
 document.addEventListener('DOMContentLoaded', function() {
-    // I-initialize ang tanan nga interactive features
-    initNavigation();
-    initScrollEffects();
-    initCycleTabs();
-    initAnimations();
-    initFloatingElements();
-    initQuiz();
-    initMetrics();
-    initCalculator();
-    initThemeToggle();
-    initStatsAnimation();
-    initEvolutionCards();
-});
-
-// Navigation functionality - Navigation nga functionality
-function initNavigation() {
-    const hamburger = document.querySelector('.hamburger-menu');
-    const navMenu = document.querySelector('.pokemon-menu');
-    const navItems = document.querySelectorAll('.pokemon-nav-item');
-
-    // I-toggle ang mobile menu
-    if (hamburger) {
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
+    // Add WALL-E sound effects and enhanced animations
+    addWallESoundEffects();
+    createFloatingWasteParticles();
+    addRobotBeepSounds();
+    initializeScrollAnimations();
+    initializeHeroAnimations();
+    initializeCardAnimations();
+    initializeProgressIndicator();
+    initializeTypingEffect();
+    // Navigation functionality
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const contentSections = document.querySelectorAll('.content-section');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navbarMenu = document.querySelector('.navbar-menu');
+    
+    console.log('Navigation elements found:', {
+        navButtons: navButtons.length,
+        contentSections: contentSections.length,
+        mobileMenuBtn: !!mobileMenuBtn,
+        navbarMenu: !!navbarMenu
     });
-    }
+    
+    // Test function to manually trigger mobile menu
+    window.testMobileMenu = function() {
+        if (mobileMenuBtn && navbarMenu) {
+            mobileMenuBtn.classList.toggle('active');
+            navbarMenu.classList.toggle('active');
+            console.log('Mobile menu toggled manually');
+        }
+    };
 
-    // I-close ang mobile menu kung mag-click sa link
-    navItems.forEach(item => {
-        item.addEventListener('click', function() {
-            if (hamburger && navMenu) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            }
-            
-            // Update active state
-            navItems.forEach(navItem => navItem.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Smooth scrolling
-            const targetSection = this.getAttribute('data-section');
-            const targetElement = document.getElementById(targetSection);
-            
-            if (targetElement) {
-                const offsetTop = targetElement.offsetTop - 70; // I-account para sa fixed navbar
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
+    // Mobile menu toggle
+    if (mobileMenuBtn && navbarMenu) {
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Mobile menu clicked');
+            this.classList.toggle('active');
+            navbarMenu.classList.toggle('active');
+            console.log('Mobile menu classes:', {
+                buttonActive: this.classList.contains('active'),
+                menuActive: navbarMenu.classList.contains('active')
+            });
         });
-    });
-
-    // Close menu when clicking outside
+    } else {
+        console.log('Mobile menu elements not found:', { mobileMenuBtn, navbarMenu });
+    }
+    
+    // Add click handler to document to close mobile menu when clicking outside
     document.addEventListener('click', function(e) {
-        if (hamburger && navMenu && 
-            !hamburger.contains(e.target) && 
-            !navMenu.contains(e.target)) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        }
-    });
-
-    // I-change ang navbar background kung mag-scroll
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar');
-        const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
-        
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-            if (isDarkMode) {
-                navbar.style.background = 'rgba(26, 26, 46, 0.98)';
-                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-            }
-        } else {
-            navbar.classList.remove('scrolled');
-            if (isDarkMode) {
-                navbar.style.background = 'rgba(26, 26, 46, 0.95)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        if (navbarMenu && navbarMenu.classList.contains('active')) {
+            if (!navbarMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navbarMenu.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                console.log('Mobile menu closed by outside click');
             }
         }
     });
-}
 
-// Scroll effects ug animations
-function initScrollEffects() {
-    // Intersection Observer para sa fade-in animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // Observe all cards and sections
-    const animatedElements = document.querySelectorAll('.profile-card, .goals-card, .issues-card, .message-card, .mdg-card, .concept-card, .cycle-panel');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-        observer.observe(el);
-    });
-}
-
-// Cycle tabs functionality
-function initCycleTabs() {
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const cyclePanels = document.querySelectorAll('.cycle-panel');
-
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const targetCycle = this.textContent.toLowerCase().replace(' cycle', '');
+    navButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const targetSection = this.getAttribute('data-section');
+            console.log('Nav button clicked:', targetSection);
             
-            // Remove active class from all buttons and panels
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            cyclePanels.forEach(panel => panel.classList.remove('active'));
+            // Remove active class from all buttons and sections
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            contentSections.forEach(section => section.classList.remove('active'));
             
-            // Add active class to clicked button and corresponding panel
+            // Add active class to clicked button and target section
             this.classList.add('active');
-            const targetPanel = document.getElementById(targetCycle + '-cycle');
-            if (targetPanel) {
-                targetPanel.classList.add('active');
+            const targetElement = document.getElementById(targetSection);
+            if (targetElement) {
+                targetElement.classList.add('active');
+                console.log('Section activated:', targetSection);
+            } else {
+                console.log('Target section not found:', targetSection);
             }
-        });
-    });
-}
-
-// Animation functions
-function initAnimations() {
-    // Parallax effect for hero section
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.floating-icon');
-        
-        parallaxElements.forEach((element, index) => {
-            const speed = 0.5 + (index * 0.1);
-            element.style.transform = `translateY(${scrolled * speed}px)`;
-        });
-    });
-
-    // Typing effect for hero title
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        const text = heroTitle.textContent;
-        heroTitle.textContent = '';
-        let i = 0;
-        
-        function typeWriter() {
-            if (i < text.length) {
-                heroTitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
+            
+            // Close mobile menu if open
+            if (navbarMenu && navbarMenu.classList.contains('active')) {
+                navbarMenu.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
             }
-        }
-        
-        // Start typing effect after a delay
-        setTimeout(typeWriter, 500);
-    }
-}
-
-// Floating elements animation
-function initFloatingElements() {
-    const floatingIcons = document.querySelectorAll('.floating-icon');
-    
-    floatingIcons.forEach((icon, index) => {
-        // Add random movement
-        setInterval(() => {
-            const randomX = (Math.random() - 0.5) * 20;
-            const randomY = (Math.random() - 0.5) * 20;
-            icon.style.transform = `translate(${randomX}px, ${randomY}px)`;
-        }, 3000 + (index * 500));
-    });
-}
-
-// Utility function for smooth scrolling to sections
-function scrollToSection(sectionId) {
-    const section = document.getElementById(sectionId);
-    if (section) {
-        const offsetTop = section.offsetTop - 70;
-        window.scrollTo({
-            top: offsetTop,
-            behavior: 'smooth'
-        });
-    }
-}
-
-// Interactive food chain visualization
-function initFoodChainInteraction() {
-    const trophicLevels = document.querySelectorAll('.trophic-level');
-    
-    trophicLevels.forEach(level => {
-        level.addEventListener('click', function() {
-            // Add pulse effect
-            this.style.animation = 'pulse 0.6s ease-in-out';
+            
+            // Add WALL-E sound effect (visual feedback)
+            this.style.transform = 'scale(0.95)';
             setTimeout(() => {
-                this.style.animation = '';
-            }, 600);
-            
-            // Show information about this trophic level
-            showTrophicLevelInfo(this);
+                this.style.transform = 'scale(1)';
+            }, 150);
         });
     });
-}
 
-function showTrophicLevelInfo(element) {
-    const levelType = element.classList[1]; // primary, producer, consumer, decomposer
-    const info = getTrophicLevelInfo(levelType);
-    
-    // Create info modal
-    const modal = document.createElement('div');
-    modal.className = 'trophic-info-modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h3>${info.title}</h3>
-            <p>${info.description}</p>
-            <div class="info-details">
-                <h4>Key Characteristics:</h4>
-                <ul>
-                    ${info.characteristics.map(char => `<li>${char}</li>`).join('')}
-                </ul>
-            </div>
-        </div>
-    `;
-    
-    document.body.appendChild(modal);
-    
-    // Close modal functionality
-    const closeBtn = modal.querySelector('.close-modal');
-    closeBtn.addEventListener('click', () => {
-        document.body.removeChild(modal);
-    });
-    
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            document.body.removeChild(modal);
-        }
-    });
-}
-
-function getTrophicLevelInfo(levelType) {
-    const info = {
-        primary: {
-            title: 'Solar Energy Source',
-            description: 'The primary energy source that powers the entire Solaria Prime ecosystem.',
-            characteristics: [
-                'Provides unlimited clean energy',
-                'Captured by bio-solar panels',
-                'Converts to chemical energy',
-                'Zero waste energy source'
-            ]
-        },
-        producer: {
-            title: 'Sky Corals (Producers)',
-            description: 'Bio-engineered organisms that convert solar energy into chemical energy through photosynthesis.',
-            characteristics: [
-                'Convert solar energy to glucose',
-                'Release oxygen as byproduct',
-                'Form the base of the food web',
-                'Self-repairing and adaptive'
-            ]
-        },
-        consumer: {
-            title: 'Solar Gliders (Primary Consumers)',
-            description: 'Aerial organisms that feed on sky corals and other producers.',
-            characteristics: [
-                'Feed on sky coral biomass',
-                'Convert energy to movement',
-                'Maintain ecosystem balance',
-                'AI-monitored populations'
-            ]
-        },
-        decomposer: {
-            title: 'AI Decomposers',
-            description: 'Intelligent systems that break down organic matter and recycle nutrients.',
-            characteristics: [
-                'Break down dead organisms',
-                'Recycle nutrients back to soil',
-                'Maintain nutrient cycles',
-                'AI-optimized decomposition'
-            ]
-        }
-    };
-    
-    return info[levelType] || info.primary;
-}
-
-// Interactive cycle visualization
-function initCycleInteraction() {
-    const cycleSteps = document.querySelectorAll('.cycle-step');
-    
-    cycleSteps.forEach(step => {
-        step.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.1) rotate(2deg)';
-            this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
-        });
-        
-        step.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1) rotate(0deg)';
-            this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-        });
-    });
-}
-
-// Initialize interactive features when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    initFoodChainInteraction();
-    initCycleInteraction();
-});
-
-// Add CSS for modal
-const modalCSS = `
-.trophic-info-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    animation: fadeIn 0.3s ease-out;
-}
-
-.modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    max-width: 500px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    position: relative;
-    animation: slideIn 0.3s ease-out;
-    color: #333;
-}
-
-.modal-content h3 {
-    color: #2E8B57;
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-}
-
-.modal-content h4 {
-    color: #20B2AA;
-    margin: 20px 0 10px 0;
-    font-size: 1.1rem;
-}
-
-.close-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #999;
-    transition: color 0.3s ease;
-}
-
-.close-modal:hover {
-    color: #333;
-}
-
-.info-details ul {
-    list-style: none;
-    padding: 0;
-}
-
-.info-details li {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-    color: #666;
-}
-
-.info-details li:last-child {
-    border-bottom: none;
-}
-
-/* Dark mode styles for modal */
-[data-theme="dark"] .trophic-info-modal {
-    background: rgba(0, 0, 0, 0.9);
-}
-
-[data-theme="dark"] .modal-content {
-    background: #2C2C2C;
-    color: #E8E8E8;
-    border: 1px solid rgba(46, 139, 87, 0.3);
-}
-
-[data-theme="dark"] .modal-content h3 {
-    color: #4CAF50;
-}
-
-[data-theme="dark"] .modal-content h4 {
-    color: #20B2AA;
-}
-
-[data-theme="dark"] .close-modal {
-    color: #ccc;
-}
-
-[data-theme="dark"] .close-modal:hover {
-    color: #fff;
-}
-
-[data-theme="dark"] .info-details li {
-    color: #ccc;
-    border-bottom: 1px solid #444;
-}
-
-.info-details li {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-    position: relative;
-    padding-left: 20px;
-}
-
-.info-details li:before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: #2E8B57;
-    font-weight: bold;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-`;
-
-// Inject modal CSS
-const style = document.createElement('style');
-style.textContent = modalCSS;
-document.head.appendChild(style);
-
-// Performance optimization: Throttle scroll events
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
-}
-
-// Apply throttling to scroll events
-window.addEventListener('scroll', throttle(function() {
-    // Scroll-based animations here
-}, 16)); // ~60fps
-
-// Add loading animation
-window.addEventListener('load', function() {
-    document.body.classList.add('loaded');
-});
-
-// Add CSS for loading state
-const loadingCSS = `
-body:not(.loaded) {
-    overflow: hidden;
-}
-
-body:not(.loaded)::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-body:not(.loaded)::after {
-    content: 'Loading EcoVerse...';
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 600;
-    z-index: 10000;
-    animation: pulse 1.5s infinite;
-}
-`;
-
-const loadingStyle = document.createElement('style');
-loadingStyle.textContent = loadingCSS;
-document.head.appendChild(loadingStyle);
-
-// Quiz functionality - Quiz nga functionality
-let currentQuestion = 0;
-let score = 0;
-let selectedAnswer = null;
-let shuffledQuestions = [];
-let questionsPerRound = 5; // Number of questions per quiz round
-
-const quizData = [
-    {
-        question: "What is the primary energy source in PokéVerse?",
-        options: ["Wind Energy", "Solar Energy", "Nuclear Energy", "Geothermal Energy"],
-        correct: 1
-    },
-    {
-        question: "Which technology is used for nitrogen fixation in Solaria Prime?",
-        options: ["Solar panels", "Aerial microbes", "Wind turbines", "Water filters"],
-        correct: 1
-    },
-    {
-        question: "What percentage of waste is recycled in Solaria Prime?",
-        options: ["85%", "90%", "95%", "100%"],
-        correct: 3
-    },
-    {
-        question: "What is the main purpose of AI Decomposers?",
-        options: ["Generate energy", "Break down organic matter", "Filter water", "Monitor air quality"],
-        correct: 1
-    },
-    {
-        question: "How much water can Atmospheric Water Harvesters produce per day?",
-        options: ["500L", "750L", "1000L", "1500L"],
-        correct: 2
-    },
-    {
-        question: "What type of organisms are Sky Corals?",
-        options: ["Bio-engineered producers", "Natural consumers", "Artificial decomposers", "Mechanical filters"],
-        correct: 0
-    },
-    {
-        question: "What is the main function of Solar Gliders?",
-        options: ["Primary consumers", "Secondary consumers", "Producers", "Decomposers"],
-        correct: 0
-    },
-    {
-        question: "Which law of thermodynamics applies to energy conversion in Solaria Prime?",
-        options: ["1st Law only", "2nd Law only", "Both 1st and 2nd Law", "Neither law applies"],
-        correct: 2
-    },
-    {
-        question: "What maintains homeostasis in the Solaria Prime ecosystem?",
-        options: ["Manual controls", "AI sensors", "Natural processes", "Random events"],
-        correct: 1
-    },
-    {
-        question: "What is the main benefit of the closed-loop system in Solaria Prime?",
-        options: ["Reduced costs", "Zero waste", "Faster production", "Less maintenance"],
-        correct: 1
-    },
-    {
-        question: "Which cycle is most important for nutrient recycling in Solaria Prime?",
-        options: ["Carbon cycle", "Nitrogen cycle", "Water cycle", "All cycles are equally important"],
-        correct: 3
-    },
-    {
-        question: "What technology captures solar energy in Solaria Prime?",
-        options: ["Traditional solar panels", "Bio-solar panels", "Wind turbines", "Hydroelectric dams"],
-        correct: 1
-    },
-    {
-        question: "How do Sky Corals contribute to the ecosystem?",
-        options: ["They consume other organisms", "They convert solar energy to chemical energy", "They decompose waste", "They filter water"],
-        correct: 1
-    },
-    {
-        question: "What is the role of Solar Gliders in the food chain?",
-        options: ["Primary producers", "Primary consumers", "Secondary consumers", "Tertiary consumers"],
-        correct: 1
-    },
-    {
-        question: "Which technology ensures water sustainability in Solaria Prime?",
-        options: ["Traditional wells", "Atmospheric Water Harvesters", "River systems", "Underground storage"],
-        correct: 1
-    }
-];
-
-// Function to shuffle array
-function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-}
-
-function initQuiz() {
-    // Initialize with shuffled questions
-    startNewQuiz();
-    
-    // Attach event listeners to quiz buttons
-    attachQuizEventListeners();
-}
-
-function attachQuizEventListeners() {
-    const optionButtons = document.querySelectorAll('.option-btn-quiz');
-    console.log('Found quiz buttons:', optionButtons.length);
-    
-    optionButtons.forEach((button, index) => {
-        // Remove any existing event listeners
-        button.removeEventListener('click', selectAnswer);
-        // Add new event listener
-        button.addEventListener('click', function() {
-            console.log('Button clicked:', index);
-            selectAnswer(this);
-        });
-    });
-}
-
-function startNewQuiz() {
-    // Shuffle all questions and select the first 5
-    shuffledQuestions = shuffleArray(quizData).slice(0, questionsPerRound);
-    currentQuestion = 0;
-    score = 0;
-    selectedAnswer = null;
-    document.getElementById('score').textContent = '0';
-    document.getElementById('next-btn').textContent = 'Next Question';
-    updateQuestion();
-    
-    // Ensure event listeners are attached
-    attachQuizEventListeners();
-}
-
-function selectAnswer(button) {
-    console.log('Answer selected:', button.dataset.answer);
-    
-    // Remove selected class from all buttons
-    document.querySelectorAll('.option-btn-quiz').forEach(btn => {
-        btn.classList.remove('selected');
-    });
-    
-    // Add selected class to clicked button
-    button.classList.add('selected');
-    selectedAnswer = parseInt(button.dataset.answer);
-    
-    console.log('Selected answer:', selectedAnswer);
-}
-
-function nextQuestion() {
-    if (selectedAnswer === null) {
-        alert('Please select an answer before proceeding.');
-        return;
-    }
-    
-    // Check if answer is correct
-    if (selectedAnswer === shuffledQuestions[currentQuestion].correct) {
-        score++;
-        document.querySelectorAll('.option-btn-quiz')[selectedAnswer].classList.add('correct');
-    } else {
-        document.querySelectorAll('.option-btn-quiz')[selectedAnswer].classList.add('incorrect');
-        document.querySelectorAll('.option-btn-quiz')[shuffledQuestions[currentQuestion].correct].classList.add('correct');
-    }
-    
-    // Update score
-    document.getElementById('score').textContent = score;
-    
-    // Move to next question
-    currentQuestion++;
-    
-    if (currentQuestion < shuffledQuestions.length) {
-        setTimeout(() => {
-            updateQuestion();
-        }, 2000);
-    } else {
-        setTimeout(() => {
-            showQuizResults();
-        }, 2000);
-    }
-}
-
-function updateQuestion() {
-    const question = shuffledQuestions[currentQuestion];
-    const questionElement = document.getElementById('question-text-quiz') || document.getElementById('question-text');
-    if (questionElement) {
-        questionElement.textContent = question.question;
-    }
-    document.getElementById('current-q').textContent = currentQuestion + 1;
-    
-    const options = document.querySelectorAll('.option-btn-quiz');
-    options.forEach((option, index) => {
-        const optionText = option.querySelector('.option-text');
-        if (optionText) {
-            optionText.textContent = question.options[index];
-        } else {
-        option.textContent = question.options[index];
-        }
-        option.classList.remove('selected', 'correct', 'incorrect');
-        option.dataset.answer = index;
-    });
-    
-    selectedAnswer = null;
-    
-    if (currentQuestion === shuffledQuestions.length - 1) {
-        document.getElementById('next-btn').textContent = 'Finish Quiz';
-    }
-}
-
-function showQuizResults() {
-    const percentage = Math.round((score / shuffledQuestions.length) * 100);
-    let message = '';
-    
-    if (percentage >= 80) {
-        message = 'Excellent! You have a deep understanding of Solaria Prime!';
-    } else if (percentage >= 60) {
-        message = 'Good job! You know quite a bit about environmental science.';
-    } else {
-        message = 'Keep learning! Environmental science is fascinating!';
-    }
-    
-    document.querySelector('.quiz-content').innerHTML = `
-        <div class="quiz-results-pokemon">
-            <div class="quiz-results-header">
-                <div class="pokemon-celebration">
-                    <div class="pokemon-sprite-results">${score >= 4 ? '🏆' : score >= 2 ? '⭐' : '💪'}</div>
-                    <div class="celebration-effects">
-                        <div class="celebration-star">✨</div>
-                        <div class="celebration-star">✨</div>
-                        <div class="celebration-star">✨</div>
-                        <div class="celebration-star">✨</div>
-                        <div class="celebration-star">✨</div>
-            </div>
-                </div>
-                <h3 class="quiz-complete-title">Quiz Complete!</h3>
-                <p class="quiz-subtitle">Pokémon Battle Quiz Results</p>
-            </div>
-            
-            <div class="quiz-score-display">
-                <div class="score-circle">
-                    <div class="score-number">${score}</div>
-                    <div class="score-total">/${shuffledQuestions.length}</div>
-                </div>
-                <div class="score-percentage">${percentage}%</div>
-                <div class="score-bar-container">
-                    <div class="score-bar">
-                        <div class="score-fill" style="width: ${percentage}%"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="quiz-result-message">
-                <div class="result-icon">${score >= 4 ? '🎉' : score >= 2 ? '👍' : '💪'}</div>
-                <p class="result-text">${message}</p>
-            </div>
-            
-            <div class="quiz-achievements">
-                <h4>🏆 Achievements Unlocked:</h4>
-                <div class="achievement-list">
-                    <div class="achievement-item ${score >= 1 ? 'unlocked' : 'locked'}">
-                        <span class="achievement-icon">🥉</span>
-                        <span class="achievement-text">First Answer</span>
-                    </div>
-                    <div class="achievement-item ${score >= 2 ? 'unlocked' : 'locked'}">
-                        <span class="achievement-icon">🥈</span>
-                        <span class="achievement-text">Getting Started</span>
-                    </div>
-                    <div class="achievement-item ${score >= 3 ? 'unlocked' : 'locked'}">
-                        <span class="achievement-icon">🥇</span>
-                        <span class="achievement-text">Pokémon Scholar</span>
-                    </div>
-                    <div class="achievement-item ${score >= 4 ? 'unlocked' : 'locked'}">
-                        <span class="achievement-icon">💎</span>
-                        <span class="achievement-text">Master Trainer</span>
-                    </div>
-                    <div class="achievement-item ${score >= 5 ? 'unlocked' : 'locked'}">
-                        <span class="achievement-icon">👑</span>
-                        <span class="achievement-text">Pokémon Professor</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="quiz-actions">
-                <button class="btn-quiz-restart" onclick="restartQuiz()">
-                    <span class="btn-icon">🔄</span>
-                    <span class="btn-text">Take Quiz Again</span>
-                </button>
-                <button class="btn-quiz-home" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                    <span class="btn-icon">🏠</span>
-                    <span class="btn-text">Back to Home</span>
-                </button>
-            </div>
-        </div>
-    `;
-}
-
-function restartQuiz() {
-    // Restore the original quiz structure with correct class names
-    document.querySelector('.quiz-content').innerHTML = `
-        <div class="quiz-battle-arena">
-            <div class="battle-pokemon-left">
-                <div class="pokemon-sprite-quiz">⚡</div>
-                <div class="pokemon-name-quiz">Pikachu</div>
-            </div>
-            <div class="quiz-center">
-                <div class="vs-text-quiz">VS</div>
-                <div class="question-number-quiz">Question <span id="current-q">1</span> of <span id="total-q">5</span></div>
-            </div>
-            <div class="battle-pokemon-right">
-                <div class="pokemon-sprite-quiz">🔥</div>
-                <div class="pokemon-name-quiz">Charmander</div>
-            </div>
-        </div>
-        <div class="question-container-quiz">
-            <div class="question-text-quiz" id="question-text-quiz">What is the primary energy source in PokéVerse?</div>
-            <div class="options-quiz" id="options">
-                <button class="option-btn-quiz" data-answer="0">
-                    <span class="option-icon">💨</span>
-                    <span class="option-text">Wind Energy</span>
-                </button>
-                <button class="option-btn-quiz" data-answer="1">
-                    <span class="option-icon">☀️</span>
-                    <span class="option-text">Solar Energy</span>
-                </button>
-                <button class="option-btn-quiz" data-answer="2">
-                    <span class="option-icon">⚛️</span>
-                    <span class="option-text">Nuclear Energy</span>
-                </button>
-                <button class="option-btn-quiz" data-answer="3">
-                    <span class="option-icon">🌋</span>
-                    <span class="option-text">Geothermal Energy</span>
-                </button>
-            </div>
-        </div>
-        <div class="quiz-controls-quiz">
-            <button class="btn-quiz-primary" id="next-btn" onclick="nextQuestion()">
-                <span class="btn-icon">➡️</span>
-                <span class="btn-text">Next Question</span>
-            </button>
-            <div class="score-display-quiz">
-                <div class="score-icon">🏆</div>
-                <div class="score-text">Score: <span id="score">0</span>/5</div>
-            </div>
-        </div>
-    `;
-    
-    // Re-attach event listeners to the new buttons
-    attachQuizEventListeners();
-    
-    // Start a new quiz with different randomized questions
-    startNewQuiz();
-}
-
-// Metrics animation
-function initMetrics() {
-    const metricValues = document.querySelectorAll('.metric-value');
-    
+// Enhanced Animation Functions
+function initializeScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-    
-    metricValues.forEach(value => {
-        observer.observe(value);
-    });
-}
-
-function animateCounter(element) {
-    const target = parseInt(element.dataset.target);
-    const duration = 2000;
-    const increment = target / (duration / 16);
-    let current = 0;
-    
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            current = target;
-            clearInterval(timer);
-        }
-        element.textContent = Math.floor(current);
-    }, 16);
-}
-
-// Calculator functionality
-function initCalculator() {
-    // Calculator is already set up with onclick handlers
-}
-
-function calculateImpact() {
-    const energyUsage = parseFloat(document.getElementById('energy-usage').value) || 0;
-    const waterUsage = parseFloat(document.getElementById('water-usage').value) || 0;
-    const wasteProduction = parseFloat(document.getElementById('waste-production').value) || 0;
-    
-    // Calculate carbon footprint (simplified calculation)
-    const carbonFootprint = (energyUsage * 0.4 + wasteProduction * 0.5).toFixed(1);
-    document.getElementById('carbon-result').textContent = carbonFootprint + ' kg CO₂/day';
-    
-    // Calculate water efficiency
-    const waterEfficiency = waterUsage > 0 ? Math.max(0, 100 - (waterUsage - 100) * 0.5) : 0;
-    document.getElementById('water-result').textContent = waterEfficiency.toFixed(1) + '%';
-    
-    // Calculate waste score
-    const wasteScore = Math.max(0, 100 - wasteProduction * 10);
-    document.getElementById('waste-result').textContent = wasteScore.toFixed(1) + '%';
-    
-    // Calculate overall rating
-    const overallRating = (parseFloat(carbonFootprint) + waterEfficiency + wasteScore) / 3;
-    let rating = '';
-    if (overallRating >= 80) rating = 'Excellent 🌟';
-    else if (overallRating >= 60) rating = 'Good 👍';
-    else if (overallRating >= 40) rating = 'Fair ⚠️';
-    else rating = 'Needs Improvement 📈';
-    
-    document.getElementById('overall-result').textContent = rating;
-    
-    // Generate recommendations
-    generateRecommendations(energyUsage, waterUsage, wasteProduction);
-}
-
-function generateRecommendations(energy, water, waste) {
-    const recommendations = [];
-    
-    if (energy > 30) {
-        recommendations.push('Consider using energy-efficient appliances');
-    }
-    if (water > 200) {
-        recommendations.push('Install water-saving fixtures and devices');
-    }
-    if (waste > 5) {
-        recommendations.push('Implement a recycling and composting system');
-    }
-    if (energy < 20 && water < 150 && waste < 3) {
-        recommendations.push('You\'re doing great! Keep up the sustainable practices!');
-    }
-    
-    const list = document.getElementById('recommendations-list');
-    list.innerHTML = recommendations.map(rec => `<li>${rec}</li>`).join('');
-}
-
-// Theme toggle functionality
-function initThemeToggle() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-}
-
-function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    // Add transition class for smooth animation
-    const navbar = document.querySelector('.navbar');
-    navbar.style.transition = 'all 0.3s ease';
-    
-    // Set the new theme
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
-    
-    // Use setTimeout to ensure CSS transitions work properly
-    setTimeout(() => {
-        const isScrolled = window.scrollY > 50;
-        
-        if (newTheme === 'dark') {
-            if (isScrolled) {
-                navbar.style.background = 'rgba(26, 26, 46, 0.98)';
-                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
-            } else {
-                navbar.style.background = 'rgba(26, 26, 46, 0.95)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
-            }
-        } else {
-            if (isScrolled) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-            }
-        }
-    }, 10);
-}
-
-function updateThemeIcon(theme) {
-    const icon = document.querySelector('.theme-toggle i');
-    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-}
-
-// Pokémon Game Interactions
-document.addEventListener('DOMContentLoaded', function() {
-    // Pokémon Navigation
-    const navItems = document.querySelectorAll('.pokemon-nav-item');
-    navItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Remove active class from all items
-            navItems.forEach(nav => nav.classList.remove('active'));
-            // Add active class to clicked item
-            this.classList.add('active');
-            
-            // Get section to scroll to
-            const section = this.getAttribute('data-section');
-            if (section) {
-                scrollToSection(section);
-            }
-        });
-    });
-
-    // Pokémon Card Interactions
-    const pokemonCards = document.querySelectorAll('.pokemon-card');
-    pokemonCards.forEach(card => {
-        card.addEventListener('click', function() {
-            // Add battle animation
-            this.style.transform = 'translateY(-15px) rotate(5deg) scale(1.05)';
-            this.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.4), 0 0 0 6px #FFD700';
-            
-            // Reset after animation
-            setTimeout(() => {
-                this.style.transform = '';
-                this.style.boxShadow = '';
-            }, 300);
-        });
-    });
-
-    // Pokémon Search Functionality
-    const searchInput = document.querySelector('.pokemon-search');
-    const searchBtn = document.querySelector('.search-btn');
-    
-    if (searchInput && searchBtn) {
-        searchBtn.addEventListener('click', function() {
-            const searchTerm = searchInput.value.toLowerCase();
-            filterPokemonCards(searchTerm);
-        });
-        
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            filterPokemonCards(searchTerm);
-        });
-    }
-
-    // Pokémon Battle Animations
-    const battlePokemon = document.querySelectorAll('.pokemon-sprite-large');
-    battlePokemon.forEach(pokemon => {
-        pokemon.addEventListener('click', function() {
-            // Trigger battle animation
-            this.style.animation = 'pokemonBattle 0.5s ease-in-out';
-            setTimeout(() => {
-                this.style.animation = '';
-            }, 500);
-        });
-    });
-
-    // Pokémon Menu Options
-    const menuOptions = document.querySelectorAll('.pokemon-option');
-    menuOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            // Remove active class from all options
-            menuOptions.forEach(opt => opt.classList.remove('active'));
-            // Add active class to clicked option
-            this.classList.add('active');
-            
-            // Add click effect
-            this.style.transform = 'scale(0.95)';
-            this.style.background = 'rgba(255, 255, 255, 0.4)';
-            setTimeout(() => {
-                this.style.transform = '';
-                this.style.background = '';
-            }, 150);
-            
-            // Navigate to appropriate section based on option
-            const optionText = this.textContent.trim();
-            let targetSection = '';
-            
-            switch(optionText) {
-                case 'START JOURNEY':
-                    targetSection = 'home';
-                    break;
-                case 'POKÉDEX':
-                    targetSection = 'profile';
-                    break;
-                case 'TRAINER CARD':
-                    targetSection = 'education';
-                    break;
-                case 'BATTLE':
-                    targetSection = 'ecosystem';
-                    break;
-            }
-            
-            if (targetSection) {
-                const targetElement = document.getElementById(targetSection);
-                if (targetElement) {
-                    const offsetTop = targetElement.offsetTop - 70;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
+                entry.target.classList.add('visible');
+                
+                // Add staggered animation delays
+                const siblings = Array.from(entry.target.parentNode.children);
+                const index = siblings.indexOf(entry.target);
+                entry.target.style.animationDelay = `${index * 0.1}s`;
+                
+                // Add special effects for different elements
+                if (entry.target.classList.contains('card')) {
+                    addCardRevealEffect(entry.target);
+                } else if (entry.target.classList.contains('cycle-section')) {
+                    addCycleRevealEffect(entry.target);
+                } else if (entry.target.classList.contains('chain-level')) {
+                    addChainRevealEffect(entry.target);
                 }
             }
         });
-    });
-});
+    }, { threshold: 0.1 });
 
-// Filter Pokémon cards based on search term
-function filterPokemonCards(searchTerm) {
-    const cards = document.querySelectorAll('.pokemon-card');
-    cards.forEach(card => {
-        const pokemonName = card.querySelector('.pokemon-name').textContent.toLowerCase();
-        const pokemonType = card.querySelector('.pokemon-type').textContent.toLowerCase();
-        const pokemonDescription = card.querySelector('.pokemon-description p').textContent.toLowerCase();
-        
-        if (pokemonName.includes(searchTerm) || 
-            pokemonType.includes(searchTerm) || 
-            pokemonDescription.includes(searchTerm)) {
-            card.style.display = 'block';
-            card.style.animation = 'pokemonCardFloat 0.5s ease-in-out';
-        } else {
-            card.style.display = 'none';
-        }
-    });
+    // Observe all animatable elements
+    const animatableElements = document.querySelectorAll(
+        '.section-header, .terrain-card, .species-item, .card, .cycle-section, .chain-level, .feature-card, .goal-card, .message-card'
+    );
+
+    animatableElements.forEach(el => observer.observe(el));
 }
 
-// Evolution tab switching functionality
-function showEvolution(tabName) {
-    // Remove active class from all tabs
-    const tabs = document.querySelectorAll('.evolution-tab');
-    tabs.forEach(tab => tab.classList.remove('active'));
+// Add card reveal effect
+function addCardRevealEffect(card) {
+    card.style.transform = 'translateY(50px) rotateX(20deg)';
+    card.style.opacity = '0';
+    card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
     
-    // Hide all panels
-    const panels = document.querySelectorAll('.evolution-panel');
-    panels.forEach(panel => panel.classList.remove('active'));
-    
-    // Show selected panel based on tab name
-    let selectedPanel;
-    if (tabName === 'energy') {
-        selectedPanel = document.getElementById('energy-flow');
-    } else if (tabName === 'evolution') {
-        selectedPanel = document.getElementById('evolution-chain');
-    } else if (tabName === 'care') {
-        selectedPanel = document.getElementById('pokemon-care');
-    }
-    
-    if (selectedPanel) {
-        selectedPanel.classList.add('active');
-    }
-    
-    // Add active class to clicked tab
-    const clickedTab = event.target;
-    clickedTab.classList.add('active');
-    
-    // Add click effect
-    clickedTab.style.transform = 'scale(0.95)';
     setTimeout(() => {
-        clickedTab.style.transform = '';
-    }, 150);
-    
-    // Re-attach event listeners for the newly shown panel
-    setTimeout(() => {
-        attachEvolutionEventListeners();
-    }, 50);
-}
-
-// Add scroll listener to re-attach event listeners when cycles section is visible
-window.addEventListener('scroll', function() {
-    const cyclesSection = document.getElementById('cycles');
-    if (cyclesSection) {
-        const rect = cyclesSection.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        
-        if (isVisible) {
-            // Re-attach event listeners when section becomes visible
-            attachEvolutionEventListeners();
-        }
-    }
-});
-
-// Add global click handler for dynamic content
-document.addEventListener('click', function(e) {
-    // Check if clicked element is an energy step
-    if (e.target.closest('.energy-step')) {
-        const energyStep = e.target.closest('.energy-step');
-        console.log('Energy step clicked via global handler');
-        showEnergyDialog(energyStep);
-    }
-    
-    // Check if clicked element is a care step
-    if (e.target.closest('.care-step')) {
-        const careStep = e.target.closest('.care-step');
-        console.log('Care step clicked via global handler');
-        showCareDialog(careStep);
-    }
-    
-    // Check if clicked element is an evolution stage
-    if (e.target.closest('.pokemon-evolution-stage')) {
-        const evolutionStage = e.target.closest('.pokemon-evolution-stage');
-        console.log('Evolution stage clicked via global handler');
-        showPokemonDialog(evolutionStage);
-    }
-});
-
-// Evolution card click functionality
-function initEvolutionCards() {
-    // Add a small delay to ensure elements are loaded
-    setTimeout(() => {
-        attachEvolutionEventListeners();
+        card.style.transform = 'translateY(0) rotateX(0deg)';
+        card.style.opacity = '1';
     }, 100);
 }
 
-function attachEvolutionEventListeners() {
-    // Evolution stages click functionality
-    const evolutionStages = document.querySelectorAll('.pokemon-evolution-stage');
-    console.log('Found evolution stages:', evolutionStages.length);
-    evolutionStages.forEach(stage => {
-        stage.addEventListener('click', function() {
-            console.log('Evolution stage clicked');
-            showPokemonDialog(this);
-        });
-    });
+// Add cycle reveal effect
+function addCycleRevealEffect(cycle) {
+    cycle.style.transform = 'translateX(-100px) rotateY(45deg)';
+    cycle.style.opacity = '0';
+    cycle.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
     
-    // Energy flow step click functionality
-    const energySteps = document.querySelectorAll('.energy-step');
-    console.log('Found energy steps:', energySteps.length);
-    energySteps.forEach(step => {
-        step.addEventListener('click', function() {
-            console.log('Energy step clicked');
-            showEnergyDialog(this);
-        });
-    });
-    
-    // Care step click functionality
-    const careSteps = document.querySelectorAll('.care-step');
-    console.log('Found care steps:', careSteps.length);
-    careSteps.forEach(step => {
-        step.addEventListener('click', function() {
-            console.log('Care step clicked');
-            showCareDialog(this);
-        });
-    });
-}
-
-// Show Pokémon dialog when evolution card is clicked
-function showPokemonDialog(evolutionStage) {
-    const pokemonName = evolutionStage.querySelector('.pokemon-name-evolution').textContent;
-    const pokemonSprite = evolutionStage.querySelector('.pokemon-sprite-evolution').textContent;
-    const pokemonLevel = evolutionStage.querySelector('.evolution-level').textContent;
-    
-    // Create dialog content based on Pokémon
-    let dialogContent = getPokemonDialogContent(pokemonName, pokemonSprite, pokemonLevel);
-    
-    // Create and show modal dialog
-    showModalDialog(pokemonName, dialogContent);
-}
-
-// Get dialog content for specific Pokémon
-function getPokemonDialogContent(name, sprite, level) {
-    const pokemonData = {
-        'Bulbasaur': {
-            type: 'Grass/Poison',
-            description: 'A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon.',
-            abilities: ['Overgrow', 'Chlorophyll'],
-            stats: { hp: 45, attack: 49, defense: 49, speed: 45 },
-            evolution: 'Evolves into Ivysaur at Level 16'
-        },
-        'Ivysaur': {
-            type: 'Grass/Poison',
-            description: 'When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.',
-            abilities: ['Overgrow', 'Chlorophyll'],
-            stats: { hp: 60, attack: 62, defense: 63, speed: 60 },
-            evolution: 'Evolves into Venusaur at Level 32'
-        },
-        'Venusaur': {
-            type: 'Grass/Poison',
-            description: 'The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight.',
-            abilities: ['Overgrow', 'Chlorophyll'],
-            stats: { hp: 80, attack: 82, defense: 83, speed: 80 },
-            evolution: 'Final evolution stage'
-        },
-        'Charmander': {
-            type: 'Fire',
-            description: 'It has a preference for hot things. When it rains, steam is said to spout from the tip of its tail.',
-            abilities: ['Blaze', 'Solar Power'],
-            stats: { hp: 39, attack: 52, defense: 43, speed: 65 },
-            evolution: 'Evolves into Charmeleon at Level 16'
-        },
-        'Charmeleon': {
-            type: 'Fire',
-            description: 'It is very hotheaded by nature, so it constantly seeks opponents. It calms down only when it wins.',
-            abilities: ['Blaze', 'Solar Power'],
-            stats: { hp: 58, attack: 64, defense: 58, speed: 80 },
-            evolution: 'Evolves into Charizard at Level 36'
-        },
-        'Charizard': {
-            type: 'Fire/Flying',
-            description: 'It spits fire that is hot enough to melt boulders. It is said to cause wildfires by accident.',
-            abilities: ['Blaze', 'Solar Power'],
-            stats: { hp: 78, attack: 84, defense: 78, speed: 100 },
-            evolution: 'Final evolution stage'
-        }
-    };
-    
-    const data = pokemonData[name] || {
-        type: 'Unknown',
-        description: 'A mysterious Pokémon with unknown abilities.',
-        abilities: ['Unknown'],
-        stats: { hp: 50, attack: 50, defense: 50, speed: 50 },
-        evolution: 'Evolution information unknown'
-    };
-    
-    return `
-        <div class="pokemon-dialog-content">
-            <div class="pokemon-dialog-header">
-                <div class="pokemon-dialog-sprite">${sprite}</div>
-                <div class="pokemon-dialog-info">
-                    <h3>${name}</h3>
-                    <p class="pokemon-type">${data.type}</p>
-                    <p class="pokemon-level">Level: ${level}</p>
-                </div>
-            </div>
-            <div class="pokemon-dialog-body">
-                <p class="pokemon-description">${data.description}</p>
-                <div class="pokemon-abilities">
-                    <h4>Abilities:</h4>
-                    <div class="ability-list">
-                        ${data.abilities.map(ability => `<span class="ability-badge">${ability}</span>`).join('')}
-                    </div>
-                </div>
-                <div class="pokemon-stats-compact">
-                    <div class="stats-row">
-                        <div class="stat-compact">
-                            <span class="stat-label">HP</span>
-                            <span class="stat-value">${data.stats.hp}</span>
-                        </div>
-                        <div class="stat-compact">
-                            <span class="stat-label">ATK</span>
-                            <span class="stat-value">${data.stats.attack}</span>
-                        </div>
-                        <div class="stat-compact">
-                            <span class="stat-label">DEF</span>
-                            <span class="stat-value">${data.stats.defense}</span>
-                        </div>
-                        <div class="stat-compact">
-                            <span class="stat-label">SPD</span>
-                            <span class="stat-value">${data.stats.speed}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="pokemon-evolution-info">
-                    <h4>Evolution:</h4>
-                    <p>${data.evolution}</p>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Show energy flow dialog
-function showEnergyDialog(energyStep) {
-    const energyIcon = energyStep.querySelector('.energy-icon').textContent;
-    const energyText = energyStep.querySelector('span').textContent.replace(/\n/g, ' ');
-    
-    const energyData = {
-        '☀️': {
-            title: 'Sun Energy',
-            description: 'The primary energy source in the PokéVerse ecosystem. Solar energy provides the foundation for all life processes and powers the entire energy flow system.',
-            details: [
-                'Provides 100% of the ecosystem\'s energy needs',
-                'Captured by Grass-type Pokémon through photosynthesis',
-                'Converts light energy into chemical energy',
-                'Sustains the entire food web and energy cycle'
-            ],
-            type: 'Primary Energy Source',
-            efficiency: '100%'
-        },
-        '🌱': {
-            title: 'Grass Pokémon Photosynthesis',
-            description: 'Grass-type Pokémon like Bulbasaur, Oddish, and Bellsprout use photosynthesis to convert solar energy into chemical energy stored in their bodies.',
-            details: [
-                'Converts solar energy to glucose and oxygen',
-                'Stores energy in leaves and body tissues',
-                'Provides food for other Pokémon types',
-                'Maintains atmospheric oxygen levels'
-            ],
-            type: 'Energy Conversion',
-            efficiency: '85%'
-        },
-        '⚡': {
-            title: 'Electric Pokémon Energy Storage',
-            description: 'Electric-type Pokémon like Pikachu and Magnemite store and convert electrical energy, acting as living batteries in the ecosystem.',
-            details: [
-                'Stores electrical energy in specialized organs',
-                'Converts chemical energy to electrical energy',
-                'Provides power for technological systems',
-                'Maintains electrical balance in the ecosystem'
-            ],
-            type: 'Energy Storage',
-            efficiency: '90%'
-        },
-        '🔥': {
-            title: 'Fire Pokémon Energy Release',
-            description: 'Fire-type Pokémon like Charmander and Vulpix release thermal energy through controlled combustion, providing heat and power.',
-            details: [
-                'Releases stored energy as heat and light',
-                'Provides warmth for cold environments',
-                'Enables cooking and industrial processes',
-                'Maintains temperature balance'
-            ],
-            type: 'Energy Release',
-            efficiency: '75%'
-        },
-        '🔄': {
-            title: 'Energy Recycling at Pokémon Centers',
-            description: 'Pokémon Centers use advanced technology to recycle and redistribute energy throughout the ecosystem, ensuring no energy is wasted.',
-            details: [
-                'Recycles waste energy back into the system',
-                'Distributes energy to areas in need',
-                'Maintains energy balance across regions',
-                'Prevents energy loss and waste'
-            ],
-            type: 'Energy Recycling',
-            efficiency: '95%'
-        }
-    };
-    
-    const data = energyData[energyIcon] || {
-        title: energyText,
-        description: 'An important part of the Pokémon energy flow system.',
-        details: ['Essential for ecosystem balance', 'Contributes to energy flow'],
-        type: 'Energy Process',
-        efficiency: '80%'
-    };
-    
-    const dialogContent = `
-        <div class="energy-dialog-content">
-            <div class="energy-dialog-header">
-                <div class="energy-dialog-icon">${energyIcon}</div>
-                <div class="energy-dialog-info">
-                    <h3>${data.title}</h3>
-                    <p class="energy-type">${data.type}</p>
-                    <p class="energy-efficiency">Efficiency: ${data.efficiency}</p>
-                </div>
-            </div>
-            <div class="energy-dialog-body">
-                <p class="energy-description">${data.description}</p>
-                <div class="energy-details-compact">
-                    <h4>Key Functions:</h4>
-                    <div class="details-grid">
-                        ${data.details.map(detail => `<div class="detail-item">• ${detail}</div>`).join('')}
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    showModalDialog(data.title, dialogContent);
-}
-
-// Show care dialog
-function showCareDialog(careStep) {
-    const careIcon = careStep.querySelector('.care-icon').textContent;
-    const careText = careStep.querySelector('span').textContent.replace(/\n/g, ' ');
-    
-    const careData = {
-        '🍎': {
-            title: 'Feeding & Nutrition',
-            description: 'Proper nutrition is essential for Pokémon health and growth. Different Pokémon types require specific diets to maintain their energy levels and abilities.',
-            details: [
-                'Grass-types need sunlight and water',
-                'Fire-types require high-energy foods',
-                'Water-types need aquatic nutrition',
-                'Electric-types need electrical supplements'
-            ],
-            importance: 'Critical for Health'
-        },
-        '💤': {
-            title: 'Rest & Sleep',
-            description: 'Pokémon need adequate rest to recover energy, heal from battles, and maintain their mental health. Sleep is crucial for their overall well-being.',
-            details: [
-                '8-10 hours of sleep per night',
-                'Quiet, comfortable sleeping areas',
-                'Regular sleep schedules',
-                'Peaceful environment for rest'
-            ],
-            importance: 'Essential for Recovery'
-        },
-        '🏥': {
-            title: 'Health Monitoring',
-            description: 'Regular health checkups at Pokémon Centers ensure early detection of health issues and maintain optimal Pokémon condition.',
-            details: [
-                'Weekly health assessments',
-                'Vaccination schedules',
-                'Injury treatment and prevention',
-                'Mental health evaluations'
-            ],
-            importance: 'Preventive Care'
-        },
-        '❤️': {
-            title: 'Happiness & Bonding',
-            description: 'Building strong emotional bonds with Pokémon through interaction, play, and affection is crucial for their happiness and performance.',
-            details: [
-                'Daily interaction and playtime',
-                'Positive reinforcement training',
-                'Emotional support and comfort',
-                'Building trust and friendship'
-            ],
-            importance: 'Emotional Well-being'
-        },
-        '⚡': {
-            title: 'Training & Growth',
-            description: 'Regular training helps Pokémon develop their abilities, increase their stats, and reach their full potential in battles and competitions.',
-            details: [
-                'Daily exercise and training',
-                'Skill development programs',
-                'Battle practice sessions',
-                'Physical and mental challenges'
-            ],
-            importance: 'Skill Development'
-        }
-    };
-    
-    const data = careData[careIcon] || {
-        title: careText,
-        description: 'An important aspect of Pokémon care and wellness.',
-        details: ['Essential for Pokémon health', 'Contributes to overall well-being'],
-        importance: 'Important'
-    };
-    
-    const dialogContent = `
-        <div class="care-dialog-content">
-            <div class="care-dialog-header">
-                <div class="care-dialog-icon">${careIcon}</div>
-                <div class="care-dialog-info">
-                    <h3>${data.title}</h3>
-                    <p class="care-importance">${data.importance}</p>
-                </div>
-            </div>
-            <div class="care-dialog-body">
-                <p class="care-description">${data.description}</p>
-                <div class="care-details-compact">
-                    <h4>Care Guidelines:</h4>
-                    <div class="details-grid">
-                        ${data.details.map(detail => `<div class="detail-item">• ${detail}</div>`).join('')}
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    showModalDialog(data.title, dialogContent);
-}
-
-// Show modal dialog
-function showModalDialog(title, content) {
-    // Remove any existing modals first
-    const existingModals = document.querySelectorAll('.modal-overlay');
-    existingModals.forEach(modal => modal.remove());
-    
-    // Create modal overlay
-    const modalOverlay = document.createElement('div');
-    modalOverlay.className = 'modal-overlay';
-    
-    // Create modal dialog
-    const modalDialog = document.createElement('div');
-    modalDialog.className = 'modal-dialog pokemon-modal';
-    
-    modalDialog.innerHTML = `
-        <div class="modal-header">
-            <h2>${title}</h2>
-            <button class="modal-close" type="button">&times;</button>
-        </div>
-        <div class="modal-body">
-            ${content}
-        </div>
-    `;
-    
-    modalOverlay.appendChild(modalDialog);
-    document.body.appendChild(modalOverlay);
-    
-    // Close function
-    const closeModal = () => {
-        console.log('Closing modal');
-        if (modalOverlay && modalOverlay.parentNode) {
-            modalOverlay.classList.remove('show');
-            setTimeout(() => {
-                if (modalOverlay.parentNode) {
-                    document.body.removeChild(modalOverlay);
-                }
-            }, 300);
-        }
-    };
-    
-    // Add event listeners
-    const closeBtn = modalDialog.querySelector('.modal-close');
-    closeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        closeModal();
-    });
-    
-    modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) {
-            closeModal();
-        }
-    });
-    
-    // Add keyboard support (ESC key)
-    const handleKeyPress = (e) => {
-        if (e.key === 'Escape') {
-            closeModal();
-            document.removeEventListener('keydown', handleKeyPress);
-        }
-    };
-    document.addEventListener('keydown', handleKeyPress);
-    
-    // Add animation
     setTimeout(() => {
-        modalOverlay.classList.add('show');
-    }, 10);
+        cycle.style.transform = 'translateX(0) rotateY(0deg)';
+        cycle.style.opacity = '1';
+    }, 200);
 }
 
-// Initialize stats animation
-function initStatsAnimation() {
-    // Function to animate stats when they come into view
-    function animateStats() {
-        const statValues = document.querySelectorAll('.stat-value[data-target]');
-        const statFills = document.querySelectorAll('.stat-fill[data-width]');
-        
-        statValues.forEach((element, index) => {
-            const target = parseInt(element.getAttribute('data-target'));
-            const duration = 2000; // 2 seconds
-            const increment = target / (duration / 16); // 60fps
-            let current = 0;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                element.textContent = Math.floor(current);
-            }, 16);
+// Add chain reveal effect
+function addChainRevealEffect(chain) {
+    chain.style.transform = 'translateY(100px) scale(0.8)';
+    chain.style.opacity = '0';
+    chain.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    
+    setTimeout(() => {
+        chain.style.transform = 'translateY(0) scale(1)';
+        chain.style.opacity = '1';
+    }, 150);
+}
+
+function initializeHeroAnimations() {
+    // Hero content animations
+    const heroContent = document.querySelector('.hero-content');
+    const heroSlogan = document.querySelector('.hero-slogan');
+    const heroDescription = document.querySelector('.hero-description');
+    const heroScroll = document.querySelector('.hero-scroll');
+
+    if (heroContent) {
+        setTimeout(() => {
+            heroContent.style.opacity = '1';
+            heroContent.style.transform = 'translateY(0)';
+        }, 100);
+    }
+    
+    if (heroSlogan) {
+        setTimeout(() => heroSlogan.style.opacity = '1', 400);
+    }
+    
+    if (heroDescription) {
+        setTimeout(() => heroDescription.style.opacity = '1', 700);
+    }
+    
+    if (heroScroll) {
+        setTimeout(() => heroScroll.style.opacity = '1', 1000);
+    }
+}
+
+function initializeCardAnimations() {
+    // Add hover effects to cards
+    const cards = document.querySelectorAll('.card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px) scale(1.02)';
         });
         
-        statFills.forEach((element, index) => {
-            const width = element.getAttribute('data-width');
-            element.style.width = width + '%';
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    // Add click animations to terrain and species cards
+    const interactiveCards = document.querySelectorAll('.terrain-card, .species-item');
+    
+    interactiveCards.forEach(card => {
+        card.addEventListener('click', function() {
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1.05) translateY(-5px)';
+            }, 150);
+        });
+    });
+}
+
+// Enhanced waste particle system
+function createEnhancedWasteParticles() {
+    const container = document.getElementById('waste-particles-container');
+    if (!container) return;
+
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'waste-particle';
+        
+        const icons = ['♻️', '🗑️', '📦', '🔋', '⚡', '🌱', '👢', '🤖', '🪳', '👽', '💨', '☀️', '🌍', '💫', '✨'];
+        const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+        
+        particle.innerHTML = randomIcon;
+        particle.style.position = 'absolute';
+        particle.style.fontSize = Math.random() * 20 + 10 + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = '100vh';
+        particle.style.opacity = Math.random() * 0.7 + 0.3;
+        particle.style.animationDuration = Math.random() * 10 + 5 + 's';
+        particle.style.animationDelay = Math.random() * 2 + 's';
+        particle.style.animation = 'floatUp linear infinite';
+        
+        container.appendChild(particle);
+        
+        // Remove particle after animation
+        setTimeout(() => {
+            if (particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+            }
+        }, 15000);
+    }
+
+    // Create initial particles
+    for (let i = 0; i < 20; i++) {
+        setTimeout(createParticle, i * 200);
+    }
+
+    // Continuously create new particles
+    setInterval(createParticle, 1000);
+}
+
+// Add CSS for floating animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0) translateX(0) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) translateX(50px) rotate(360deg);
+            opacity: 0;
+        }
+    }
+    
+    .waste-particle {
+        pointer-events: none;
+        user-select: none;
+        z-index: 1;
+    }
+`;
+document.head.appendChild(style);
+
+// Initialize enhanced particles
+createEnhancedWasteParticles();
+});
+
+
+    // Enhanced WALL-E world simulation
+    function createWALLEWorldSimulation() {
+        const chainLevels = document.querySelectorAll('.chain-level');
+        const organisms = document.querySelectorAll('.organism');
+        
+        chainLevels.forEach((level, index) => {
+            level.addEventListener('click', function() {
+                // Add enhanced pulsing animation
+                this.style.animation = 'chainPulse 0.8s ease-in-out';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 800);
+                
+                // Add glow effect
+                this.style.boxShadow = '0 0 30px rgba(52, 152, 219, 0.8)';
+                setTimeout(() => {
+                    this.style.boxShadow = '';
+                }, 1000);
+                
+                // Show energy flow information
+                showEnergyFlowInfo(index);
+            });
+        });
+        
+        // Add individual organism animations
+        organisms.forEach((organism, index) => {
+            organism.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Create particle effect
+                createParticleEffect(this);
+                
+                // Add bounce animation
+                this.style.animation = 'organismBounce 0.6s ease-in-out';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 600);
+                
+                // Show detailed organism info
+                showDetailedOrganismInfo(this.textContent);
+            });
         });
     }
     
-    // Use Intersection Observer to trigger animation when stats section is visible
-    const statsSection = document.querySelector('.pokemon-stats-section');
-    if (statsSection) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    observer.unobserve(entry.target); // Only animate once
-                }
-            });
-        }, { threshold: 0.5 });
+    // Create particle effect for organisms
+    function createParticleEffect(element) {
+        const rect = element.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
         
-        observer.observe(statsSection);
+        for (let i = 0; i < 8; i++) {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.left = centerX + 'px';
+            particle.style.top = centerY + 'px';
+            particle.style.width = '6px';
+            particle.style.height = '6px';
+            particle.style.background = '#3498db';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '1000';
+            
+            const angle = (i / 8) * Math.PI * 2;
+            const velocity = 100 + Math.random() * 50;
+            const vx = Math.cos(angle) * velocity;
+            const vy = Math.sin(angle) * velocity;
+            
+            particle.style.transform = `translate(${vx}px, ${vy}px)`;
+            particle.style.opacity = '1';
+            particle.style.transition = 'all 0.8s ease-out';
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.style.opacity = '0';
+                particle.style.transform = `translate(${vx * 2}px, ${vy * 2}px) scale(0)`;
+            }, 50);
+            
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 800);
+        }
     }
+    
+    // Add CSS for new animations
+    const organismStyle = document.createElement('style');
+    organismStyle.textContent = `
+        @keyframes chainPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes organismBounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            40% {
+                transform: translateY(-15px) scale(1.1);
+            }
+            60% {
+                transform: translateY(-8px) scale(1.05);
+            }
+        }
+    `;
+    document.head.appendChild(organismStyle);
+
+    function showEnergyFlowInfo(levelIndex) {
+        const energyInfo = [
+            "Solar Energy: Primary energy source from the sun, converted to electrical energy",
+            "Photosynthesis: Plants convert solar energy to chemical energy (glucose)",
+            "WALL-E Processing: Robots consume plant matter and organic waste for energy",
+            "Decomposition: AI decomposers break down organic matter, releasing nutrients",
+            "Recycling: Nutrients return to soil, completing the cycle"
+        ];
+        
+        showModal(`Energy Flow Level ${levelIndex + 1}`, energyInfo[levelIndex]);
+    }
+    
+    function showDetailedOrganismInfo(organismName) {
+        const organismDetails = {
+            "☀️ Sun → Energy": "The primary energy source that powers all life on Earth. WALL-E's solar panels convert this energy to electricity for his operations. Without the sun, there would be no photosynthesis, no life, and no hope for Earth's restoration.",
+            "🌱👢 Plant → Oxygen": "A miraculous discovery! This tiny plant represents hope for Earth's restoration. It produces oxygen through photosynthesis and could support human life when they return. The plant in the boot is the key to reversing Earth's environmental damage.",
+            "🤖 WALL-E → Waste Management": "The last robot on Earth! WALL-E tirelessly compacts waste, cares for the plant, and maintains environmental systems. His solar-powered design allows continuous operation. He represents the bridge between technology and nature.",
+            "🪳 Cockroaches → Decomposition": "Nature's recyclers! These resilient creatures break down organic matter, releasing nutrients back into the soil for plant growth. They survived Earth's environmental collapse and help maintain the ecosystem's balance.",
+            "👽 EVE → Plant Detection": "EVE (Extraterrestrial Vegetation Evaluator) is an advanced probe designed to search for signs of life. She discovered the precious plant and works with WALL-E to protect it. EVE represents advanced technology working in harmony with nature.",
+            "💨 Dust Storms → Atmosphere": "Dust storms are a major environmental challenge in WALL-E's world. They carry pollutants and create harsh conditions, but also help distribute nutrients and seeds across the landscape, playing a role in Earth's natural restoration process."
+        };
+        
+        const detail = organismDetails[organismName] || "This component plays a vital role in WALL-E's world ecosystem! Each element works together to create a balanced environment where life can thrive and Earth can be restored.";
+        showModal(`🌍 ${organismName}`, detail);
+    }
+
+    // Interactive food web
+    function createInteractiveFoodWeb() {
+        const webNodes = document.querySelectorAll('.node');
+        
+        webNodes.forEach(node => {
+            node.addEventListener('click', function() {
+                const fullText = this.textContent;
+                showDetailedOrganismInfo(fullText);
+            });
+        });
+    }
+
+
+    // Interactive biogeochemical cycles
+    function createInteractiveCycles() {
+        const cycleSteps = document.querySelectorAll('.cycle-step');
+        
+        cycleSteps.forEach(step => {
+            step.addEventListener('click', function() {
+                const stepText = this.querySelector('.step-text').textContent;
+                showCycleStepInfo(stepText);
+            });
+        });
+    }
+
+    function showCycleStepInfo(stepText) {
+        const cycleInfo = {
+            "Solar Energy": "Primary energy input driving all WALL-E world processes",
+            "Photosynthesis": "Plants convert CO₂ and water into glucose using solar energy",
+            "WALL-E Processing": "Robots process organic matter, maintaining nutrient cycles",
+            "Carbon Storage": "Carbon sequestered in soil and biomass for long-term storage",
+            "Nitrogen Fixation": "Conversion of atmospheric nitrogen to usable forms",
+            "Plant Uptake": "Plants absorb nitrogen for growth and development",
+            "Waste Processing": "Organic nitrogen compounds broken down by WALL-E units",
+            "Decomposition": "Microorganisms convert organic nitrogen back to inorganic forms",
+            "Atmospheric Collection": "Water vapor collected from the atmosphere",
+            "Purification": "Water filtered and treated for WALL-E world use",
+            "Plant Irrigation": "Water distributed to plants through efficient systems",
+            "Evaporation": "Water returns to atmosphere through natural processes"
+        };
+        
+        showModal(`${stepText} Process`, cycleInfo[stepText] || "Process information not available");
+    }
+
+    // Modal functionality
+    function showModal(title, content) {
+        // Remove existing modal if any
+        const existingModal = document.querySelector('.modal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+
+        // Create modal
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>${title}</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>${content}</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn">🤖 WALL-E Understood!</button>
+                </div>
+            </div>
+        `;
+
+        // Add modal styles
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        `;
+
+        const modalContent = modal.querySelector('.modal-content');
+        modalContent.style.cssText = `
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border: 2px solid #3498db;
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.3s ease;
+        `;
+
+        const modalHeader = modal.querySelector('.modal-header');
+        modalHeader.style.cssText = `
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #3498db;
+        `;
+
+        const modalTitle = modal.querySelector('h3');
+        modalTitle.style.cssText = `
+            color: #3498db;
+            font-family: 'Orbitron', monospace;
+            margin: 0;
+        `;
+
+        const closeBtn = modal.querySelector('.close');
+        closeBtn.style.cssText = `
+            color: #e74c3c;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        `;
+
+        const modalBody = modal.querySelector('.modal-body');
+        modalBody.style.cssText = `
+            margin-bottom: 20px;
+            line-height: 1.6;
+        `;
+
+        const modalFooter = modal.querySelector('.modal-footer');
+        modalFooter.style.cssText = `
+            text-align: center;
+        `;
+
+        const modalBtn = modal.querySelector('.modal-btn');
+        modalBtn.style.cssText = `
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        `;
+
+        // Add event listeners
+        closeBtn.addEventListener('click', () => modal.remove());
+        modalBtn.addEventListener('click', () => modal.remove());
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+        });
+
+        // Add animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateY(-50px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+            .modal-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+            }
+            .close:hover {
+                color: #c0392b;
+            }
+        `;
+        document.head.appendChild(style);
+
+        document.body.appendChild(modal);
+    }
+
+    // WALL-E robot animation
+    function createWallEAnimation() {
+        const wallEIcon = document.querySelector('.wall-e-icon');
+        if (wallEIcon) {
+            wallEIcon.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'float 3s ease-in-out infinite';
+                }, 10);
+                
+                // Show WALL-E greeting
+                showModal("WALL-E Greeting", "Hello! I'm WALL-E, your environmental companion. I help turn waste into resources and maintain our world's balance. Click on different parts of WALL-E's world to learn more!");
+            });
+        }
+    }
+
+    // WALL-E's world monitoring simulation
+    function createWALLEWorldMonitoring() {
+        const monitoringData = {
+            soilPH: 6.8,
+            moistureLevel: 75,
+            carbonStorage: 1200,
+            energyEfficiency: 94
+        };
+
+        // Update monitoring data every 5 seconds
+        setInterval(() => {
+            updateMonitoringData(monitoringData);
+        }, 5000);
+    }
+
+    function updateMonitoringData(data) {
+        // Simulate real-time data changes
+        data.soilPH += (Math.random() - 0.5) * 0.1;
+        data.moistureLevel += (Math.random() - 0.5) * 2;
+        data.carbonStorage += Math.floor((Math.random() - 0.5) * 10);
+        data.energyEfficiency += (Math.random() - 0.5) * 1;
+
+        // Keep values within realistic ranges
+        data.soilPH = Math.max(6.0, Math.min(7.5, data.soilPH));
+        data.moistureLevel = Math.max(60, Math.min(90, data.moistureLevel));
+        data.carbonStorage = Math.max(1000, Math.min(1500, data.carbonStorage));
+        data.energyEfficiency = Math.max(85, Math.min(100, data.energyEfficiency));
+
+        // Update display if monitoring panel exists
+        updateMonitoringDisplay(data);
+    }
+
+    function updateMonitoringDisplay(data) {
+        // This would update a monitoring panel if it existed
+        console.log('WALL-E World Status:', data);
+    }
+
+    // Interactive cycle animations
+    function createCycleAnimations() {
+        const cycleSteps = document.querySelectorAll('.cycle-step');
+        const cycleArrows = document.querySelectorAll('.cycle-arrow');
+        
+        // Add click animations to cycle steps
+        cycleSteps.forEach((step, index) => {
+            step.addEventListener('click', function() {
+                // Add ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(52, 152, 219, 0.6)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.left = '50%';
+                ripple.style.top = '50%';
+                ripple.style.width = '100px';
+                ripple.style.height = '100px';
+                ripple.style.marginLeft = '-50px';
+                ripple.style.marginTop = '-50px';
+                ripple.style.pointerEvents = 'none';
+                
+                this.style.position = 'relative';
+                this.appendChild(ripple);
+                
+                // Remove ripple after animation
+                setTimeout(() => {
+                    if (ripple.parentNode) {
+                        ripple.parentNode.removeChild(ripple);
+                    }
+                }, 600);
+                
+                // Show step information
+                const stepText = this.querySelector('.step-text').textContent;
+                showCycleStepInfo(stepText);
+                
+                // Add bounce animation
+                this.style.animation = 'bounce 0.6s ease-in-out';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 600);
+            });
+        });
+        
+        // Add hover effects to cycle arrows
+        cycleArrows.forEach(arrow => {
+            arrow.addEventListener('mouseenter', function() {
+                this.style.animation = 'pulse 0.5s ease-in-out infinite';
+            });
+            
+            arrow.addEventListener('mouseleave', function() {
+                this.style.animation = '';
+            });
+        });
+    }
+    
+    // Add CSS for ripple effect
+    const rippleStyle = document.createElement('style');
+    rippleStyle.textContent = `
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            40% {
+                transform: translateY(-10px) scale(1.1);
+            }
+            60% {
+                transform: translateY(-5px) scale(1.05);
+            }
+        }
+    `;
+    document.head.appendChild(rippleStyle);
+
+    // Initialize all interactive features
+    function initializeWALLEWorld() {
+        createWALLEWorldSimulation();
+        createInteractiveFoodWeb();
+        createInteractiveCycles();
+        createWallEAnimation();
+        createWALLEWorldMonitoring();
+        createCycleAnimations();
+        
+        console.log('🤖 WALL-E World initialized successfully!');
+    }
+
+    // Start the application
+    initializeWALLEWorld();
+
+    // Add keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.querySelector('.modal');
+            if (modal) modal.remove();
+        }
+        
+        // Number keys for navigation
+        if (e.key >= '1' && e.key <= '4') {
+            const sectionIndex = parseInt(e.key) - 1;
+            const sections = ['profile', 'education', 'ecosystem', 'cycles'];
+            if (sections[sectionIndex]) {
+                const targetButton = document.querySelector(`[data-section="${sections[sectionIndex]}"]`);
+                if (targetButton) targetButton.click();
+            }
+        }
+    });
+
+    // Add touch support for mobile
+    if ('ontouchstart' in window) {
+        document.querySelectorAll('.interactive-element').forEach(element => {
+            element.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                this.click();
+            });
+        });
+    }
+
+// WALL-E Sound Effects
+function addWallESoundEffects() {
+    // Create audio context for sound effects
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // WALL-E beep sound
+    function playBeep(frequency = 800, duration = 200) {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+        oscillator.type = 'sine';
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration / 1000);
+    }
+    
+    // Add beep sounds to interactive elements
+    document.querySelectorAll('.nav-btn, .organism, .node, .step-icon').forEach(element => {
+        element.addEventListener('click', () => {
+            playBeep(600 + Math.random() * 400, 150);
+        });
+    });
+}
+
+// Floating waste particles animation
+function createFloatingWasteParticles() {
+    const particleContainer = document.createElement('div');
+    particleContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+    `;
+    
+    const wasteIcons = ['♻️', '🗑️', '📦', '🔋', '⚡', '🌱', '👢', '🤖', '🪳', '👽', '💨', '☀️', '🌍', '💫', '✨', '🌟', '💎', '🔮', '🎯', '🚀', '⭐', '💫', '✨', '🌈'];
+    
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.textContent = wasteIcons[Math.floor(Math.random() * wasteIcons.length)];
+        const size = Math.random() * 20 + 10;
+        const duration = Math.random() * 10 + 15;
+        const opacity = Math.random() * 0.5 + 0.3;
+        const rotation = Math.random() * 360;
+        const scale = 0.8 + Math.random() * 0.4;
+        
+        particle.style.cssText = `
+            position: absolute;
+            font-size: ${size}px;
+            left: ${Math.random() * 100}%;
+            top: 100%;
+            animation: floatUp ${duration}s linear forwards, particlePulse 2s ease-in-out infinite;
+            opacity: ${opacity};
+            transform: rotate(${rotation}deg) scale(${scale});
+            filter: drop-shadow(0 0 10px rgba(52, 152, 219, 0.5));
+            transition: all 0.3s ease;
+            cursor: pointer;
+        `;
+        
+        // Add interactive effects
+        particle.addEventListener('mouseenter', function() {
+            this.style.transform = `rotate(${rotation + 180}deg) scale(${scale * 1.5})`;
+            this.style.filter = 'drop-shadow(0 0 20px rgba(52, 152, 219, 1))';
+            this.style.opacity = '1';
+        });
+        
+        particle.addEventListener('mouseleave', function() {
+            this.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+            this.style.filter = 'drop-shadow(0 0 10px rgba(52, 152, 219, 0.5))';
+            this.style.opacity = opacity;
+        });
+        
+        particleContainer.appendChild(particle);
+        
+        setTimeout(() => {
+            if (particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+            }
+        }, 25000);
+    }
+    
+    // Add CSS animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    document.body.appendChild(particleContainer);
+    
+    // Create particles periodically
+    setInterval(createParticle, 3000);
+}
+
+// Robot beep sounds for different actions
+function addRobotBeepSounds() {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playRobotSound(type) {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        let frequency, duration;
+        
+        switch(type) {
+            case 'success':
+                frequency = 1000;
+                duration = 300;
+                break;
+            case 'error':
+                frequency = 200;
+                duration = 500;
+                break;
+            case 'info':
+                frequency = 600;
+                duration = 200;
+                break;
+            case 'warning':
+                frequency = 400;
+                duration = 400;
+                break;
+            default:
+                frequency = 500;
+                duration = 200;
+        }
+        
+        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+        oscillator.type = 'sine';
+        
+        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration / 1000);
+    }
+    
+    // Add different sounds for different interactions
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => playRobotSound('info'));
+    });
+    
+    document.querySelectorAll('.organism').forEach(org => {
+        org.addEventListener('click', () => playRobotSound('success'));
+    });
+    
+    document.querySelectorAll('.node').forEach(node => {
+        node.addEventListener('click', () => playRobotSound('info'));
+    });
+    
+    document.querySelectorAll('.step-icon').forEach(icon => {
+        icon.addEventListener('click', () => playRobotSound('success'));
+    });
+}
+
+// Enhanced WALL-E greeting with animation
+function createEnhancedWallEGreeting() {
+    const wallEIcon = document.querySelector('.wall-e-icon');
+    if (wallEIcon) {
+        wallEIcon.addEventListener('click', function() {
+            // Play special greeting sound
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            // Create a melody
+            const melody = [523, 659, 784, 1047]; // C, E, G, C
+            let time = audioContext.currentTime;
+            
+            melody.forEach((freq, index) => {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                
+                osc.frequency.setValueAtTime(freq, time);
+                osc.type = 'sine';
+                
+                gain.gain.setValueAtTime(0.3, time);
+                gain.gain.exponentialRampToValueAtTime(0.01, time + 0.3);
+                
+                osc.start(time);
+                osc.stop(time + 0.3);
+                
+                time += 0.2;
+            });
+            
+            // Show enhanced greeting
+            showModal("🤖 WALL-E Greeting", "Hello! I'm WALL-E (Waste Allocation Load Lifter - Earth Class)! I'm the last robot on Earth, working to clean up our planet. I found a precious plant growing in an old boot - it could save humanity! Click on different parts of my world to learn about environmental science and how we can restore Earth! 👢🌱");
+        });
+    }
+}
+
+// Progress Indicator Functionality
+function initializeProgressIndicator() {
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    
+    if (!progressFill || !progressText) return;
+    
+    const sections = ['profile', 'education', 'ecosystem', 'cycles'];
+    const progressTexts = [
+        'Exploring WALL-E\'s Earth Profile',
+        'Learning Environmental Education',
+        'Simulating Ecosystem Dynamics',
+        'Mapping Biogeochemical Cycles'
+    ];
+    
+    function updateProgress() {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        
+        progressFill.style.width = scrollPercent + '%';
+        
+        // Update text based on current section
+        const currentSection = getCurrentSection();
+        const sectionIndex = sections.indexOf(currentSection);
+        if (sectionIndex !== -1) {
+            progressText.textContent = progressTexts[sectionIndex];
+        }
+    }
+    
+    function getCurrentSection() {
+        const sections = document.querySelectorAll('.content-section');
+        let currentSection = 'profile';
+        
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= 100 && rect.bottom >= 100) {
+                currentSection = section.id;
+            }
+        });
+        
+        return currentSection;
+    }
+    
+    window.addEventListener('scroll', updateProgress);
+    updateProgress(); // Initial call
+}
+
+
+// Advanced Typing Effect for Main Title
+function initializeTypingEffect() {
+    const mainTitle = document.querySelector('.task-title h1');
+    if (!mainTitle) return;
+    
+    const text = mainTitle.textContent;
+    mainTitle.textContent = '';
+    mainTitle.style.borderRight = '2px solid #3498db';
+    mainTitle.style.animation = 'typingBlink 1s infinite';
+    
+    let i = 0;
+    const typeWriter = () => {
+        if (i < text.length) {
+            mainTitle.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+        } else {
+            setTimeout(() => {
+                mainTitle.style.borderRight = 'none';
+                mainTitle.style.animation = 'none';
+            }, 1000);
+        }
+    };
+    
+    // Start typing effect after a delay
+    setTimeout(typeWriter, 2000);
 }

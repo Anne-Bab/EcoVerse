@@ -3,1352 +3,617 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PokéVerse: A Digital Pokémon World - Environmental Science Performance Task</title>
+    <title>WALL-E: Earth Restoration Project</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Pokémon Navigation Bar -->
-    <nav class="pokemon-navbar">
-        <div class="pokemon-nav-container">
-            <div class="pokemon-logo">
-                <div class="pokeball-logo">
-                    <div class="pokeball-top"></div>
-                    <div class="pokeball-center"></div>
-                    <div class="pokeball-bottom"></div>
+<body class="min-h-screen relative overflow-x-hidden">
+    <!-- Global blurred background -->
+    <div id="background-home" style="position:fixed; inset:0; z-index:0; pointer-events:none;">
+        <div class="waste-background"></div>
+    </div>
+    
+    <!-- Animated Waste Particles Background -->
+    <div id="waste-particles-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+    <!-- WALL-E Welcome Screen -->
+    <div class="welcome-screen">
+        <div class="wall-e-welcome">🤖</div>
+        <h1>WALL-E</h1>
+        <p>Earth Restoration Project</p>
+    </div>
+
+    <div class="container">
+        <!-- WALL-E Navbar -->
+        <nav class="navbar">
+            <div class="navbar-container">
+                <!-- Logo Section -->
+                <div class="navbar-logo">
+                    <div class="wall-e-icon">🤖</div>
+                    <div class="logo-text">
+                        <h1>WALL-E</h1>
+                        <p class="subtitle">Earth Restoration</p>
+                    </div>
                 </div>
-                <div class="pokemon-title">
-                    <h1>PokéVerse</h1>
-                    <p>Digital Pokémon World</p>
+
+                <!-- Mobile Menu Button -->
+                <div class="mobile-menu-btn">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </div>
+
+                <!-- Navigation Menu -->
+                <div class="navbar-menu">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <button class="nav-btn active" data-section="profile">
+                                <span class="nav-icon">🏠</span>
+                                <span class="nav-text">Profile</span>
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-btn" data-section="education">
+                                <span class="nav-icon">📚</span>
+                                <span class="nav-text">Education</span>
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-btn" data-section="ecosystem">
+                                <span class="nav-icon">🌍</span>
+                                <span class="nav-text">WALL-E's World</span>
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-btn" data-section="cycles">
+                                <span class="nav-icon">🔄</span>
+                                <span class="nav-text">Cycles</span>
+                            </button>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            
-            <!-- Hamburger Menu Button -->
-            <div class="hamburger-menu">
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-            </div>
-            
-            <!-- Navigation Menu -->
-            <div class="pokemon-menu">
-                <div class="pokemon-nav-item active" data-section="home">
-                    <div class="pokemon-icon">🏠</div>
-                    <span>Home</span>
+        </nav>
+
+        <!-- Task Format Header -->
+        <div class="task-header">
+            <h2>Subject: Environmental Science</h2>
+        </div>
+
+        <!-- Project Header Information -->
+        <div class="project-header">
+            <div class="header-info">
+                <div class="subject-info">
+                    <span class="subject-label">Subject:</span>
+                    <span class="subject-value">Environmental Science</span>
                 </div>
-                <div class="pokemon-nav-item" data-section="profile">
-                    <div class="pokemon-icon">👤</div>
-                    <span>Trainer</span>
-                </div>
-                <div class="pokemon-nav-item" data-section="education">
-                    <div class="pokemon-icon">📚</div>
-                    <span>Academy</span>
-                </div>
-                <div class="pokemon-nav-item" data-section="ecosystem">
-                    <div class="pokemon-icon">🌿</div>
-                    <span>Ecosystem</span>
-                </div>
-                <div class="pokemon-nav-item" data-section="cycles">
-                    <div class="pokemon-icon">🔄</div>
-                    <span>Cycles</span>
-                </div>
-                <div class="pokemon-nav-item" data-section="quiz">
-                    <div class="pokemon-icon">⚡</div>
-                    <span>Battle</span>
+                <div class="task-title">
+                    <h1>WALL-E: Designing a Sustainable Digital World</h1>
+                    <p class="task-subtitle">Designing a Sustainable Digital World</p>
                 </div>
             </div>
         </div>
-    </nav>
 
-    <!-- Pokémon Game Interface -->
-    <section id="home" class="pokemon-hero">
-        <div class="pokemon-game-screen">
-            <!-- Pokémon Game Boy Style Screen -->
-            <div class="gameboy-screen">
-                <div class="screen-border">
-                    <div class="screen-content">
-                        <div class="pokemon-title-screen">
-                            <div class="pokemon-logo-large">
-                                <div class="pokeball-large">
-                                    <div class="pokeball-top-large"></div>
-                                    <div class="pokeball-center-large"></div>
-                                    <div class="pokeball-bottom-large"></div>
-                                </div>
-                                <h1 class="pokemon-title-text">PokéVerse</h1>
-                            </div>
-                            <div class="pokemon-subtitle">A Digital Pokémon World</div>
-                            <div class="pokemon-characters">
-                                <div class="pokemon-sprite pikachu-sprite">⚡</div>
-                                <div class="pokemon-sprite charmander-sprite">🔥</div>
-                                <div class="pokemon-sprite squirtle-sprite">💧</div>
-                                <div class="pokemon-sprite bulbasaur-sprite">🌱</div>
-                            </div>
-                            <div class="pokemon-menu-options">
-                                <div class="pokemon-option active">START JOURNEY</div>
-                                <div class="pokemon-option">POKÉDEX</div>
-                                <div class="pokemon-option">TRAINER CARD</div>
-                                <div class="pokemon-option">BATTLE</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Pokémon Stats Display -->
-            <div class="pokemon-stats-panel">
-                <div class="pokemon-info">
-                    <div class="pokemon-name">Pikachu</div>
-                    <div class="pokemon-level">Lv. 25</div>
-                    <div class="pokemon-hp">
-                        <div class="hp-bar">
-                            <div class="hp-fill" style="width: 85%"></div>
-                        </div>
-                        <span class="hp-text">85/100</span>
-                    </div>
-                </div>
-                <div class="pokemon-type">Electric</div>
-            </div>
-            
-            <!-- Pokémon Battle Scene -->
-            <div class="pokemon-battle-scene">
-                <div class="battle-pokemon left">
-                    <div class="pokemon-sprite-large pikachu-battle">⚡</div>
-                    <div class="battle-effects">
-                        <div class="electric-effect">⚡</div>
-                        <div class="electric-effect">⚡</div>
-                        <div class="electric-effect">⚡</div>
-                    </div>
-                </div>
-                <div class="battle-pokemon right">
-                    <div class="pokemon-sprite-large charmander-battle">🔥</div>
-                    <div class="battle-effects">
-                        <div class="fire-effect">🔥</div>
-                        <div class="fire-effect">🔥</div>
-                        <div class="fire-effect">🔥</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pokédex Entry Section -->
-    <section id="profile" class="pokemon-pokedex-section">
-        <div class="pokemon-container">
-            <div class="pokedex-header">
-                <div class="pokedex-title">
-                    <div class="pokeball-icon-large">⚪</div>
-                    <h2>Pokédex Entry #001-151</h2>
-                </div>
-                <div class="pokedex-search">
-                    <input type="text" placeholder="Search Pokémon..." class="pokemon-search">
-                    <button class="search-btn">🔍</button>
-                </div>
-            </div>
-            
-            <div class="pokedex-content">
-                <!-- Pokémon Card 1: Pikachu -->
-                <div class="pokemon-card">
-                    <div class="pokemon-card-header">
-                        <div class="pokemon-number">#025</div>
-                        <div class="pokemon-name">Pikachu</div>
-                        <div class="pokemon-type electric">Electric</div>
-                    </div>
-                    <div class="pokemon-image">
-                        <div class="pokemon-sprite-large pikachu-card">⚡</div>
-                        <div class="pokemon-shine"></div>
-                    </div>
-                    <div class="pokemon-stats">
-                        <div class="stat-bar">
-                            <span class="stat-name">HP</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 85%"></div>
-                            </div>
-                            <span class="stat-value">85</span>
-                        </div>
-                        <div class="stat-bar">
-                            <span class="stat-name">Attack</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 70%"></div>
-                            </div>
-                            <span class="stat-value">70</span>
-                        </div>
-                        <div class="stat-bar">
-                            <span class="stat-name">Defense</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 60%"></div>
-                            </div>
-                            <span class="stat-value">60</span>
-                        </div>
-                    </div>
-                    <div class="pokemon-description">
-                        <p>When it releases pent-up energy in a burst, the electric power is equal to a lightning bolt.</p>
-                    </div>
-                </div>
-
-                <!-- Pokémon Card 2: Charmander -->
-                <div class="pokemon-card">
-                    <div class="pokemon-card-header">
-                        <div class="pokemon-number">#004</div>
-                        <div class="pokemon-name">Charmander</div>
-                        <div class="pokemon-type fire">Fire</div>
-                    </div>
-                    <div class="pokemon-image">
-                        <div class="pokemon-sprite-large charmander-card">🔥</div>
-                        <div class="pokemon-shine"></div>
-                    </div>
-                    <div class="pokemon-stats">
-                        <div class="stat-bar">
-                            <span class="stat-name">HP</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 90%"></div>
-                            </div>
-                            <span class="stat-value">90</span>
-                        </div>
-                        <div class="stat-bar">
-                            <span class="stat-name">Attack</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 80%"></div>
-                            </div>
-                            <span class="stat-value">80</span>
-                        </div>
-                        <div class="stat-bar">
-                            <span class="stat-name">Defense</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 65%"></div>
-                            </div>
-                            <span class="stat-value">65</span>
-                        </div>
-                    </div>
-                    <div class="pokemon-description">
-                        <p>The flame on its tail indicates Charmander's life force. If the flame were to go out, this Pokémon would die.</p>
-                    </div>
-                </div>
-
-                <!-- Pokémon Card 3: Squirtle -->
-                <div class="pokemon-card">
-                    <div class="pokemon-card-header">
-                        <div class="pokemon-number">#007</div>
-                        <div class="pokemon-name">Squirtle</div>
-                        <div class="pokemon-type water">Water</div>
-                    </div>
-                    <div class="pokemon-image">
-                        <div class="pokemon-sprite-large squirtle-card">💧</div>
-                        <div class="pokemon-shine"></div>
-                    </div>
-                    <div class="pokemon-stats">
-                        <div class="stat-bar">
-                            <span class="stat-name">HP</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 75%"></div>
-                            </div>
-                            <span class="stat-value">75</span>
-                        </div>
-                        <div class="stat-bar">
-                            <span class="stat-name">Attack</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 65%"></div>
-                            </div>
-                            <span class="stat-value">65</span>
-                        </div>
-                        <div class="stat-bar">
-                            <span class="stat-name">Defense</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 95%"></div>
-                            </div>
-                            <span class="stat-value">95</span>
-                        </div>
-                    </div>
-                    <div class="pokemon-description">
-                        <p>After birth, its back swells and hardens into a shell. Powerfully sprays foam from its mouth.</p>
-                    </div>
-                </div>
-
-                <!-- Pokémon Card 4: Bulbasaur -->
-                <div class="pokemon-card">
-                    <div class="pokemon-card-header">
-                        <div class="pokemon-number">#001</div>
-                        <div class="pokemon-name">Bulbasaur</div>
-                        <div class="pokemon-type grass">Grass</div>
-                    </div>
-                    <div class="pokemon-image">
-                        <div class="pokemon-sprite-large bulbasaur-card">🌱</div>
-                        <div class="pokemon-shine"></div>
-                    </div>
-                    <div class="pokemon-stats">
-                        <div class="stat-bar">
-                            <span class="stat-name">HP</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 80%"></div>
-                            </div>
-                            <span class="stat-value">80</span>
-                        </div>
-                        <div class="stat-bar">
-                            <span class="stat-name">Attack</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 75%"></div>
-                            </div>
-                            <span class="stat-value">75</span>
-                        </div>
-                        <div class="stat-bar">
-                            <span class="stat-name">Defense</span>
-                            <div class="stat-bar-bg">
-                                <div class="stat-bar-fill" style="width: 85%"></div>
-                            </div>
-                            <span class="stat-value">85</span>
-                        </div>
-                    </div>
-                    <div class="pokemon-description">
-                        <p>A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pokémon Academy Section -->
-    <section id="education" class="pokemon-academy-section">
-        <div class="pokemon-container">
-            <div class="academy-header">
-                <div class="academy-logo">
-                    <div class="pokeball-academy">⚪</div>
-                    <h2>Pokémon Academy</h2>
-                    <p>Trainer Education Center</p>
-                </div>
-            </div>
-            
-            <div class="academy-content">
-                <!-- Academy Motto -->
-                <div class="academy-motto">
-                    <div class="motto-display">
-                        <h3>"Gotta Catch 'Em All!"</h3>
-                        <div class="motto-pokemon">
-                            <div class="pokemon-sprite-small pikachu-motto">⚡</div>
-                            <div class="pokemon-sprite-small charmander-motto">🔥</div>
-                            <div class="pokemon-sprite-small squirtle-motto">💧</div>
-                            <div class="pokemon-sprite-small bulbasaur-motto">🌱</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Trainer Lessons -->
-                <div class="trainer-lessons">
-                    <h3>Trainer Lessons</h3>
-                    <div class="lessons-grid">
-                        <div class="lesson-card">
-                            <div class="lesson-icon">❤️</div>
-                            <h4>Pokémon Care</h4>
-                            <p>"Treat every Pokémon with love and respect. Learn proper feeding, grooming, and health monitoring techniques."</p>
-                            <div class="lesson-progress">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 85%"></div>
-                                </div>
-                                <span class="progress-text">85% Complete</span>
-                            </div>
-                        </div>
-                        
-                        <div class="lesson-card">
-                            <div class="lesson-icon">⚔️</div>
-                            <h4>Battle Training</h4>
-                            <p>"Master battle strategies, type advantages, and combat techniques. Train hard, battle fair, and never give up!"</p>
-                            <div class="lesson-progress">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 70%"></div>
-                                </div>
-                                <span class="progress-text">70% Complete</span>
-                            </div>
-                        </div>
-                        
-                        <div class="lesson-card">
-                            <div class="lesson-icon">🤝</div>
-                            <h4>Team Building</h4>
-                            <p>"Build strong bonds with your Pokémon team. Friendship between trainer and Pokémon is everything."</p>
-                            <div class="lesson-progress">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 90%"></div>
-                                </div>
-                                <span class="progress-text">90% Complete</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Academy Programs -->
-                <div class="academy-programs">
-                    <h3>Academy Programs</h3>
-                    <div class="program-card">
-                        <div class="program-header">
-                            <div class="program-icon">🎓</div>
-                            <h4>Pokémon Trainer Certification</h4>
-                        </div>
-                        <div class="program-content">
-                            <p>Comprehensive training program covering Pokémon care, battle strategies, type advantages, and ethical training practices. Includes hands-on experience with different Pokémon types and real-world scenarios.</p>
-                            <div class="program-features">
-                                <div class="feature-item">✅ Type Advantage Training</div>
-                                <div class="feature-item">✅ Battle Strategy Workshop</div>
-                                <div class="feature-item">✅ Pokémon Health Management</div>
-                                <div class="feature-item">✅ Evolution Guidance</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Academy Goals -->
-                <div class="academy-goals">
-                    <h3>Academy Goals</h3>
-                    <div class="goals-grid">
-                        <div class="goal-card">
-                            <div class="goal-number">1</div>
-                            <div class="goal-content">
-                                <h4>Pokémon Conservation</h4>
-                                <p>Protect and preserve all Pokémon species and their natural habitats through education and awareness.</p>
-                            </div>
-                        </div>
-                        <div class="goal-card">
-                            <div class="goal-number">2</div>
-                            <div class="goal-content">
-                                <h4>Trainer Excellence</h4>
-                                <p>Develop skilled, ethical trainers who understand proper Pokémon care and responsible training practices.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pokémon Battle Arena Section -->
-    <section id="ecosystem" class="pokemon-battle-arena-section">
-        <div class="pokemon-container">
-            <div class="arena-header">
-                <div class="arena-logo">
-                    <div class="pokeball-arena">⚪</div>
-                    <h2>Pokémon Battle Arena</h2>
-                    <p>Ecosystem Simulation</p>
-                </div>
-            </div>
-            
-            <div class="arena-content">
-                <!-- Battle Arena -->
-                <div class="battle-arena">
-                    <div class="arena-field">
-                        <div class="battle-pokemon-left">
-                            <div class="pokemon-battle-sprite pikachu-arena">⚡</div>
-                            <div class="pokemon-name">Pikachu</div>
-                            <div class="pokemon-level">Lv. 25</div>
-                            <div class="hp-bar-arena">
-                                <div class="hp-fill-arena" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="battle-center">
-                            <div class="vs-text">VS</div>
-                            <div class="battle-effects-arena">
-                                <div class="effect-spark">✨</div>
-                                <div class="effect-spark">✨</div>
-                                <div class="effect-spark">✨</div>
-                            </div>
-                        </div>
-                        
-                        <div class="battle-pokemon-right">
-                            <div class="pokemon-battle-sprite charmander-arena">🔥</div>
-                            <div class="pokemon-name">Charmander</div>
-                            <div class="pokemon-level">Lv. 23</div>
-                            <div class="hp-bar-arena">
-                                <div class="hp-fill-arena" style="width: 70%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Type Effectiveness Chart -->
-                <div class="type-effectiveness">
-                    <h3>Type Effectiveness</h3>
-                    <div class="effectiveness-grid">
-                        <div class="effectiveness-card super-effective">
-                            <div class="type-icon">⚡</div>
-                            <div class="type-name">Electric</div>
-                            <div class="effectiveness-arrow">→</div>
-                            <div class="type-icon">💧</div>
-                            <div class="type-name">Water</div>
-                            <div class="effectiveness-text">Super Effective!</div>
-                        </div>
-                        
-                        <div class="effectiveness-card not-very-effective">
-                            <div class="type-icon">🔥</div>
-                            <div class="type-name">Fire</div>
-                            <div class="effectiveness-arrow">→</div>
-                            <div class="type-icon">🌱</div>
-                            <div class="type-name">Grass</div>
-                            <div class="effectiveness-text">Not Very Effective</div>
-                        </div>
-                        
-                        <div class="effectiveness-card normal">
-                            <div class="type-icon">⚡</div>
-                            <div class="type-name">Electric</div>
-                            <div class="effectiveness-arrow">→</div>
-                            <div class="type-icon">🔥</div>
-                            <div class="type-name">Fire</div>
-                            <div class="effectiveness-text">Normal Damage</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pokémon Stats Comparison -->
-                <div class="pokemon-stats-comparison">
-                    <h3>Pokémon Stats Comparison</h3>
-                    <div class="stats-comparison">
-                        <div class="pokemon-stats-card">
-                            <div class="pokemon-header">
-                                <div class="pokemon-sprite-small">⚡</div>
-                                <div class="pokemon-info">
-                                    <div class="pokemon-name">Pikachu</div>
-                                    <div class="pokemon-type">Electric</div>
-                                </div>
-                            </div>
-                            <div class="stats-bars">
-                                <div class="stat-comparison">
-                                    <span class="stat-label">HP</span>
-                                    <div class="stat-bar-comparison">
-                                        <div class="stat-fill" style="width: 85%"></div>
-                                    </div>
-                                    <span class="stat-value">85</span>
-                                </div>
-                                <div class="stat-comparison">
-                                    <span class="stat-label">Attack</span>
-                                    <div class="stat-bar-comparison">
-                                        <div class="stat-fill" style="width: 70%"></div>
-                                    </div>
-                                    <span class="stat-value">70</span>
-                                </div>
-                                <div class="stat-comparison">
-                                    <span class="stat-label">Defense</span>
-                                    <div class="stat-bar-comparison">
-                                        <div class="stat-fill" style="width: 60%"></div>
-                                    </div>
-                                    <span class="stat-value">60</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="pokemon-stats-card">
-                            <div class="pokemon-header">
-                                <div class="pokemon-sprite-small">🔥</div>
-                                <div class="pokemon-info">
-                                    <div class="pokemon-name">Charmander</div>
-                                    <div class="pokemon-type">Fire</div>
-                                </div>
-                            </div>
-                            <div class="stats-bars">
-                                <div class="stat-comparison">
-                                    <span class="stat-label">HP</span>
-                                    <div class="stat-bar-comparison">
-                                        <div class="stat-fill" style="width: 90%"></div>
-                                    </div>
-                                    <span class="stat-value">90</span>
-                                </div>
-                                <div class="stat-comparison">
-                                    <span class="stat-label">Attack</span>
-                                    <div class="stat-bar-comparison">
-                                        <div class="stat-fill" style="width: 80%"></div>
-                                    </div>
-                                    <span class="stat-value">80</span>
-                                </div>
-                                <div class="stat-comparison">
-                                    <span class="stat-label">Defense</span>
-                                    <div class="stat-bar-comparison">
-                                        <div class="stat-fill" style="width: 65%"></div>
-                                    </div>
-                                    <span class="stat-value">65</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pokémon Biology Research Lab Section -->
-    <section class="pokemon-biology-section">
-        <div class="pokemon-container">
-            <div class="biology-header">
-                <div class="biology-logo">
-                    <div class="pokeball-biology">⚪</div>
-                    <h2>Pokémon Biology Research Lab</h2>
-                    <p>Scientific Concepts Explained</p>
-                </div>
-            </div>
-            
-            <div class="biology-content">
-                <div class="biology-concepts">
-                    <div class="concept-card-pokemon">
-                        <div class="concept-header">
-                            <div class="concept-icon">⚡</div>
-                            <h4>Matter & Energy in Pokémon</h4>
-                        </div>
-                        <div class="concept-content">
-                            <p>Pokémon convert solar energy into electrical energy through photosynthesis (Grass types) and store it as chemical energy in their bodies, creating a sustainable energy system for their abilities.</p>
-                            <div class="concept-visual">
-                                <div class="energy-flow-mini">
-                                    <span>☀️</span> → <span>🌱</span> → <span>⚡</span> → <span>🔥</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="concept-card-pokemon">
-                        <div class="concept-header">
-                            <div class="concept-icon">🔬</div>
-                            <h4>Laws of Thermodynamics in Pokémon</h4>
-                        </div>
-                        <div class="concept-content">
-                            <div class="law-item">
-                                <div class="law-number">1st Law</div>
-                                <div class="law-description">Energy cannot be created or destroyed, only transformed. When Pokémon use moves, they convert stored energy (HP) into kinetic energy (attacks), but the total energy remains constant.</div>
-                            </div>
-                            <div class="law-item">
-                                <div class="law-number">2nd Law</div>
-                                <div class="law-description">Energy tends to disperse and become less useful. As Pokémon battle, some energy is lost as heat and sound, making the system less efficient over time, requiring rest and recovery.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="concept-card-pokemon">
-                        <div class="concept-header">
-                            <div class="concept-icon">⚔️</div>
-                            <h4>Type Effectiveness & Balance</h4>
-                        </div>
-                        <div class="concept-content">
-                            <p>Different Pokémon types have advantages and disadvantages against each other, creating a balanced ecosystem where no single type dominates, requiring strategic thinking in battles.</p>
-                            <div class="type-chart-mini">
-                                <div class="type-advantage">⚡ > 💧</div>
-                                <div class="type-advantage">🔥 > 🌱</div>
-                                <div class="type-advantage">💧 > 🔥</div>
-                                <div class="type-advantage">🌱 > ⚡</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="concept-card-pokemon">
-                        <div class="concept-header">
-                            <div class="concept-icon">🏥</div>
-                            <h4>Homeostasis in Pokémon Ecosystem</h4>
-                        </div>
-                        <div class="concept-content">
-                            <p>Pokémon Centers and natural habitats maintain balance through temperature control, humidity regulation, and pH monitoring. The ecosystem self-regulates through predator-prey relationships, ensuring no single species overpopulates and maintaining stable energy flow throughout the digital world.</p>
-                            <div class="homeostasis-visual">
-                                <div class="balance-indicator">
-                                    <div class="balance-icon">⚖️</div>
-                                    <span>Ecosystem Balance</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pokémon Evolution Center Section -->
-    <section id="cycles" class="pokemon-evolution-section">
-        <div class="pokemon-container">
-            <div class="evolution-header">
-                <div class="evolution-logo">
-                    <div class="pokeball-evolution">⚪</div>
-                    <h2>Pokémon Evolution Center</h2>
-                    <p>Evolution & Life Cycles</p>
-                </div>
-            </div>
-            
-            <div class="evolution-content">
-                <!-- Evolution Tabs -->
-                <div class="evolution-tabs">
-                    <button class="evolution-tab active" onclick="showEvolution('energy')">Energy Flow</button>
-                    <button class="evolution-tab" onclick="showEvolution('evolution')">Evolution Chain</button>
-                    <button class="evolution-tab" onclick="showEvolution('care')">Pokémon Care</button>
-                </div>
-
-                <!-- Energy Flow Tab -->
-                <div id="energy-flow" class="evolution-panel active">
-                    <h3>Pokémon Energy Flow System</h3>
-                    <div class="energy-flow-visualization">
-                        <div class="energy-step">
-                            <div class="energy-icon">☀️</div>
-                            <span>Sun Energy</span>
-                        </div>
-                        <div class="energy-arrow">→</div>
-                        <div class="energy-step">
-                            <div class="energy-icon">🌱</div>
-                            <span>Grass Pokémon<br/>Photosynthesis</span>
-                        </div>
-                        <div class="energy-arrow">→</div>
-                        <div class="energy-step">
-                            <div class="energy-icon">⚡</div>
-                            <span>Electric Pokémon<br/>Energy Storage</span>
-                        </div>
-                        <div class="energy-arrow">→</div>
-                        <div class="energy-step">
-                            <div class="energy-icon">🔥</div>
-                            <span>Fire Pokémon<br/>Energy Release</span>
-                        </div>
-                        <div class="energy-arrow">→</div>
-                        <div class="energy-step">
-                            <div class="energy-icon">🔄</div>
-                            <span>Energy Recycling<br/>Pokémon Centers</span>
-                        </div>
-                    </div>
-                    <p class="evolution-description">
-                        <strong>Energy Flow:</strong> Sun energy is captured by Grass Pokémon through photosynthesis, 
-                        converted to electrical energy by Electric Pokémon, released as thermal energy by Fire Pokémon, 
-                        and recycled through Pokémon Centers to maintain the ecosystem balance.
-                    </p>
-                </div>
-
-                <!-- Evolution Chain Tab -->
-                <div id="evolution-chain" class="evolution-panel">
-                    <h3>Pokémon Evolution Chains</h3>
-                    <div class="evolution-chains">
-                        <div class="evolution-chain">
-                            <div class="pokemon-evolution-stage">
-                                <div class="pokemon-sprite-evolution">🌱</div>
-                                <div class="pokemon-name-evolution">Bulbasaur</div>
-                                <div class="evolution-level">Lv. 16</div>
-                            </div>
-                            <div class="evolution-arrow">→</div>
-                            <div class="pokemon-evolution-stage">
-                                <div class="pokemon-sprite-evolution">🌿</div>
-                                <div class="pokemon-name-evolution">Ivysaur</div>
-                                <div class="evolution-level">Lv. 32</div>
-                            </div>
-                            <div class="evolution-arrow">→</div>
-                            <div class="pokemon-evolution-stage">
-                                <div class="pokemon-sprite-evolution">🌳</div>
-                                <div class="pokemon-name-evolution">Venusaur</div>
-                                <div class="evolution-level">Final</div>
-                            </div>
-                        </div>
-                        
-                        <div class="evolution-chain">
-                            <div class="pokemon-evolution-stage">
-                                <div class="pokemon-sprite-evolution">🔥</div>
-                                <div class="pokemon-name-evolution">Charmander</div>
-                                <div class="evolution-level">Lv. 16</div>
-                            </div>
-                            <div class="evolution-arrow">→</div>
-                            <div class="pokemon-evolution-stage">
-                                <div class="pokemon-sprite-evolution">🔥</div>
-                                <div class="pokemon-name-evolution">Charmeleon</div>
-                                <div class="evolution-level">Lv. 36</div>
-                            </div>
-                            <div class="evolution-arrow">→</div>
-                            <div class="pokemon-evolution-stage">
-                                <div class="pokemon-sprite-evolution">🔥</div>
-                                <div class="pokemon-name-evolution">Charizard</div>
-                                <div class="evolution-level">Final</div>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="evolution-description">
-                        <strong>Evolution Process:</strong> Pokémon evolve through experience, friendship, and specific conditions. 
-                        Each evolution stage brings new abilities, increased stats, and sometimes type changes, 
-                        representing the natural growth and development of Pokémon.
-                    </p>
-                </div>
-
-                <!-- Pokémon Care Tab -->
-                <div id="pokemon-care" class="evolution-panel">
-                    <h3>Pokémon Care & Wellness</h3>
-                    <div class="care-visualization">
-                        <div class="care-step">
-                            <div class="care-icon">🍎</div>
-                            <span>Feeding<br/>& Nutrition</span>
-                        </div>
-                        <div class="care-arrow">→</div>
-                        <div class="care-step">
-                            <div class="care-icon">💤</div>
-                            <span>Rest<br/>& Sleep</span>
-                        </div>
-                        <div class="care-arrow">→</div>
-                        <div class="care-step">
-                            <div class="care-icon">🏥</div>
-                            <span>Health<br/>Monitoring</span>
-                        </div>
-                        <div class="care-arrow">→</div>
-                        <div class="care-step">
-                            <div class="care-icon">❤️</div>
-                            <span>Happiness<br/>& Bonding</span>
-                        </div>
-                        <div class="care-arrow">→</div>
-                        <div class="care-step">
-                            <div class="care-icon">⚡</div>
-                            <span>Training<br/>& Growth</span>
-                        </div>
-                    </div>
-                    <p class="evolution-description">
-                        <strong>Care Cycle:</strong> Proper Pokémon care involves balanced nutrition, adequate rest, 
-                        regular health checkups, building strong bonds through interaction, and consistent training 
-                        to help Pokémon reach their full potential and maintain their well-being.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pokémon Stats Center Section -->
-    <section id="metrics" class="pokemon-stats-section">
-        <div class="pokemon-container">
-            <div class="stats-header">
-                <div class="stats-logo">
-                    <div class="pokeball-stats">⚪</div>
-                    <h2>Pokémon Stats Center</h2>
-                    <p>Ecosystem Performance Metrics</p>
-                </div>
-            </div>
-            
-            <div class="stats-content">
-                <div class="pokemon-stats-grid">
-                    <div class="stat-card-pokemon">
-                        <div class="stat-header">
-                            <div class="stat-icon">🌱</div>
-                            <h3>Eco-Footprint</h3>
-                        </div>
-                        <div class="stat-visual">
-                            <div class="stat-value" data-target="95">0</div>
-                            <div class="stat-unit">% Reduction</div>
-                            <div class="stat-bar">
-                                <div class="stat-fill" data-width="95"></div>
-                            </div>
-                        </div>
-                        <div class="stat-description">Compared to traditional cities</div>
-                    </div>
-
-                    <div class="stat-card-pokemon">
-                        <div class="stat-header">
-                            <div class="stat-icon">♻️</div>
-                            <h3>Waste Management</h3>
-                        </div>
-                        <div class="stat-visual">
-                            <div class="stat-value" data-target="100">0</div>
-                            <div class="stat-unit">% Recycled</div>
-                            <div class="stat-bar">
-                                <div class="stat-fill" data-width="100"></div>
-                            </div>
-                        </div>
-                        <div class="stat-description">Zero waste to landfill</div>
-                    </div>
-
-                    <div class="stat-card-pokemon">
-                        <div class="stat-header">
-                            <div class="stat-icon">☀️</div>
-                            <h3>Solar Energy</h3>
-                        </div>
-                        <div class="stat-visual">
-                            <div class="stat-value" data-target="100">0</div>
-                            <div class="stat-unit">% Solar</div>
-                            <div class="stat-bar">
-                                <div class="stat-fill" data-width="100"></div>
-                            </div>
-                        </div>
-                        <div class="stat-description">Clean energy usage</div>
-                    </div>
-
-                    <div class="stat-card-pokemon">
-                        <div class="stat-header">
-                            <div class="stat-icon">💧</div>
-                            <h3>Water Efficiency</h3>
-                        </div>
-                        <div class="stat-visual">
-                            <div class="stat-value" data-target="85">0</div>
-                            <div class="stat-unit">% Saved</div>
-                            <div class="stat-bar">
-                                <div class="stat-fill" data-width="85"></div>
-                            </div>
-                        </div>
-                        <div class="stat-description">Water conservation</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pokémon Battle Quiz Section -->
-    <section id="quiz" class="pokemon-quiz-section">
-        <div class="pokemon-container">
-            <div class="quiz-header">
-                <div class="quiz-logo">
-                    <div class="pokeball-quiz">⚪</div>
-                    <h2>Pokémon Battle Quiz</h2>
-                    <p>Test your knowledge of Pokémon biology and ecosystem dynamics!</p>
-                </div>
-            </div>
-            
-            <div class="quiz-content">
-                <div class="quiz-battle-arena">
-                    <div class="battle-pokemon-left">
-                        <div class="pokemon-sprite-quiz">⚡</div>
-                        <div class="pokemon-name-quiz">Pikachu</div>
-                    </div>
-                    
-                    <div class="quiz-center">
-                        <div class="vs-text-quiz">VS</div>
-                        <div class="question-number-quiz">Question <span id="current-q">1</span> of <span id="total-q">5</span></div>
-                    </div>
-                    
-                    <div class="battle-pokemon-right">
-                        <div class="pokemon-sprite-quiz">🔥</div>
-                        <div class="pokemon-name-quiz">Charmander</div>
-                    </div>
-                </div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- I. WALL-E's Earth Profile Section -->
+            <section id="profile" class="content-section active">
+                <h2>I. WALL-E's Earth Profile</h2>
                 
-                <div class="question-container-quiz">
-                    <div class="question-text-quiz" id="question-text">What is the primary energy source in PokéVerse?</div>
-                    <div class="options-quiz" id="options">
-                        <button class="option-btn-quiz" data-answer="0">
-                            <span class="option-icon">💨</span>
-                            <span class="option-text">Wind Energy</span>
-                        </button>
-                        <button class="option-btn-quiz" data-answer="1">
-                            <span class="option-icon">☀️</span>
-                            <span class="option-text">Solar Energy</span>
-                        </button>
-                        <button class="option-btn-quiz" data-answer="2">
-                            <span class="option-icon">⚛️</span>
-                            <span class="option-text">Nuclear Energy</span>
-                        </button>
-                        <button class="option-btn-quiz" data-answer="3">
-                            <span class="option-icon">🌋</span>
-                            <span class="option-text">Geothermal Energy</span>
-                        </button>
+                <div class="profile-card">
+                    <h3>Name of WALL-E's World: <span class="highlight">WALL-E's Earth Restoration Zone</span></h3>
+                    
+                    <div class="description">
+                        <div class="section-header-card">
+                            <div class="header-icon">🌍</div>
+                            <h4>World Description</h4>
+                        </div>
+                        <div class="description-card">
+                            <div class="description-content">
+                                <div class="description-text">
+                                    <p>Based on the WALL-E movie universe, this world represents Earth after humanity's departure to space. WALL-E (Waste Allocation Load Lifter - Earth Class) is the last remaining robot on Earth, working tirelessly to clean up the planet's massive waste problem while discovering the first signs of life - a small plant growing in an old boot.</p>
+                                </div>
+                                <div class="world-features-grid">
+                                    <div class="feature-card">
+                                        <div class="feature-icon">📍</div>
+                                        <div class="feature-content">
+                                            <h5>Location</h5>
+                                            <p>Post-apocalyptic Earth, specifically the massive waste-covered cities</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature-card">
+                                        <div class="feature-icon">🌪️</div>
+                                        <div class="feature-content">
+                                            <h5>Climate</h5>
+                                            <p>Dusty, polluted atmosphere with extreme weather conditions</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature-card">
+                                        <div class="feature-icon">🗻</div>
+                                        <div class="feature-content">
+                                            <h5>Terrain</h5>
+                                            <p>Towering mountains of compacted waste cubes, abandoned skyscrapers, and dust storms</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature-card">
+                                        <div class="feature-icon">🤖</div>
+                                        <div class="feature-content">
+                                            <h5>Dominant Species</h5>
+                                            <p>WALL-E robot, EVE probe, cockroaches, and the precious plant in the boot</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="goals">
+                        <div class="section-header-card">
+                            <div class="header-icon">🎯</div>
+                            <h4>Environmental Goals</h4>
+                        </div>
+                        <div class="goals-grid">
+                            <div class="goal-card">
+                                <div class="goal-number">01</div>
+                                <div class="goal-icon">♻️</div>
+                                <div class="goal-content">
+                                    <h5>Waste Management</h5>
+                                    <p>Clean up Earth's massive waste problem through WALL-E's compacting and sorting systems</p>
+                                </div>
+                            </div>
+                            <div class="goal-card">
+                                <div class="goal-number">02</div>
+                                <div class="goal-icon">🌬️</div>
+                                <div class="goal-content">
+                                    <h5>Atmosphere Restoration</h5>
+                                    <p>Restore Earth's atmosphere and make it habitable for human return</p>
+                                </div>
+                            </div>
+                            <div class="goal-card">
+                                <div class="goal-number">03</div>
+                                <div class="goal-icon">🌱</div>
+                                <div class="goal-content">
+                                    <h5>Plant Protection</h5>
+                                    <p>Protect and nurture the precious plant that could save humanity</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="issues-solutions">
+                        <div class="section-header-card">
+                            <div class="header-icon">⚠️</div>
+                            <h4>Environmental Issues & Solutions</h4>
+                        </div>
+                        <div class="issue-solution-container">
+                            <div class="issue-section">
+                                <div class="issue-header">
+                                    <div class="issue-icon">🚨</div>
+                                    <h5>Major Issue</h5>
+                                </div>
+                                <div class="issue-content">
+                                    <h6>Massive Waste Accumulation and Environmental Destruction</h6>
+                                    <p>Earth has become a wasteland covered in mountains of trash, with polluted air and no signs of life except for WALL-E and a few cockroaches.</p>
+                                </div>
+                            </div>
+                            <div class="solution-section">
+                                <div class="solution-header">
+                                    <div class="solution-icon">💡</div>
+                                    <h5>Tech-Based Solution</h5>
+                                </div>
+                                <div class="solution-content">
+                                    <div class="solution-features">
+                                        <div class="solution-feature">
+                                            <div class="feature-icon">🤖</div>
+                                            <span>WALL-E's Advanced Waste Management</span>
+                                        </div>
+                                        <div class="solution-feature">
+                                            <div class="feature-icon">📦</div>
+                                            <span>Trash Compacting into Neat Cubes</span>
+                                        </div>
+                                        <div class="solution-feature">
+                                            <div class="feature-icon">♻️</div>
+                                            <span>Recyclable Material Sorting</span>
+                                        </div>
+                                        <div class="solution-feature">
+                                            <div class="feature-icon">☀️</div>
+                                            <span>Solar-Powered Continuous Operation</span>
+                                        </div>
+                                    </div>
+                                    <p class="solution-description">WALL-E's discovery of the precious plant proves that life can still thrive on Earth with proper environmental restoration!</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
+
+            <!-- II. WALL-E's Education Blueprint Section -->
+            <section id="education" class="content-section">
+                <h2>II. WALL-E's Education Blueprint</h2>
                 
-                <div class="quiz-controls-quiz">
-                    <button class="btn-quiz-primary" id="next-btn" onclick="nextQuestion()">
-                        <span class="btn-icon">➡️</span>
-                        <span class="btn-text">Next Question</span>
-                    </button>
-                    <div class="score-display-quiz">
-                        <div class="score-icon">🏆</div>
-                        <div class="score-text">Score: <span id="score">0</span>/5</div>
+                <div class="education-content">
+                    <div class="slogan-section">
+                        <h3>Slogan: <span class="slogan">"Waste Not, Want Not - Earth Needs You!"</span></h3>
+                    </div>
+
+                    <div class="logo-section">
+                        <h4>Logo Description:</h4>
+                        <div class="logo-visual">
+                            <div class="wall-e-logo">🤖</div>
+                            <div class="logo-elements">
+                                <span class="leaf">🌱</span>
+                                <span class="boot">👢</span>
+                                <span class="heart">💚</span>
+                            </div>
+                        </div>
+                        <p>WALL-E robot holding the precious plant in the old boot, symbolizing hope and the possibility of Earth's restoration. The boot represents the unexpected places where life can thrive, and WALL-E's caring nature shows that even robots can develop environmental consciousness.</p>
+                    </div>
+
+                    <div class="key-messages">
+                        <div class="section-header-card">
+                            <div class="header-icon">💬</div>
+                            <h4>Key Messages for Citizens</h4>
+                        </div>
+                        <div class="messages-grid">
+                            <div class="message-card">
+                                <div class="message-number">01</div>
+                                <div class="message-icon">🌱</div>
+                                <div class="message-content">
+                                    <h5>Protect Every Living Thing</h5>
+                                    <p>"Even the smallest plant can save the world - protect every living thing"</p>
+                                </div>
+                            </div>
+                            <div class="message-card">
+                                <div class="message-number">02</div>
+                                <div class="message-icon">🤖</div>
+                                <div class="message-content">
+                                    <h5>Inspire Through Action</h5>
+                                    <p>"One robot's dedication can inspire millions to care for Earth"</p>
+                                </div>
+                            </div>
+                            <div class="message-card">
+                                <div class="message-number">03</div>
+                                <div class="message-icon">✨</div>
+                                <div class="message-content">
+                                    <h5>Never Give Up Hope</h5>
+                                    <p>"Never give up hope - life finds a way even in the most unlikely places"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="policy-section">
+                        <div class="section-header-card">
+                            <div class="header-icon">📋</div>
+                            <h4>Policy Inspired by NEEAP</h4>
+                        </div>
+                        <div class="policy-card">
+                            <div class="policy-header">
+                                <div class="policy-icon">🎓</div>
+                                <h5>WALL-E Environmental Awareness Program (WEAP)</h5>
+                            </div>
+                            <div class="policy-content">
+                                <p>Using WALL-E's story as inspiration, this program teaches students about environmental responsibility through interactive storytelling. Students learn about waste management, the importance of plants for oxygen production, and how individual actions can make a difference in environmental restoration.</p>
+                                <div class="policy-features">
+                                    <div class="policy-feature">
+                                        <div class="feature-icon">📚</div>
+                                        <span>Interactive Storytelling</span>
+                                    </div>
+                                    <div class="policy-feature">
+                                        <div class="feature-icon">♻️</div>
+                                        <span>Waste Management Education</span>
+                                    </div>
+                                    <div class="policy-feature">
+                                        <div class="feature-icon">🌱</div>
+                                        <span>Plant Importance Awareness</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mdgs">
+                        <div class="section-header-card">
+                            <div class="header-icon">🌐</div>
+                            <h4>Relevant Millennium Development Goals</h4>
+                        </div>
+                        <div class="mdgs-grid">
+                            <div class="mdg-card">
+                                <div class="mdg-number">07</div>
+                                <div class="mdg-icon">🌍</div>
+                                <div class="mdg-content">
+                                    <h5>Environmental Sustainability</h5>
+                                    <p>Through WALL-E's waste management and Earth restoration efforts</p>
+                                </div>
+                            </div>
+                            <div class="mdg-card">
+                                <div class="mdg-number">08</div>
+                                <div class="mdg-icon">🤝</div>
+                                <div class="mdg-content">
+                                    <h5>Global Partnerships</h5>
+                                    <p>Via international robot collaboration networks</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
+
+            <!-- III. WALL-E's World Simulation Section -->
+            <section id="ecosystem" class="content-section">
+                <h2>III. WALL-E's World Simulation</h2>
+                
+                <div class="wall-e-world-content">
+                    <div class="food-chain">
+                        <h3>Food Chain</h3>
+                        <div class="chain-visual">
+                            <div class="chain-level">
+                                <div class="organism">☀️ Solar Energy</div>
+                                <div class="arrow">⬇️</div>
+                            </div>
+                            <div class="chain-level">
+                                <div class="organism">🌱👢 The Precious Plant (in the boot)</div>
+                                <div class="arrow">⬇️</div>
+                            </div>
+                            <div class="chain-level">
+                                <div class="organism">🤖 WALL-E (Protector & Caretaker)</div>
+                                <div class="arrow">⬇️</div>
+                            </div>
+                            <div class="chain-level">
+                                <div class="organism">🪳 Cockroaches (Decomposers)</div>
+                                <div class="arrow">⬇️</div>
+                            </div>
+                            <div class="chain-level">
+                                <div class="organism">♻️ Waste Compacting & Recycling</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="food-web">
+                        <h3>Food Web</h3>
+                        <div class="web-diagram">
+                            <div class="web-center">
+                                <div class="central-node">WALL-E's World</div>
+                            </div>
+                            <div class="web-nodes">
+                                <div class="node producer">☀️ Sun → Energy</div>
+                                <div class="node consumer">🌱👢 Plant → Oxygen</div>
+                                <div class="node decomposer">🪳 Cockroaches → Decomposition</div>
+                                <div class="node recycler">🤖 WALL-E → Waste Management</div>
+                                <div class="node eva">👽 EVE → Plant Detection</div>
+                                <div class="node dust">💨 Dust Storms → Atmosphere</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="energy-concepts">
+                        <h3>Energy Concepts Explained:</h3>
+                        <div class="concept-grid">
+                            <div class="concept-card">
+                                <h4>Matter & Energy Changes:</h4>
+                                <p>WALL-E's solar panels convert sunlight into electrical energy to power his operations. The precious plant uses photosynthesis to convert CO₂ and sunlight into oxygen and glucose, while WALL-E compacts waste into organized cubes, transforming chaotic matter into structured forms.</p>
+                            </div>
+                            <div class="concept-card">
+                                <h4>Laws of Thermodynamics:</h4>
+                                <ul>
+                                    <li><strong>1st Law:</strong> Energy from the sun is conserved - solar energy powers WALL-E's operations and the plant's photosynthesis</li>
+                                    <li><strong>2nd Law:</strong> Energy quality decreases as it flows - high-quality solar energy becomes lower-quality heat during WALL-E's waste compacting process</li>
+                                </ul>
+                            </div>
+                            <div class="concept-card">
+                                <h4>Homeostasis:</h4>
+                                <p>WALL-E maintains environmental balance through his daily routine of waste management and plant care. His solar-powered design allows continuous operation, while his discovery of the plant proves that life can still thrive on Earth with proper environmental conditions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- IV. Biogeochemical Cycle Mapping Section -->
+            <section id="cycles" class="content-section">
+                <h2>IV. Biogeochemical Cycle Mapping</h2>
+                
+                <div class="cycles-content">
+                    <div class="cycle-section">
+                        <h3>Carbon Cycle</h3>
+                        <div class="cycle-visual">
+                            <div class="cycle-step">
+                                <div class="step-icon">☀️</div>
+                                <div class="step-text">Solar Energy</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🌱</div>
+                                <div class="step-text">Photosynthesis</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🤖</div>
+                                <div class="step-text">WALL-E Processing</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">♻️</div>
+                                <div class="step-text">Carbon Storage</div>
+                            </div>
+                        </div>
+                        <p>Carbon moves from the polluted atmosphere through the precious plant's photosynthesis, gets stored in the plant's biomass, and when WALL-E protects the plant, he's essentially protecting Earth's carbon sequestration potential for human return.</p>
+                    </div>
+
+                    <div class="cycle-section">
+                        <h3>Nitrogen Cycle</h3>
+                        <div class="cycle-visual">
+                            <div class="cycle-step">
+                                <div class="step-icon">⚡</div>
+                                <div class="step-text">Nitrogen Fixation</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🌿</div>
+                                <div class="step-text">Plant Uptake</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🤖</div>
+                                <div class="step-text">Waste Processing</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🦠</div>
+                                <div class="step-text">Decomposition</div>
+                            </div>
+                        </div>
+                        <p>Nitrogen cycles through WALL-E's world where cockroaches decompose organic matter, releasing nitrogen compounds that could potentially support the precious plant's growth, while WALL-E's waste management helps maintain the soil structure needed for plant survival.</p>
+                    </div>
+
+                    <div class="cycle-section">
+                        <h3>Water Cycle</h3>
+                        <div class="cycle-visual">
+                            <div class="cycle-step">
+                                <div class="step-icon">☁️</div>
+                                <div class="step-text">Atmospheric Collection</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">💧</div>
+                                <div class="step-text">Purification</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🌱</div>
+                                <div class="step-text">Plant Irrigation</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">💨</div>
+                                <div class="step-text">Evaporation</div>
+                            </div>
+                        </div>
+                        <p>Water cycles through the polluted atmosphere where dust storms carry moisture, the precious plant in the boot requires careful watering (which WALL-E provides), and evaporation occurs naturally in the harsh environmental conditions of post-apocalyptic Earth.</p>
+                    </div>
+
+                    <div class="cycle-section">
+                        <h3>Oxygen Cycle</h3>
+                        <div class="cycle-visual">
+                            <div class="cycle-step">
+                                <div class="step-icon">🌱</div>
+                                <div class="step-text">Plant Photosynthesis</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">💨</div>
+                                <div class="step-text">Oxygen Release</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🤖</div>
+                                <div class="step-text">WALL-E Breathing</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🪳</div>
+                                <div class="step-text">Cockroach Respiration</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">☁️</div>
+                                <div class="step-text">CO₂ to Atmosphere</div>
+                            </div>
+                        </div>
+                        <p>The precious plant in the boot produces oxygen through photosynthesis, which WALL-E and other organisms use for respiration, creating a vital oxygen cycle that could support human life when they return to Earth.</p>
+                    </div>
+
+                    <div class="cycle-section">
+                        <h3>Phosphorus Cycle</h3>
+                        <div class="cycle-visual">
+                            <div class="cycle-step">
+                                <div class="step-icon">🗻</div>
+                                <div class="step-text">Rock Weathering</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🌱</div>
+                                <div class="step-text">Plant Absorption</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🤖</div>
+                                <div class="step-text">WALL-E Processing</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🪳</div>
+                                <div class="step-text">Decomposition</div>
+                            </div>
+                            <div class="cycle-arrow">→</div>
+                            <div class="cycle-step">
+                                <div class="step-icon">🏔️</div>
+                                <div class="step-text">Sediment Formation</div>
+                            </div>
+                        </div>
+                        <p>Phosphorus from weathered rocks and waste materials gets absorbed by the precious plant for growth, processed by WALL-E's waste management systems, and returned to the soil through decomposition, creating a sustainable nutrient cycle.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Progress Indicator -->
+        <div class="progress-indicator">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text">
+                <span id="progressText">Explore WALL-E's World</span>
             </div>
         </div>
-    </section>
-
-    <!-- Pokémon Tech Lab Section -->
-    <section id="technology" class="pokemon-tech-section">
-        <div class="pokemon-container">
-            <div class="tech-header">
-                <div class="tech-logo">
-                    <div class="pokeball-tech">⚪</div>
-                    <h2>Pokémon Tech Lab</h2>
-                    <p>Innovative Pokémon Technologies</p>
-                </div>
-            </div>
-            
-            <div class="tech-content">
-                <div class="pokemon-tech-grid">
-                    <div class="tech-card-pokemon">
-                        <div class="tech-visual-pokemon">
-                            <div class="tech-icon-pokemon">🌱</div>
-                            <div class="tech-animation-pokemon">
-                                <div class="energy-flow-pokemon">⚡</div>
-                            </div>
-                        </div>
-                        <div class="tech-content-pokemon">
-                            <h3>Bio-Solar Panels</h3>
-                            <p>Living solar panels that grow and adapt to maximize energy capture. These panels use genetically modified algae that photosynthesize more efficiently than traditional solar cells.</p>
-                            <div class="tech-stats-pokemon">
-                                <div class="stat-pokemon">
-                                    <span class="stat-value-pokemon">300%</span>
-                                    <span class="stat-label-pokemon">More Efficient</span>
-                                </div>
-                                <div class="stat-pokemon">
-                                    <span class="stat-value-pokemon">Self-Repairing</span>
-                                    <span class="stat-label-pokemon">Technology</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tech-card-pokemon">
-                        <div class="tech-visual-pokemon">
-                            <div class="tech-icon-pokemon">🤖</div>
-                            <div class="tech-animation-pokemon">
-                                <div class="ai-pulse-pokemon">💫</div>
-                            </div>
-                        </div>
-                        <div class="tech-content-pokemon">
-                            <h3>AI Ecosystem Manager</h3>
-                            <p>Advanced artificial intelligence that monitors and optimizes all environmental systems in real-time, ensuring perfect balance and maximum efficiency.</p>
-                            <div class="tech-stats-pokemon">
-                                <div class="stat-pokemon">
-                                    <span class="stat-value-pokemon">24/7</span>
-                                    <span class="stat-label-pokemon">Monitoring</span>
-                                </div>
-                                <div class="stat-pokemon">
-                                    <span class="stat-value-pokemon">99.9%</span>
-                                    <span class="stat-label-pokemon">Accuracy</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tech-card-pokemon">
-                        <div class="tech-visual-pokemon">
-                            <div class="tech-icon-pokemon">💧</div>
-                            <div class="tech-animation-pokemon">
-                                <div class="water-flow-pokemon">🌊</div>
-                            </div>
-                        </div>
-                        <div class="tech-content-pokemon">
-                            <h3>Atmospheric Water Harvesters</h3>
-                            <p>Revolutionary systems that extract water directly from the atmosphere using advanced condensation technology, providing unlimited clean water.</p>
-                            <div class="tech-stats-pokemon">
-                                <div class="stat-pokemon">
-                                    <span class="stat-value-pokemon">1000L</span>
-                                    <span class="stat-label-pokemon">Per Day</span>
-                                </div>
-                                <div class="stat-pokemon">
-                                    <span class="stat-value-pokemon">Zero Waste</span>
-                                    <span class="stat-label-pokemon">Process</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
-    <!-- Pokémon Trainer Tools Section -->
-    <section id="calculator" class="pokemon-tools-section">
-        <div class="pokemon-container">
-            <div class="tools-header">
-                <div class="tools-logo">
-                    <div class="pokeball-tools">⚪</div>
-                    <h2>Pokémon Trainer Tools</h2>
-                    <p>Calculate Your Eco-Footprint</p>
-                </div>
-            </div>
-            
-            <div class="tools-content">
-                <div class="pokemon-calculator">
-                    <div class="calculator-form-pokemon">
-                        <h3>🌍 Eco-Footprint Calculator</h3>
-                        <div class="form-group-pokemon">
-                            <label for="energy-usage">⚡ Daily Energy Usage (kWh)</label>
-                            <input type="number" id="energy-usage" placeholder="Enter your daily energy consumption">
-                        </div>
-                        <div class="form-group-pokemon">
-                            <label for="water-usage">💧 Daily Water Usage (Liters)</label>
-                            <input type="number" id="water-usage" placeholder="Enter your daily water consumption">
-                        </div>
-                        <div class="form-group-pokemon">
-                            <label for="waste-production">♻️ Weekly Waste Production (kg)</label>
-                            <input type="number" id="waste-production" placeholder="Enter your weekly waste">
-                        </div>
-                        <button class="btn-pokemon-primary" onclick="calculateImpact()">
-                            <span class="btn-icon">🧮</span>
-                            <span class="btn-text">Calculate Impact</span>
-                        </button>
-                    </div>
-                    
-                    <div class="calculator-results-pokemon">
-                        <h3>📊 Your Impact Results</h3>
-                        <div class="results-grid-pokemon">
-                            <div class="result-card-pokemon">
-                                <div class="result-icon">🌱</div>
-                                <div class="result-content">
-                                    <span class="result-label">Carbon Footprint:</span>
-                                    <span class="result-value" id="carbon-result">--</span>
-                                </div>
-                            </div>
-                            <div class="result-card-pokemon">
-                                <div class="result-icon">💧</div>
-                                <div class="result-content">
-                                    <span class="result-label">Water Efficiency:</span>
-                                    <span class="result-value" id="water-result">--</span>
-                                </div>
-                            </div>
-                            <div class="result-card-pokemon">
-                                <div class="result-icon">♻️</div>
-                                <div class="result-content">
-                                    <span class="result-label">Waste Score:</span>
-                                    <span class="result-value" id="waste-result">--</span>
-                                </div>
-                            </div>
-                            <div class="result-card-pokemon">
-                                <div class="result-icon">🏆</div>
-                                <div class="result-content">
-                                    <span class="result-label">Overall Rating:</span>
-                                    <span class="result-value" id="overall-result">--</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="recommendations-pokemon" id="recommendations">
-                            <h4>💡 Recommendations:</h4>
-                            <ul id="recommendations-list"></ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pokémon Journey Timeline Section -->
-    <section id="timeline" class="pokemon-journey-section">
-        <div class="pokemon-container">
-            <div class="journey-header">
-                <div class="journey-logo">
-                    <div class="pokeball-journey">⚪</div>
-                    <h2>Pokémon Journey Timeline</h2>
-                    <p>PokéVerse Development Journey</p>
-                </div>
-            </div>
-            
-            <div class="journey-content">
-                <div class="pokemon-timeline">
-                    <div class="timeline-item-pokemon">
-                        <div class="timeline-date-pokemon">2020</div>
-                        <div class="timeline-icon-pokemon">🌱</div>
-                        <div class="timeline-content-pokemon">
-                            <h3>Concept Development</h3>
-                            <p>Initial research and conceptualization of floating ecosystem technology</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item-pokemon">
-                        <div class="timeline-date-pokemon">2021</div>
-                        <div class="timeline-icon-pokemon">☀️</div>
-                        <div class="timeline-content-pokemon">
-                            <h3>Bio-Solar Panel Innovation</h3>
-                            <p>Breakthrough in living solar panel technology with 300% efficiency improvement</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item-pokemon">
-                        <div class="timeline-date-pokemon">2022</div>
-                        <div class="timeline-icon-pokemon">🤖</div>
-                        <div class="timeline-content-pokemon">
-                            <h3>AI System Integration</h3>
-                            <p>Development of advanced AI ecosystem management systems</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item-pokemon">
-                        <div class="timeline-date-pokemon">2023</div>
-                        <div class="timeline-icon-pokemon">🚀</div>
-                        <div class="timeline-content-pokemon">
-                            <h3>First Prototype Launch</h3>
-                            <p>Successful deployment of the first floating platform with 100 citizens</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item-pokemon">
-                        <div class="timeline-date-pokemon">2024</div>
-                        <div class="timeline-icon-pokemon">🌟</div>
-                        <div class="timeline-content-pokemon">
-                            <h3>Full Ecosystem Deployment</h3>
-                            <p>Complete Solaria Prime ecosystem with 10,000 citizens and zero waste achievement</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item-pokemon">
-                        <div class="timeline-date-pokemon">2025</div>
-                        <div class="timeline-icon-pokemon">🌍</div>
-                        <div class="timeline-content-pokemon">
-                            <h3>Global Expansion Initiative</h3>
-                            <p>Launch of multiple Solaria Prime colonies worldwide, establishing sustainable floating cities across different climate zones</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pokémon Trainer Team Section -->
-    <section id="team" class="pokemon-team-section">
-        <div class="pokemon-container">
-            <div class="team-header">
-                <div class="team-logo">
-                    <div class="pokeball-team">⚪</div>
-                    <h2>Pokémon Trainer Team</h2>
-                    <p>Environmental Science - EnviSci | Midterm Performance Task</p>
-                    <p><strong>Project:</strong> PokéVerse: A Digital Pokémon World</p>
-                </div>
-            </div>
-            
-            <div class="team-content">
-                <div class="pokemon-trainers">
-                    <div class="trainer-card">
-                        <div class="trainer-avatar">
-                            <div class="pokemon-sprite-trainer">⚡</div>
-                        </div>
-                        <div class="trainer-info">
-                            <h4>KIT LOOC</h4>
-                            <p>Electric Type Specialist</p>
-                        </div>
-                    </div>
-                    
-                    <div class="trainer-card">
-                        <div class="trainer-avatar">
-                            <div class="pokemon-sprite-trainer">🔥</div>
-                        </div>
-                        <div class="trainer-info">
-                            <h4>LORRAINE HINAUT</h4>
-                            <p>Fire Type Specialist</p>
-                        </div>
-                    </div>
-                    
-                    <div class="trainer-card">
-                        <div class="trainer-avatar">
-                            <div class="pokemon-sprite-trainer">💧</div>
-                        </div>
-                        <div class="trainer-info">
-                            <h4>ADRIAN PITOY</h4>
-                            <p>Water Type Specialist</p>
-                        </div>
-                    </div>
-                    
-                    <div class="trainer-card">
-                        <div class="trainer-avatar">
-                            <div class="pokemon-sprite-trainer">🌱</div>
-                        </div>
-                        <div class="trainer-info">
-                            <h4>ANNE CLAIRE BABOR</h4>
-                            <p>Grass Type Specialist</p>
-                        </div>
-                    </div>
-                    
-                    <div class="trainer-card">
-                        <div class="trainer-avatar">
-                            <div class="pokemon-sprite-trainer">🌿</div>
-                        </div>
-                        <div class="trainer-info">
-                            <h4>KIMBERLY TAYTAYAN</h4>
-                            <p>Nature Type Specialist</p>
-                        </div>
-                    </div>
-                    
-                    <div class="trainer-card">
-                        <div class="trainer-avatar">
-                            <div class="pokemon-sprite-trainer">🌟</div>
-                        </div>
-                        <div class="trainer-info">
-                            <h4>WELMER PARAGAMAC</h4>
-                            <p>Psychic Type Specialist</p>
-                        </div>
-                    </div>
-                    
-                    <div class="trainer-card">
-                        <div class="trainer-avatar">
-                            <div class="pokemon-sprite-trainer">💫</div>
-                        </div>
-                        <div class="trainer-info">
-                            <h4>AIRA MONIQUE PRECILLAS</h4>
-                            <p>Fairy Type Specialist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pokémon Footer -->
-    <footer class="pokemon-footer">
-        <div class="pokemon-container">
+        <!-- Footer -->
+        <footer class="footer">
             <div class="footer-content">
                 <div class="footer-main">
                     <div class="footer-logo">
-                        <div class="pokeball-footer">⚪</div>
-                        <div class="footer-title">
-                            <h3>PokéVerse</h3>
-                            <p>A Digital Pokémon World</p>
+                        <div class="wall-e-icon">🤖</div>
+                        <div class="footer-text">
+                            <h3>WALL-E: Earth Restoration Project</h3>
+                            <p>Environmental Science - EnviSci | Group Project</p>
                         </div>
                     </div>
-                    
-                    <div class="footer-sections">
-                        <div class="footer-section">
-                            <h4>🗺️ Quick Links</h4>
-                            <ul>
-                                <li><a href="#profile">📱 PokéVerse Profile</a></li>
-                                <li><a href="#education">🎓 Pokémon Academy</a></li>
-                                <li><a href="#ecosystem">⚔️ Battle Arena</a></li>
-                                <li><a href="#cycles">🔄 Evolution Center</a></li>
-                                <li><a href="#quiz">🧠 Battle Quiz</a></li>
-                                <li><a href="#team">👥 Trainer Team</a></li>
-                            </ul>
+                    <div class="footer-info">
+                        <div class="info-section">
+                            <h4>Subject</h4>
+                            <p>Environmental Science</p>
                         </div>
-                        
-                        <div class="footer-section">
-                            <h4>📚 Course Information</h4>
-                            <div class="course-info">
-                                <div class="info-item">
-                                    <span class="info-icon">📖</span>
-                                    <span><strong>Course:</strong> Environmental Science - EnviSci</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-icon">🎮</span>
-                                    <span><strong>Project:</strong> PokéVerse: A Digital Pokémon World</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-icon">📝</span>
-                                    <span><strong>Term:</strong> Midterm Performance Task</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-icon">👥</span>
-                                    <span><strong>Type:</strong> Group Work</span>
-                                </div>
-                            </div>
+                        <div class="info-section">
+                            <h4>Group Name</h4>
+                            <p>WALL-E Environmental Team</p>
                         </div>
-                        
-                        <div class="footer-section">
-                            <h4>🌟 Pokémon Types</h4>
-                            <div class="pokemon-types">
-                                <div class="type-badge">⚡ Electric</div>
-                                <div class="type-badge">🔥 Fire</div>
-                                <div class="type-badge">💧 Water</div>
-                                <div class="type-badge">🌱 Grass</div>
-                                <div class="type-badge">🌟 Psychic</div>
-                                <div class="type-badge">💫 Fairy</div>
-                            </div>
+                        <div class="info-section">
+                            <h4>Group Members</h4>
+                            <p>[Your Names Here]</p>
+                        </div>
+                        <div class="info-section">
+                            <h4>Course</h4>
+                            <p>Environmental Science - EnviSci</p>
+                        </div>
+                        <div class="info-section">
+                            <h4>Theme</h4>
+                            <p>WALL-E Movie Universe</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="footer-bottom">
-                    <div class="footer-copyright">
-                        <p>&copy; 2025 PokéVerse Project. All rights reserved. | Pokémon Science Performance Task</p>
-                    </div>
-                    <div class="footer-pokemon">
-                        <div class="pokemon-sprite-footer">⚡</div>
-                        <div class="pokemon-sprite-footer">🔥</div>
-                        <div class="pokemon-sprite-footer">💧</div>
-                        <div class="pokemon-sprite-footer">🌱</div>
-                    </div>
+                <div class="wall-e-footer">
+                    <span class="footer-icon">🤖</span>
+                    <span class="footer-icon">👢</span>
+                    <span class="footer-icon">🌱</span>
+                    <span class="footer-icon">♻️</span>
+                    <span class="footer-icon">🌍</span>
+                    <span class="footer-icon">⚡</span>
+                    <span class="footer-icon">🔋</span>
                 </div>
             </div>
-        </div>
-    </footer>
-
-    <!-- Pokémon Particle Effects -->
-    <div class="pokemon-particles">
-        <div class="pokemon-particle" style="left: 10%; animation-delay: 0s;"></div>
-        <div class="pokemon-particle" style="left: 20%; animation-delay: 1s;"></div>
-        <div class="pokemon-particle" style="left: 30%; animation-delay: 2s;"></div>
-        <div class="pokemon-particle" style="left: 40%; animation-delay: 3s;"></div>
-        <div class="pokemon-particle" style="left: 50%; animation-delay: 4s;"></div>
-        <div class="pokemon-particle" style="left: 60%; animation-delay: 5s;"></div>
-        <div class="pokemon-particle" style="left: 70%; animation-delay: 6s;"></div>
-        <div class="pokemon-particle" style="left: 80%; animation-delay: 7s;"></div>
-        <div class="pokemon-particle" style="left: 90%; animation-delay: 8s;"></div>
+        </footer>
     </div>
 
     <script src="script.js"></script>

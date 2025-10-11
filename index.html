@@ -147,6 +147,183 @@
                         </div>
                     </div>
 
+                    <!-- Map Section -->
+                    <div class="map-section">
+                        <div class="section-header-card">
+                            <div class="header-icon">🗺️</div>
+                            <h4>WALL-E's World Map</h4>
+                        </div>
+                        <div class="map-container">
+                            <div class="map-title">EARTH RESTORATION ZONE - SECTOR 7</div>
+                            <div class="map-subtitle">Post-Apocalyptic Waste Management Grid</div>
+                            
+                            <div class="actual-map">
+                                <!-- Map Background with Grid -->
+                                <div class="map-grid"></div>
+                                
+                                <!-- Dust Storm Areas -->
+                                <div class="dust-storm dust-storm-1"></div>
+                                <div class="dust-storm dust-storm-2"></div>
+                                <div class="dust-storm dust-storm-3"></div>
+                                
+                                <!-- Waste Mountains (Top) -->
+                                <div class="map-location waste-mountains" style="top: 10%; left: 20%;">
+                                    <div class="location-marker">🗻</div>
+                                    <div class="location-pulse"></div>
+                                    <div class="location-label">WASTE MOUNTAINS</div>
+                                    <div class="location-coords">N 40.7128° W 74.0060°</div>
+                                </div>
+                                
+                                <!-- WALL-E's Home (Center-Left) -->
+                                <div class="map-location wall-e-home" style="top: 45%; left: 15%;">
+                                    <div class="location-marker">🏠</div>
+                                    <div class="location-pulse"></div>
+                                    <div class="location-label">WALL-E STATION</div>
+                                    <div class="location-coords">N 40.7589° W 73.9851°</div>
+                                </div>
+                                
+                                <!-- Plant Discovery Site (Center) -->
+                                <div class="map-location plant-discovery" style="top: 50%; left: 50%;">
+                                    <div class="location-marker">🌱</div>
+                                    <div class="location-pulse plant-pulse"></div>
+                                    <div class="location-label">LIFE DISCOVERY ZONE</div>
+                                    <div class="location-coords">N 40.7505° W 73.9934°</div>
+                                </div>
+                                
+                                <!-- EVE Landing Zone (Right) -->
+                                <div class="map-location eva-landing" style="top: 30%; left: 75%;">
+                                    <div class="location-marker">👽</div>
+                                    <div class="location-pulse eva-pulse"></div>
+                                    <div class="location-label">EVE LANDING ZONE</div>
+                                    <div class="location-coords">N 40.7614° W 73.9776°</div>
+                                </div>
+                                
+                                <!-- Abandoned City (Bottom) -->
+                                <div class="map-location abandoned-city" style="top: 75%; left: 60%;">
+                                    <div class="location-marker">🏙️</div>
+                                    <div class="location-pulse"></div>
+                                    <div class="location-label">ABANDONED METROPOLIS</div>
+                                    <div class="location-coords">N 40.7282° W 73.7949°</div>
+                                </div>
+                                
+                                <!-- Connection Lines -->
+                                <svg class="map-connections" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                    <path class="connection-line" d="M 20 10 Q 30 30 15 45" stroke="#3498db" stroke-width="0.5" fill="none" opacity="0.6"/>
+                                    <path class="connection-line" d="M 15 45 Q 35 50 50 50" stroke="#2ecc71" stroke-width="0.5" fill="none" opacity="0.6"/>
+                                    <path class="connection-line" d="M 50 50 Q 65 40 75 30" stroke="#e74c3c" stroke-width="0.5" fill="none" opacity="0.6"/>
+                                    <path class="connection-line" d="M 50 50 Q 55 65 60 75" stroke="#f39c12" stroke-width="0.5" fill="none" opacity="0.6"/>
+                                </svg>
+                                
+                                <!-- Scale Indicator -->
+                                <div class="map-scale">
+                                    <div class="scale-line"></div>
+                                    <div class="scale-text">1 km</div>
+                                </div>
+                                
+                                <!-- Compass -->
+                                <div class="map-compass">
+                                    <div class="compass-needle">↑</div>
+                                    <div class="compass-label">N</div>
+                                </div>
+                            </div>
+                            
+                            <div class="map-legend">
+                                <h5>LEGEND</h5>
+                                <div class="legend-items">
+                                    <div class="legend-item">
+                                        <div class="legend-marker waste">🗻</div>
+                                        <span>Waste Processing Zones</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-marker life">🌱</div>
+                                        <span>Life Discovery Areas</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-marker robot">🤖</div>
+                                        <span>Robot Activity Centers</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-marker energy">☀️</div>
+                                        <span>Solar Energy Sources</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-marker dust">💨</div>
+                                        <span>Dust Storm Areas</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Characters Section -->
+                    <div class="characters-section">
+                        <div class="section-header-card">
+                            <div class="header-icon">👥</div>
+                            <h4>Key Characters</h4>
+                        </div>
+                        <div class="characters-grid">
+                            <div class="character-card wall-e">
+                                <div class="character-avatar">🤖</div>
+                                <div class="character-info">
+                                    <h5>WALL-E</h5>
+                                    <p class="character-role">Waste Allocation Load Lifter - Earth Class</p>
+                                    <p class="character-description">The last remaining robot on Earth, tirelessly cleaning up waste while discovering the first signs of life - a precious plant in an old boot.</p>
+                                    <div class="character-traits">
+                                        <span class="trait">♻️ Waste Management</span>
+                                        <span class="trait">🌱 Plant Care</span>
+                                        <span class="trait">☀️ Solar Powered</span>
+                                        <span class="trait">💚 Environmental Guardian</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="character-card eve">
+                                <div class="character-avatar">👽</div>
+                                <div class="character-info">
+                                    <h5>EVE</h5>
+                                    <p class="character-role">Extraterrestrial Vegetation Evaluator</p>
+                                    <p class="character-description">Advanced probe sent to Earth to search for signs of plant life and assess the planet's habitability for human return.</p>
+                                    <div class="character-traits">
+                                        <span class="trait">🔍 Plant Detection</span>
+                                        <span class="trait">🚀 Space Travel</span>
+                                        <span class="trait">⚡ High-Tech</span>
+                                        <span class="trait">🌍 Earth Assessment</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="character-card cockroach">
+                                <div class="character-avatar">🪳</div>
+                                <div class="character-info">
+                                    <h5>Hal</h5>
+                                    <p class="character-role">WALL-E's Best Friend</p>
+                                    <p class="character-description">A resilient cockroach that survived Earth's environmental devastation, representing the last remaining animal life on the planet.</p>
+                                    <div class="character-traits">
+                                        <span class="trait">🦠 Decomposition</span>
+                                        <span class="trait">💪 Survival</span>
+                                        <span class="trait">🤝 Friendship</span>
+                                        <span class="trait">♻️ Ecosystem Role</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="character-card plant">
+                                <div class="character-avatar">🌱👢</div>
+                                <div class="character-info">
+                                    <h5>The Precious Plant</h5>
+                                    <p class="character-role">Hope for Humanity</p>
+                                    <p class="character-description">A small plant growing in an old boot, discovered by WALL-E. This single plant represents the possibility of Earth's restoration and human return.</p>
+                                    <div class="character-traits">
+                                        <span class="trait">🌱 Photosynthesis</span>
+                                        <span class="trait">💨 Oxygen Production</span>
+                                        <span class="trait">🌍 Earth Restoration</span>
+                                        <span class="trait">✨ Symbol of Hope</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="goals">
                         <div class="section-header-card">
                             <div class="header-icon">🎯</div>
@@ -593,9 +770,9 @@
                             <h4>Group 4 Members</h4>
                             <div class="members-grid">
                                 <div class="member-item">🤖 ANNE CLAIRE BABOR</div>
-                                <div class="member-item">🤖 KIT LOOC</div>
                                 <div class="member-item">🤖 LORRAINE HINAUT</div>
                                 <div class="member-item">🤖 ADRIAN PITOY</div>
+                                <div class="member-item">🤖 KIT LOOC</div>
                                 <div class="member-item">🤖 KIMBERLY TAYTAYAN</div>
                                 <div class="member-item">🤖 WELMER PARAGAMAC</div>
                                 <div class="member-item">🤖 AIRA MONIQUE PRECILLAS</div>
